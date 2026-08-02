@@ -273,7 +273,7 @@ var FileItemMenu = class extends MenuHelper.MenuHelper {
 
             section = this._newSection(menu);
 
-            if (fileItem.attributeCanExecute && !fileItem.isDirectory && !fileItem.isValidDesktopFile && fileItem.execLine && Gio.content_type_can_be_executable(fileItem.attributeContentType)) {
+            if (fileItem.attributeCanExecute && !fileItem.isDirectory && !fileItem.isValidDesktopFile && !fileItem.isAppImageFile && fileItem.execLine && Gio.content_type_can_be_executable(fileItem.attributeContentType)) {
                 let execLine = fileItem.execLine;
                 this._newMenuElement(_('Run as a program'),
                     "run-as-a-program",
@@ -326,10 +326,10 @@ var FileItemMenu = class extends MenuHelper.MenuHelper {
                 );
             }
 
-            if (fileItem.isValidDesktopFile && !this._desktopManager.writableByOthers && !fileItem.writableByOthers && (selectedItemsNum == 1)) {
+            if ((fileItem.isValidDesktopFile || fileItem.isAppImageFile) && !this._desktopManager.writableByOthers && !fileItem.writableByOthers && (selectedItemsNum == 1)) {
                 section = this._newSection(menu);
                 this._newMenuElement(
-                    fileItem.trustedDesktopFile ? _("Don't Allow Launching") : _('Allow Launching'),
+                    (fileItem.trustedDesktopFile || fileItem.trustedAppImageFile) ? _("Don't Allow Launching") : _('Allow Launching'),
                     'toggle-allow-launching',
                     section,
                     GLib.Variant.new("s", fileItem.uri)

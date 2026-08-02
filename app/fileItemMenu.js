@@ -96,6 +96,11 @@ var FileItemMenu = class extends MenuHelper.MenuHelper {
             file.onAllowDisallowLaunchingClicked();
         }, 's');
 
+        this._addNewAction('toggle-use-sandboxing', null, (action, parameter) => {
+            const file = this._desktopManager.getFileItemFromURI(parameter.get_string()[0]);
+            file.onToggleSandboxingClicked();
+        }, 's');
+
         this._addNewAction('empty-trash', null, (action) => {
             this._desktopManager.doEmptyTrash();
         });
@@ -334,6 +339,14 @@ var FileItemMenu = class extends MenuHelper.MenuHelper {
                     section,
                     GLib.Variant.new("s", fileItem.uri)
                 );
+                if (fileItem.isAppImageFile) {
+                    this._newMenuElement(
+                        fileItem.metadataUseSandboxing ? _("Don't use sandboxing") : _("Use sandboxing if available"),
+                        'toggle-use-sandboxing',
+                        section,
+                        GLib.Variant.new("s", fileItem.uri)
+                    );
+                }
             }
         }
 

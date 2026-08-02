@@ -134,6 +134,9 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
         if (this._isAppImageFile && !this.trustedAppImageFile) {
             return Gio.ThemedIcon.new('emblem-unreadable');
         }
+        if (this._isAppImageFile && !this._useSandboxing) {
+            return Gio.ThemedIcon.new('dialog-warning');
+        }
         return null;
     }
 
@@ -339,6 +342,7 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
         this._unixmode = fileInfo.get_attribute_uint32('unix::mode');
         this._writableByOthers = (this._unixmode & Enums.S_IWOTH) != 0;
         this._trusted = fileInfo.get_attribute_as_string('metadata::trusted') == 'true';
+        this._useSandboxing = fileInfo.get_attribute_as_string('metadata::nosandbox') == 'false';
         this._attributeContentType = fileInfo.get_content_type();
         this._isDesktopFile = this._attributeContentType == 'application/x-desktop';
         this._isAppImageFile = this._attributeContentType == 'application/vnd.appimage';
@@ -469,9 +473,14 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
 
     _launchAppImageFile(context, fileList) {
         if (this.trustedAppImageFile) {
-            DesktopIconsUtil.spawnCommandLine(`"${this._execLine}"`);
+            let commandLine = `"${this._execLine}"`;
+            if (!this._useSandboxing)
+                commandLine += ' --no-sandbox';
+            console.log(`Launching ${commandLine}`);
+            DesktopIconsUtil.spawnCommandLine(commandLine);
             return;
         }
+
         if (this._writableByOthers || !this._attributeCanExecute) {
             let title = _('Invalid Permissions on AppImage File');
             let error = _('This .appimage File has incorrect Permissions. Right Click to edit Properties, then:\n');
@@ -721,6 +730,13 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
         this._updateName();
     }
 
+    onToggleSandboxingClicked() {
+        this.metadataUseSandboxing = !(this._isAppImageFile && this._useSandboxing);
+        this._updateIcon().catch(e => {
+            print(`Exception while updating the trash icon: ${e.message}\n${e.stack}`);
+        });
+    }
+
     doDiscreteGpu(timestamp) {
         if (!DBusUtils.discreteGpuAvailable) {
             let title = _('Could not apply discrete GPU environment');
@@ -880,6 +896,40 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
             (source, result) => {
                 try {
                     this._setMetadataTrustedCancellable = null;
+                    source.set_attributes_finish(result);
+                    this._refreshMetadataAsync(true);
+                } catch (error) {
+                    if (!error.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.CANCELLED)) {
+                        let title = _('Failed to set metadata::trusted flag');
+                        let err = error.message;
+                        let logError = `${title}: ${err}`;
+                        this._logAndPopupError(title, err, logError);
+                    }
+                }
+            });
+    }
+
+    get metadataUseSandboxing() {
+        return this._useSandboxing;
+    }
+
+    set metadataUseSandboxing(value) {
+        this._useSandboxing = value;
+
+        if (this._setMetadataSandboxingCancellable) {
+            this._setMetadataSandboxingCancellable.cancel();
+        }
+        this._setMetadataSandboxingCancellable = new Gio.Cancellable();
+        let info = new Gio.FileInfo();
+        info.set_attribute_string('metadata::nosandbox',
+            value ? 'false' : 'true');
+        this._file.set_attributes_async(info,
+            Gio.FileQueryInfoFlags.NONE,
+            GLib.PRIORITY_LOW,
+            this._setMetadataSandboxingCancellable,
+            (source, result) => {
+                try {
+                    this._setMetadataSandboxingCancellable = null;
                     source.set_attributes_finish(result);
                     this._refreshMetadataAsync(true);
                 } catch (error) {

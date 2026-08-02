@@ -613,7 +613,6 @@ var DesktopManager = class {
          */
         function isValidURL(str) {
             const [ok, scheme] = GLib.Uri.split(str, 0);
-            console.log(`Scheme: ${scheme}`);
             if (["http", "https", "ftp", "rtsp", "mms"].includes(scheme))
                 return ok;
             else

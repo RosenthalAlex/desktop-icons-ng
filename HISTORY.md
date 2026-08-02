@@ -2,6 +2,7 @@
 
 * Version 51.0.4 (2026-08-02)
   * Added support for DnD of URIs and plain text
+  * Added support for directly launch AppImages
 
 * Version 51.0.3 (2026-07-17)
   * Fixed "Open in terminal" for the desktop

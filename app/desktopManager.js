@@ -578,16 +578,17 @@ var DesktopManager = class {
 
     onDragDataReceived(dropInfo, xDestination, yDestination, forceMove) {
         this.onDragLeave();
-        if (dropInfo.filelist.length == 0) {
-            return;
-        }
         switch (dropInfo.mimetype) {
             case Enums.DndTargetInfo.DING_ICON_LIST:
+                if (dropInfo.filelist.length == 0)
+                    return;
                 let [xOrigin, yOrigin, a, b, c] = this.dragItem.getCoordinates();
                 this.doMoveWithDragAndDrop(xOrigin, yOrigin, xDestination, yDestination);
                 break;
             case Enums.DndTargetInfo.GNOME_ICON_LIST:
             case Enums.DndTargetInfo.URI_LIST:
+                if (dropInfo.filelist.length == 0)
+                    return;
                 this.clearFileCoordinates(dropInfo.filelist, [xDestination, yDestination]);
                 let data = Gio.File.new_for_uri(dropInfo.filelist[0]).query_info('id::filesystem', Gio.FileQueryInfoFlags.NONE, null);
                 let idFS = data.get_attribute_string('id::filesystem');
@@ -598,8 +599,9 @@ var DesktopManager = class {
                 }
                 break;
             case Enums.DndTargetInfo.TEXT_PLAIN:
-                let dropCoordinates = [xDestination, yDestination];
-                this.detectURLorText(dropInfo.filelist, dropCoordinates);
+            case Enums.DndTargetInfo.TEXT_PLAIN_UTF8:
+                const dropCoordinates = [xDestination, yDestination];
+                this.detectURLorText(dropInfo.data, dropCoordinates);
                 break;
         }
     }
@@ -610,13 +612,12 @@ var DesktopManager = class {
          * @param str
          */
         function isValidURL(str) {
-            var pattern = new RegExp('^(https|http|ftp|rtsp|mms)?:\\/\\/?' +
-                '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' +
-                '((\\d{1,3}\\.){3}\\d{1,3}))' +
-                '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' +
-                '(\\?[;&a-z\\d%_.~+=-]*)?' +
-                '(\\#[-a-z\\d_]*)?$', 'i');
-            return !!pattern.test(str);
+            const [ok, scheme] = GLib.Uri.split(str, 0);
+            console.log(`Scheme: ${scheme}`);
+            if (["http", "https", "ftp", "rtsp", "mms"].includes(scheme))
+                return ok;
+            else
+                return false;
         }
         let text = fileList.toString();
         if (isValidURL(text)) {

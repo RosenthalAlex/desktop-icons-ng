@@ -202,6 +202,9 @@ async function manageIconDrop(fileItem, drop, x, y) {
                     }
                 }
                 break;
+            case Enums.DndTargetInfo.TEXT_PLAIN:
+            case Enums.DndTargetInfo.TEXT_PLAIN_UTF8:
+                break;
             default:
                 console.log(`Unknown mime type for DnD: ${mimetype}`);
                 break;
@@ -210,7 +213,8 @@ async function manageIconDrop(fileItem, drop, x, y) {
         return {
             'action': gdkDropAction,
             'mimetype': mimetype,
-            'filelist': file_list
+            'filelist': file_list,
+            'data': decodedData
         };
     } catch (e) {
         console.error(e);

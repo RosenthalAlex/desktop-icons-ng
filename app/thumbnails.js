@@ -35,8 +35,8 @@ var ThumbnailLoader = class {
         this._thumbnailScriptWatch = null;
         this._running = false;
         if (!GnomeDesktop) {
-                desktopManager.dbusManager.doNotify(_('GnomeDesktop-3.0 GIR file not found'),
-                                                    _('GnomeDesktop-3.0.gir file is missing. Please, install the required package in your system.'));
+                desktopManager.dbusManager.doNotify(_('GnomeDesktop-4.0 GIR file not found'),
+                                                    _('GnomeDesktop-4.0.gir file is missing. Please, install the required package in your system.'));
         } else {
             this._thumbnailFactoryNormal = GnomeDesktop.DesktopThumbnailFactory.new(GnomeDesktop.DesktopThumbnailSize.NORMAL);
             this._thumbnailFactoryLarge = GnomeDesktop.DesktopThumbnailFactory.new(GnomeDesktop.DesktopThumbnailSize.LARGE);

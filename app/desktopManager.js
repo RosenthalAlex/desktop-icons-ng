@@ -417,7 +417,7 @@ var DesktopManager = class {
         }
 
         try {
-            if (this.accentColorsAvailable) {
+            if (this._accentColorsAvailable) {
                 this.selectColor = this._adwStyleManager.get_accent_color_rgba();
             } else {
                 const box = new Gtk.Label();

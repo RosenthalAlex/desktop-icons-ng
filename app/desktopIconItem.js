@@ -472,14 +472,18 @@ var desktopIconItem = class desktopIconItem extends SignalManager.SignalManager 
             return;
         }
 
+        const isNotTrusted = (this._isDesktopFile && !this.trustedDesktopFile) || (this._isAppImageFile && !this.trustedAppImageFile);
+
         try {
-            let customIcon = this._fileInfo.get_attribute_as_string('metadata::custom-icon');
-            if (customIcon && (customIcon != '')) {
-                let customIconFile = Gio.File.new_for_uri(customIcon);
-                if (customIconFile.query_exists(null)) {
-                    let loadedImage = await this._loadImageAsIcon(customIconFile);
-                    if (loadedImage | this._destroyed) {
-                        return;
+            if (!isNotTrusted) {
+                let customIcon = this._fileInfo.get_attribute_as_string('metadata::custom-icon');
+                if (customIcon && (customIcon != '')) {
+                    let customIconFile = Gio.File.new_for_uri(customIcon);
+                    if (customIconFile.query_exists(null)) {
+                        let loadedImage = await this._loadImageAsIcon(customIconFile);
+                        if (loadedImage || this._destroyed) {
+                            return;
+                        }
                     }
                 }
             }
@@ -496,16 +500,18 @@ var desktopIconItem = class desktopIconItem extends SignalManager.SignalManager 
             return;
         }
         let iconSet = false;
-        if (Prefs.nautilusSettings.get_string('show-image-thumbnails') != 'never') {
-            let thumbnail = await this._desktopManager.thumbnailLoader.getThumbnail(this);
-            if (this._destroyed) {
-                return;
-            }
-            if (thumbnail != null) {
-                let thumbnailFile = Gio.File.new_for_path(thumbnail);
-                iconSet = await this._loadImageAsIcon(thumbnailFile);
+        if (!isNotTrusted) {
+            if (Prefs.nautilusSettings.get_string('show-image-thumbnails') != 'never') {
+                let thumbnail = await this._desktopManager.thumbnailLoader.getThumbnail(this);
                 if (this._destroyed) {
                     return;
+                }
+                if (thumbnail != null) {
+                    let thumbnailFile = Gio.File.new_for_path(thumbnail);
+                    iconSet = await this._loadImageAsIcon(thumbnailFile);
+                    if (this._destroyed) {
+                        return;
+                    }
                 }
             }
         }
@@ -514,7 +520,7 @@ var desktopIconItem = class desktopIconItem extends SignalManager.SignalManager 
             let iconPaintable;
             if (this._isBrokenSymlink) {
                 iconPaintable = this._createEmblemedIcon(null, 'text-x-generic');
-            } else if (this._desktopFile && this._desktopFile.has_key('Icon')) {
+            } else if (this._desktopFile && this._desktopFile.has_key('Icon') && !isNotTrusted) {
                 iconPaintable = this._createEmblemedIcon(null, this._desktopFile.get_string('Icon'));
             } else {
                 iconPaintable = this._createEmblemedIcon(this._getDefaultIcon(), null);

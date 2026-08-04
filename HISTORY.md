@@ -1,5 +1,9 @@
 # History of versions #
 
+* Version 51.0.5 (2026-08-03)
+  * Fixed accent color change detection (thanks to Boogie)
+  * Don't show the custom icon in .desktop or .appimage files that aren't trusted
+
 * Version 51.0.4 (2026-08-02)
   * Added support for DnD of URIs and plain text
   * Added support for directly launch AppImages

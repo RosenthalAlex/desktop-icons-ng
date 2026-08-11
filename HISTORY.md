@@ -1,5 +1,8 @@
 # History of versions #
 
+* Version 51.0.6 (2026-08-11)
+  * Fixed typo
+
 * Version 51.0.5 (2026-08-03)
   * Fixed accent color change detection (thanks to Boogie)
   * Don't show the custom icon in .desktop or .appimage files that aren't trusted

@@ -197,7 +197,7 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
         ];
 
         var name = "";
-        for (let c of specialCases){
+        for (let c of specialCases) {
             if (c[0]) {
                 name = this._isSelected ? c[2] : c[1];
                 break;
@@ -394,7 +394,8 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
         this._acceptsDrop = (this._fileExtra == Enums.FileType.USER_DIRECTORY_TRASH) ||
                             (this._fileExtra == Enums.FileType.USER_DIRECTORY_HOME) ||
                             (this._fileExtra == Enums.FileType.EXTERNAL_DRIVE) ||
-                            this._isDirectory;
+                            this._isDirectory ||
+                            this.trustedDesktopFile;
     }
 
     _logAndPopupError(title, error, logError) {
@@ -569,11 +570,12 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
         if ((this._fileExtra != Enums.FileType.USER_DIRECTORY_TRASH) &&
             (this._fileExtra != Enums.FileType.USER_DIRECTORY_HOME) &&
             (this._fileExtra != Enums.FileType.EXTERNAL_DRIVE) &&
-            (!this._isDirectory)) {
+            (!this._isDirectory) &&
+            (!this.trustedDesktopFile)) {
             return;
         }
         const dropTarget = new Gtk.DropTargetAsync();
-        const validFormats = Gdk.ContentFormats.new(Enums.MIME_TYPES );
+        const validFormats = Gdk.ContentFormats.new(Enums.MIME_TYPES);
         dropTarget.set_actions(Gdk.DragAction.MOVE | Gdk.DragAction.COPY | Gdk.DragAction.ASK);
 
         this.connectSignal(dropTarget, 'drag-enter', (widget, drop) => {
@@ -596,13 +598,19 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
             if (dropInfo === null) {
                 return false;
             }
+
+            if (this.trustedDesktopFile) {
+                this.doOpen(null, dropInfo.filelist);
+                return true;
+            }
+
             try {
                 if (dropInfo.action === Gdk.DragAction.MOVE) {
                     DBusUtils.RemoteFileOperations.MoveURIsRemote(dropInfo.filelist, this.uri);
                 } else {
                     DBusUtils.RemoteFileOperations.CopyURIsRemote(dropInfo.filelist, this.uri);
                 }
-            } catch(e) {
+            } catch (e) {
                 print(`Error: ${e}\n`);
             }
             return true;

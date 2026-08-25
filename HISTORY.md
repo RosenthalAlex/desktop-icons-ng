@@ -1,5 +1,9 @@
 # History of versions #
 
+* Versio 51.0.7 (2026-08-25)
+  * Support for DnD of files onto trusted .desktop files
+  * Fixed proxy-wrappers bug (thanks to Daniel Van Vugt)
+
 * Version 51.0.6 (2026-08-11)
   * Fixed typo
 

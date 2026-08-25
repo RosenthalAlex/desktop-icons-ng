@@ -144,7 +144,9 @@ class ProxyManager {
         if (this._interfaceXML) {
             this._beingLaunched = true;
             try {
-                new Gio.DBusProxy.makeProxyWrapper(this._interfaceXML)(
+                const Proxy =
+                    Gio.DBusProxy.makeProxyWrapper(this._interfaceXML);
+                new Proxy(
                     this._inSystemBus ? Gio.DBus.system : Gio.DBus.session,
                     this._serviceName,
                     this._objectName,
@@ -230,7 +232,8 @@ class DBusManager {
             'org.freedesktop.DBus',
             Enums.DBusBus.SYSTEM, // system bus
             true); // use DBus Introspection
-        this._dbusSystemProxy = new Gio.DBusProxy.makeProxyWrapper(interfaceXML)(
+        const DBusSystemProxy = Gio.DBusProxy.makeProxyWrapper(interfaceXML);
+        this._dbusSystemProxy = new DBusSystemProxy(
             Gio.DBus.system,
             'org.freedesktop.DBus',
             '/org/freedesktop/DBus',
@@ -245,7 +248,8 @@ class DBusManager {
             'org.freedesktop.DBus',
             Enums.DBusBus.SESSION,
             true); // use DBus Introspection
-        this._dbusLocalProxy = new Gio.DBusProxy.makeProxyWrapper(interfaceXML)(
+        const DBusSessionProxy = Gio.DBusProxy.makeProxyWrapper(interfaceXML);
+        this._dbusLocalProxy = new DBusSessionProxy(
             Gio.DBus.session,
             'org.freedesktop.DBus',
             '/org/freedesktop/DBus',
@@ -277,7 +281,8 @@ class DBusManager {
             'org.freedesktop.Notifications',
             Enums.DBusBus.SESSION,
             false); // get interface from local code
-        this._notifyProxy = new Gio.DBusProxy.makeProxyWrapper(interfaceXML)(
+        const NotifyProxy = Gio.DBusProxy.makeProxyWrapper(interfaceXML);
+        this._notifyProxy = new NotifyProxy(
             Gio.DBus.session,
             'org.freedesktop.Notifications',
             '/org/freedesktop/Notifications',
@@ -414,13 +419,15 @@ class DBusManager {
     getIntrospectionData(serviceName, objectName, inSystemBus) {
         let data = null;
         try {
-            let wraper = new Gio.DBusProxy.makeProxyWrapper(DBusInterfaces.DBusInterfaces['org.freedesktop.DBus.Introspectable'])(
+            const iface = DBusInterfaces.DBusInterfaces['org.freedesktop.DBus.Introspectable'];
+            const Proxy = Gio.DBusProxy.makeProxyWrapper(iface);
+            let proxy = new Proxy(
                 inSystemBus ? Gio.DBus.system : Gio.DBus.session,
                 serviceName,
                 objectName,
                 null
             );
-            data = wraper.IntrospectSync()[0];
+            data = proxy.IntrospectSync()[0];
         } catch (e) {
             console.error(e, 'Error getting introspection data over Dbus.');
         }

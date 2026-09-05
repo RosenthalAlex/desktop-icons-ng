@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: desktop-icons master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-24 20:44+0100\n"
+"POT-Creation-Date: 2026-09-05 08:41+0200\n"
 "PO-Revision-Date: 2026-08-11 22:00+0200\n"
 "Last-Translator: Kazmer GECZI-KULCSAR <info@szabad.eu>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
@@ -20,27 +20,35 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: app/askRenamePopup.js:50
-msgid "Folder name"
-msgstr "Mappanév"
+#: app/askRenamePopup.js:54
+#, fuzzy
+msgid "Rename folder"
+msgstr "Új mappa"
 
-#: app/askRenamePopup.js:50
-msgid "File name"
+#: app/askRenamePopup.js:54
+#, fuzzy
+msgid "Rename file"
+msgstr "Átnevezés"
+
+#: app/askRenamePopup.js:64
+#, fuzzy
+msgid "New filename"
 msgstr "Fájlnév"
 
-#: app/askRenamePopup.js:59 app/autoAr.js:305 app/desktopManager.js:1091
+#: app/askRenamePopup.js:69 app/autoAr.js:307 app/autoAr.js:559
+#: app/desktopManager.js:1036
 msgid "OK"
 msgstr "Rendben"
 
-#: app/askRenamePopup.js:59
+#: app/askRenamePopup.js:69
 msgid "Rename"
 msgstr "Átnevezés"
 
-#: app/autoAr.js:88
+#: app/autoAr.js:76
 msgid "AutoAr is not installed"
 msgstr "Az AutoAr nincs telepítve"
 
-#: app/autoAr.js:89
+#: app/autoAr.js:77
 msgid ""
 "To be able to work with compressed files, install file-roller and/or gir-1.2-"
 "gnomeAutoAr"
@@ -48,292 +56,178 @@ msgstr ""
 "A tömörített fájlok kezeléséhez telepítse a file-roller és/vagy a gir-1.2-"
 "gnomeAutoAr csomagot"
 
-#: app/autoAr.js:224
+#: app/autoAr.js:216
 msgid "Extracting files"
 msgstr "Fájlok kibontása"
 
-#: app/autoAr.js:241
+#: app/autoAr.js:233
 msgid "Compressing files"
 msgstr "Fájlok tömörítése"
 
-#: app/autoAr.js:297 app/autoAr.js:636 app/desktopManager.js:1093
-#: app/fileItemMenu.js:474
+#: app/autoAr.js:299 app/autoAr.js:566 app/desktopManager.js:1039
+#: app/fileItemMenu.js:575
 msgid "Cancel"
 msgstr "Mégse"
 
-#: app/autoAr.js:318 app/autoAr.js:619
+#: app/autoAr.js:320 app/autoAr.js:635
 msgid "Enter a password here"
 msgstr "Adjon meg egy jelszót"
 
-#: app/autoAr.js:359
+#: app/autoAr.js:353
 msgid "Removing partial file '${outputFile}'"
 msgstr "Részleges fájl eltávolítása: „${outputFile}”"
 
-#: app/autoAr.js:378
+#: app/autoAr.js:372
 msgid "Creating destination folder"
 msgstr "Célmappa létrehozása"
 
-#: app/autoAr.js:410
+#: app/autoAr.js:404
 msgid "Extracting files into '${outputPath}'"
 msgstr "Fájlok kibontása ide: „${outputPath}”"
 
-#: app/autoAr.js:442
+#: app/autoAr.js:436
 msgid "Extraction completed"
 msgstr "A kibontás befejeződött"
 
-#: app/autoAr.js:443
+#: app/autoAr.js:437
 msgid "Extracting '${fullPathFile}' has been completed."
 msgstr "A(z) „${fullPathFile}” kibontása befejeződött."
 
-#: app/autoAr.js:449
+#: app/autoAr.js:443
 msgid "Extraction cancelled"
 msgstr "A kibontás megszakítva"
 
-#: app/autoAr.js:450
+#: app/autoAr.js:444
 msgid "Extracting '${fullPathFile}' has been cancelled by the user."
 msgstr "A(z) „${fullPathFile}” kibontását a felhasználó megszakította."
 
-#: app/autoAr.js:460
+#: app/autoAr.js:454
 msgid "Passphrase required for ${filename}"
 msgstr "Jelszó szükséges a(z) ${filename} fájlhoz"
 
-#: app/autoAr.js:463
+#: app/autoAr.js:457
 msgid "Error during extraction"
 msgstr "Hiba történt a kibontás során"
 
-#: app/autoAr.js:492
+#: app/autoAr.js:486
 msgid "Compressing files into '${outputFile}'"
 msgstr "Fájlok tömörítése ide: „${outputFile}”"
 
-#: app/autoAr.js:505
+#: app/autoAr.js:499
 msgid "Compression completed"
 msgstr "A tömörítés befejeződött"
 
-#: app/autoAr.js:506
+#: app/autoAr.js:500
 msgid "Compressing files into '${outputFile}' has been completed."
 msgstr "A(z) „${outputFile}” tömörítése befejeződött."
 
-#: app/autoAr.js:510 app/autoAr.js:517
+#: app/autoAr.js:504 app/autoAr.js:511
 msgid "Cancelled compression"
 msgstr "A tömörítés megszakítva"
 
-#: app/autoAr.js:511
+#: app/autoAr.js:505
 msgid "The output file '${outputFile}' already exists."
 msgstr "A(z) „${outputFile}” kimeneti fájl már létezik."
 
-#: app/autoAr.js:518
+#: app/autoAr.js:512
 msgid "Compressing files into '${outputFile}' has been cancelled by the user."
 msgstr "A(z) „${outputFile}” tömörítését a felhasználó megszakította."
 
-#: app/autoAr.js:521
+#: app/autoAr.js:515
 msgid "Error during compression"
 msgstr "Hiba történt a tömörítés során"
 
-#: app/autoAr.js:554
+#: app/autoAr.js:548
 msgid "Create archive"
 msgstr "Archívum létrehozása"
 
-#: app/autoAr.js:579
+#: app/autoAr.js:592
 msgid "Archive name"
 msgstr "Archívum neve"
 
-#: app/autoAr.js:614
+#: app/autoAr.js:630
 msgid "Password"
 msgstr "Jelszó"
 
-#: app/autoAr.js:633
-msgid "Create"
-msgstr "Létrehozás"
-
-#: app/autoAr.js:712
+#: app/autoAr.js:719
 msgid "Compatible with all operating systems."
 msgstr "Minden operációs rendszerrel kompatibilis."
 
-#: app/autoAr.js:718
+#: app/autoAr.js:725
 msgid "Password protected .zip, must be installed on Windows and Mac."
-msgstr "Jelszóval védett .zip; Windows és Mac rendszeren további programot igényel."
+msgstr ""
+"Jelszóval védett .zip; Windows és Mac rendszeren további programot igényel."
 
-#: app/autoAr.js:724
+#: app/autoAr.js:731
 msgid "Smaller archives but Linux and Mac only."
 msgstr "Kisebb archívumok, de csak Linux és Mac rendszeren."
 
-#: app/autoAr.js:730
+#: app/autoAr.js:737
 msgid "Smaller archives but must be installed on Windows and Mac."
-msgstr "Kisebb archívumok, de Windows és Mac rendszeren további programot igényel."
+msgstr ""
+"Kisebb archívumok, de Windows és Mac rendszeren további programot igényel."
 
-#: app/dbusUtils.js:69
+#: app/dbusUtils.js:73
 msgid "\"${programName}\" is needed for Desktop Icons"
 msgstr "A(z) „${programName}” programra szükség van az Asztali ikonokhoz"
 
-#: app/dbusUtils.js:70
+#: app/dbusUtils.js:74
 msgid ""
 "For this functionality to work in Desktop Icons, you must install \"$"
 "{programName}\" in your system."
 msgstr ""
-"Ahhoz, hogy ez a funkció működjön az Asztali ikonokban, telepítenie kell a(z) "
-"„${programName}” programot a rendszerére."
+"Ahhoz, hogy ez a funkció működjön az Asztali ikonokban, telepítenie kell "
+"a(z) „${programName}” programot a rendszerére."
 
-#: app/desktopIconsUtil.js:157
+#: app/desktopIconsUtil.js:170
 msgid "Command not found"
 msgstr "A parancs nem található"
 
-#: app/desktopManager.js:264
+#: app/desktopManager.js:279
 msgid "Nautilus File Manager not found"
 msgstr "A Nautilus fájlkezelő nem található"
 
-#: app/desktopManager.js:265
+#: app/desktopManager.js:280
 msgid "The Nautilus File Manager is mandatory to work with Desktop Icons NG."
 msgstr "A Nautilus fájlkezelő szükséges a Desktop Icons NG működéséhez."
 
-#: app/desktopManager.js:271
-msgid "GLibUnix GIR file not found"
-msgstr "A GLibUnix GIR fájl nem található"
-
-#: app/desktopManager.js:272
-msgid ""
-"GLibUnix-2.0.gir file is missing. Please, install the required package in "
-"your system."
-msgstr ""
-"A GLibUnix-2.0.gir fájl hiányzik. Telepítse a szükséges csomagot a "
-"rendszerébe."
-
-#: app/desktopManager.js:1050
+#: app/desktopManager.js:935
 msgid "Clear Current Selection before New Search"
 msgstr "Aktuális kijelölés törlése új keresés előtt"
 
-#: app/desktopManager.js:1095
+#: app/desktopManager.js:1026
 msgid "Find Files on Desktop"
 msgstr "Fájlok keresése az asztalon"
 
-#: app/desktopManager.js:1163 app/desktopManager.js:1875
+#: app/desktopManager.js:1713
 msgid "New Folder"
 msgstr "Új mappa"
 
-#: app/desktopManager.js:1167
-msgid "New Document"
-msgstr "Új dokumentum"
-
-#: app/desktopManager.js:1172
-msgid "Paste"
-msgstr "Beillesztés"
-
-#: app/desktopManager.js:1176
-msgid "Undo"
-msgstr "Visszavonás"
-
-#: app/desktopManager.js:1180
-msgid "Redo"
-msgstr "Újra"
-
-#: app/desktopManager.js:1186
-msgid "Select All"
-msgstr "Összes kijelölése"
-
-#: app/desktopManager.js:1194
-msgid "Show Desktop in Files"
-msgstr "Asztal megjelenítése a Fájlokban"
-
-#: app/desktopManager.js:1198 app/fileItemMenu.js:365
-msgid "Open in Terminal"
-msgstr "Megnyitás terminálban"
-
-#: app/desktopManager.js:1204
-msgid "Change Background…"
-msgstr "Háttér megváltoztatása…"
-
-#: app/desktopManager.js:1215
-msgid "Desktop Icons Settings"
-msgstr "Asztali ikonok beállítása"
-
-#: app/desktopManager.js:1228
-msgid "Display Settings"
-msgstr "Megjelenítés beállításai"
-
-#: app/desktopManager.js:1888
+#: app/desktopManager.js:1726
 msgid "Folder Creation Failed"
 msgstr "A mappa létrehozása nem sikerült"
 
-#: app/desktopManager.js:1889
+#: app/desktopManager.js:1727
 msgid "Error while trying to create a Folder"
 msgstr "Hiba történt a mappa létrehozásakor"
-
-#: app/desktopManager.js:1925
-msgid "Template Creation Failed"
-msgstr "A sablon létrehozása nem sikerült"
-
-#: app/desktopManager.js:1926
-msgid "Error while trying to create a Document"
-msgstr "Hiba történt a dokumentum létrehozásakor"
-
-#: app/desktopManager.js:1934
-msgid "Arrange Icons"
-msgstr "Ikonok elrendezése"
-
-#: app/desktopManager.js:1938
-msgid "Arrange By..."
-msgstr "Rendezés…"
-
-#: app/desktopManager.js:1947
-msgid "Keep Arranged..."
-msgstr "Rendezve tartás…"
-
-#: app/desktopManager.js:1951
-msgid "Keep Stacked by type..."
-msgstr "Típus szerinti halmozás…"
-
-#: app/desktopManager.js:1956
-msgid "Sort Home/Drives/Trash..."
-msgstr "Saját mappa / meghajtók / Kuka rendezése…"
-
-#: app/desktopManager.js:1962
-msgid "Sort by Name"
-msgstr "Rendezés név szerint"
-
-#: app/desktopManager.js:1964
-msgid "Sort by Name Descending"
-msgstr "Rendezés név szerint csökkenő"
-
-#: app/desktopManager.js:1967
-msgid "Sort by Modified Time"
-msgstr "Rendezés módosítási idő szerint"
-
-#: app/desktopManager.js:1970
-msgid "Sort by Type"
-msgstr "Rendezés típus szerint"
-
-#: app/desktopManager.js:1973
-msgid "Sort by Size"
-msgstr "Rendezés méret szerint"
 
 #. * TRANSLATORS: when using a screen reader, this is the text read when the user's personal folder is
 #. * highlighted.
 #. TRANSLATORS: "Home" is the text that will be shown in the user's personal folder
-#: app/fileItem.js:120 app/fileItem.js:255
+#: app/fileItem.js:147 app/fileItem.js:269
 msgid "Home"
 msgstr "Saját mappa"
 
-#. * TRANSLATORS: when using a screen reader, this is the text read when the user's personal folder is
-#. * highlighted and selected.
-#: app/fileItem.js:123
-msgid "Home Selected"
-msgstr "Saját mappa kijelölve"
-
 #. * TRANSLATORS: when using a screen reader, this is the text read when the trash folder is
 #. * highlighted.
-#: app/fileItem.js:128
+#: app/fileItem.js:152
 msgid "Trash"
 msgstr "Kuka"
-
-#. * TRANSLATORS: when using a screen reader, this is the text read when the trash folder is
-#. * highlighted and selected.
-#: app/fileItem.js:131
-msgid "Trash Selected"
-msgstr "Kuka kijelölve"
 
 #. * TRANSLATORS: when using a screen reader, this is the role used when an external drive is
 #. * highlighted. Example: if a USB stick named "my_portable" is highlighted, it will say "my_portable Drive".
 #. * It is mandatory to say the file name first and the role after.
-#: app/fileItem.js:137
+#: app/fileItem.js:160
 msgid "${VisibleName} Drive"
 msgstr "${VisibleName} meghajtó"
 
@@ -341,118 +235,91 @@ msgstr "${VisibleName} meghajtó"
 #. * highlighted and selected. Example: if a USB stick named "my_portable" is highlighted and selected, it
 #. * will say "my_portable Drive Selected". It is mandatory to say the file name first, then the role, and
 #. * finally "Selected".
-#: app/fileItem.js:142
+#: app/fileItem.js:165
 msgid "${VisibleName} Drive Selected"
 msgstr "${VisibleName} meghajtó kijelölve"
-
-#. * TRANSLATORS: when using a screen reader, this is the role used when a stack is
-#. * highlighted. Example: if a stack named "pictures" is selected, it will say "pictures Stack".
-#. * It is mandatory to say the file name first and the role after.
-#: app/fileItem.js:148
-msgid "${VisibleName} Stack"
-msgstr "${VisibleName} halom"
-
-#. * TRANSLATORS: when using a screen reader, this is the role used when a stack is highlighted and
-#. * selected. Example: if a stack named "pictures" is highlighted and selected, it will say "pictures Stack Selected".
-#. * It is mandatory to say the file name first, then the role, and finally "Selected".
-#: app/fileItem.js:152
-msgid "${VisibleName} Stack Selected"
-msgstr "${VisibleName} halom kijelölve"
 
 #. * TRANSLATORS: when using a screen reader, this is the role used when a folder is
 #. * highlighted. Example: if a folder named "things" is highlighted, it will say "things Folder".
 #. * It is mandatory to say the file name first and the role after.
-#: app/fileItem.js:158
+#: app/fileItem.js:171
 msgid "${VisibleName} Folder"
 msgstr "${VisibleName} mappa"
 
 #. * TRANSLATORS: when using a screen reader, this is the role used when a folder is
 #. * highlighted and selected. Example: if a folder named "things" is highlighted and selected, it will say
 #. * "things Folder Selected". It is mandatory to say the file name first, then the role, and finally "Selected".
-#: app/fileItem.js:162
+#: app/fileItem.js:175
 msgid "${VisibleName} Folder Selected"
 msgstr "${VisibleName} mappa kijelölve"
 
 #. * TRANSLATORS: when using a screen reader, this is the role used when a trusted desktop file is
 #. * highlighted. Example: if a desktop file named "My App" is highlighted and it is trusted, it will
 #. * say "My App Application". It is mandatory to say the file name first and the role after.
-#: app/fileItem.js:168
+#: app/fileItem.js:181
 msgid "${VisibleName} Application"
 msgstr "${VisibleName} alkalmazás"
 
 #. * TRANSLATORS: when using a screen reader, this is the role used when a trusted desktop file is
 #. * highlighted. Example: if a desktop file named "My App" is highlighted and selected and it is trusted, it will
 #. * say "My App Application Selected". It is mandatory to say the file name first and the role after.
-#: app/fileItem.js:172
+#: app/fileItem.js:185
 msgid "${VisibleName} Application Selected"
 msgstr "${VisibleName} alkalmazás kijelölve"
 
 #. * TRANSLATORS: when using a screen reader, this is the text read when a normal file is
 #. * highlighted. Example: if a file named "my_picture.jpg" is highlighted, it will say "my_picture.jpg File"
-#: app/fileItem.js:178
+#: app/fileItem.js:191
 msgid "${VisibleName} File"
 msgstr "${VisibleName} fájl"
 
 #. * TRANSLATORS: when using a screen reader, this is the text read when a normal file is highlighted and
 #. * selected. Example: if a file named "my_picture.jpg" is highlighted and selected, it will say
 #. * "my_picture.jpg File Selected". It is mandatory to say the file name first and the role after.
-#: app/fileItem.js:182
+#: app/fileItem.js:195
 msgid "${VisibleName} File Selected"
 msgstr "${VisibleName} fájl kijelölve"
 
-#: app/fileItem.js:348
+#: app/fileItem.js:364
 msgid "Error while reading Desktop file"
 msgstr "Hiba történt a .desktop fájl olvasásakor"
 
-#: app/fileItem.js:390
+#: app/fileItem.js:421
 msgid "Broken Link"
 msgstr "Sérült hivatkozás"
 
-#: app/fileItem.js:391
+#: app/fileItem.js:422
 msgid "Can not open this File because it is a Broken Symlink"
 msgstr "A fájl nem nyitható meg, mert sérült szimbolikus hivatkozásra mutat"
 
-#: app/fileItem.js:423
+#: app/fileItem.js:458
 msgid "Can't open the file"
 msgstr "A fájl nem nyitható meg"
 
-#: app/fileItem.js:449
-msgid "Broken Desktop File"
-msgstr "Sérült .desktop fájl"
-
-#: app/fileItem.js:450
-msgid ""
-"This .desktop file has errors or points to a program without permissions. It "
-"can not be executed.\n"
-"\n"
-"\t<b>Edit the file to set the correct executable Program.</b>"
-msgstr ""
-"Ez a .desktop fájl hibákat tartalmaz, vagy olyan programra hivatkozik, amelynek nincs engedélye. "
-"Nem hajtható végre.\n"
-"\n"
-"\t<b>Szerkessze a fájlt a helyes végrehajtható program beállításához.</b>"
-
-#: app/fileItem.js:456
-msgid "Invalid Permissions on Desktop File"
+#: app/fileItem.js:486
+#, fuzzy
+msgid "Invalid Permissions on AppImage File"
 msgstr "Helytelen jogosultságok a .desktop fájlon"
 
-#: app/fileItem.js:457
+#: app/fileItem.js:487
+#, fuzzy
 msgid ""
-"This .desktop File has incorrect Permissions. Right Click to edit "
+"This .appimage File has incorrect Permissions. Right Click to edit "
 "Properties, then:\n"
 msgstr ""
 "Ennek a .desktop fájlnak helytelenek a jogosultságai. A Tulajdonságok "
 "szerkesztéséhez kattintson jobb gombbal, majd:\n"
 
-#: app/fileItem.js:459
+#: app/fileItem.js:489 app/fileItem.js:522
 msgid ""
 "\n"
 "<b>Set Permissions, in \"Others Access\", \"Read Only\" or \"None\"</b>"
 msgstr ""
 "\n"
-"<b>A jogosultságoknál az „Egyebek hozzáférése” mezőben válassza a „Csak olvasás” vagy a „Nincs” lehetőséget</b>"
+"<b>A jogosultságoknál az „Egyebek hozzáférése” mezőben válassza a „Csak "
+"olvasás” vagy a „Nincs” lehetőséget</b>"
 
-#: app/fileItem.js:462
+#: app/fileItem.js:492 app/fileItem.js:525
 msgid ""
 "\n"
 "<b>Enable option, \"Allow Executing File as a Program\"</b>"
@@ -460,7 +327,48 @@ msgstr ""
 "\n"
 "<b>Kapcsolja be a „Fájl futtatása programként” engedélyezését</b>"
 
-#: app/fileItem.js:470
+#: app/fileItem.js:500
+#, fuzzy
+msgid ""
+"This .appimage file is not trusted, it can not be launched. To enable "
+"launching, right-click, then:\n"
+"\n"
+"<b>Enable \"Allow Launching\"</b>"
+msgstr ""
+"Ez a .desktop fájl nem megbízható, ezért nem indítható. Az indítás "
+"engedélyezéséhez kattintson jobb gombbal, majd:\n"
+"\n"
+"<b>Kapcsolja be az „Indítás engedélyezése” beállítást</b>"
+
+#: app/fileItem.js:512
+msgid "Broken Desktop File"
+msgstr "Sérült .desktop fájl"
+
+#: app/fileItem.js:513
+msgid ""
+"This .desktop file has errors or points to a program without permissions. It "
+"can not be executed.\n"
+"\n"
+"\t<b>Edit the file to set the correct executable Program.</b>"
+msgstr ""
+"Ez a .desktop fájl hibákat tartalmaz, vagy olyan programra hivatkozik, "
+"amelynek nincs engedélye. Nem hajtható végre.\n"
+"\n"
+"\t<b>Szerkessze a fájlt a helyes végrehajtható program beállításához.</b>"
+
+#: app/fileItem.js:519
+msgid "Invalid Permissions on Desktop File"
+msgstr "Helytelen jogosultságok a .desktop fájlon"
+
+#: app/fileItem.js:520
+msgid ""
+"This .desktop File has incorrect Permissions. Right Click to edit "
+"Properties, then:\n"
+msgstr ""
+"Ennek a .desktop fájlnak helytelenek a jogosultságai. A Tulajdonságok "
+"szerkesztéséhez kattintson jobb gombbal, majd:\n"
+
+#: app/fileItem.js:533
 msgid ""
 "This .desktop file is not trusted, it can not be launched. To enable "
 "launching, right-click, then:\n"
@@ -472,173 +380,181 @@ msgstr ""
 "\n"
 "<b>Kapcsolja be az „Indítás engedélyezése” beállítást</b>"
 
-#: app/fileItem.js:669
+#: app/fileItem.js:731
 msgid "Failed to set execution flag"
 msgstr "A végrehajtható jelölő beállítása nem sikerült"
 
-#: app/fileItem.js:681 app/fileItem.js:688
+#: app/fileItem.js:750 app/fileItem.js:757
 msgid "Could not apply discrete GPU environment"
 msgstr "A dedikált GPU-környezet beállítása nem sikerült"
 
-#: app/fileItem.js:717
+#: app/fileItem.js:786
 msgid "Could not find discrete GPU data"
 msgstr "A dedikált GPU adatai nem találhatók"
 
-#: app/fileItem.js:842
+#: app/fileItem.js:911 app/fileItem.js:945
 msgid "Failed to set metadata::trusted flag"
 msgstr "A megbízhatósági jelölő (metadata::trusted) beállítása nem sikerült"
 
-#: app/fileItemMenu.js:143
+#: app/fileItemMenu.js:233
 msgid "Open All..."
 msgstr "Összes megnyitása…"
 
-#: app/fileItemMenu.js:143
+#: app/fileItemMenu.js:233
 msgid "Open"
 msgstr "Megnyitás"
 
-#: app/fileItemMenu.js:160
+#: app/fileItemMenu.js:246
 msgid "Stack This Type"
 msgstr "Ezen típus halmozása"
 
-#: app/fileItemMenu.js:160
+#: app/fileItemMenu.js:246
 msgid "Unstack This Type"
 msgstr "Ezen típus széthalmozása"
 
-#: app/fileItemMenu.js:173
-msgid "Scripts"
-msgstr "Parancsfájlok"
-
-#: app/fileItemMenu.js:178
+#: app/fileItemMenu.js:265
 msgid "Open All With Other Application..."
 msgstr "Összes megnyitása egyéb alkalmazással…"
 
-#: app/fileItemMenu.js:178
+#: app/fileItemMenu.js:265
 msgid "Open With Other Application"
 msgstr "Megnyitás egyéb alkalmazással"
 
-#: app/fileItemMenu.js:184
+#: app/fileItemMenu.js:272
 msgid "Launch using Dedicated Graphics Card"
 msgstr "Futtatás a dedikált videokártyával"
 
-#: app/fileItemMenu.js:195
+#: app/fileItemMenu.js:283
 msgid "Run as a program"
 msgstr "Futtatás programként"
 
-#: app/fileItemMenu.js:203
+#: app/fileItemMenu.js:298
 msgid "Cut"
 msgstr "Kivágás"
 
-#: app/fileItemMenu.js:210
+#: app/fileItemMenu.js:304
 msgid "Copy"
 msgstr "Másolás"
 
-#: app/fileItemMenu.js:218
+#: app/fileItemMenu.js:311
 msgid "Rename…"
 msgstr "Átnevezés…"
 
-#: app/fileItemMenu.js:228
+#: app/fileItemMenu.js:321
 msgid "Move to Trash"
 msgstr "Áthelyezés a Kukába"
 
-#: app/fileItemMenu.js:236
+#: app/fileItemMenu.js:328
 msgid "Delete permanently"
 msgstr "Végleges törlés"
 
-#: app/fileItemMenu.js:246
+#: app/fileItemMenu.js:337
 msgid "Don't Allow Launching"
 msgstr "Ne engedélyezze az indítást"
 
-#: app/fileItemMenu.js:246
+#: app/fileItemMenu.js:337
 msgid "Allow Launching"
 msgstr "Indítás engedélyezése"
 
-#: app/fileItemMenu.js:259
+#: app/fileItemMenu.js:344
+msgid "Don't use sandboxing"
+msgstr ""
+
+#: app/fileItemMenu.js:344
+msgid "Use sandboxing if available"
+msgstr ""
+
+#: app/fileItemMenu.js:358
 msgid "Empty Trash"
 msgstr "Kuka ürítése"
 
-#: app/fileItemMenu.js:272
+#: app/fileItemMenu.js:370
 msgid "Eject"
 msgstr "Kiadás"
 
-#: app/fileItemMenu.js:280
+#: app/fileItemMenu.js:378
 msgid "Unmount"
 msgstr "Leválasztás"
 
-#: app/fileItemMenu.js:294 app/fileItemMenu.js:301
+#: app/fileItemMenu.js:392 app/fileItemMenu.js:400
 msgid "Extract Here"
 msgstr "Kibontás ide"
 
-#: app/fileItemMenu.js:308
+#: app/fileItemMenu.js:406
 msgid "Extract To..."
 msgstr "Kibontás…"
 
-#: app/fileItemMenu.js:317
+#: app/fileItemMenu.js:414
 msgid "Send to..."
 msgstr "Küldés…"
 
-#: app/fileItemMenu.js:325
+#: app/fileItemMenu.js:423
 msgid "Compress {0} folder"
 msgid_plural "Compress {0} folders"
 msgstr[0] "{0} mappa tömörítése"
 msgstr[1] "{0} mappa tömörítése"
 
-#: app/fileItemMenu.js:332
+#: app/fileItemMenu.js:432
 msgid "Compress {0} file"
 msgid_plural "Compress {0} files"
 msgstr[0] "{0} fájl tömörítése"
 msgstr[1] "{0} fájl tömörítése"
 
-#: app/fileItemMenu.js:340
+#: app/fileItemMenu.js:442
 msgid "New Folder with {0} item"
 msgid_plural "New Folder with {0} items"
 msgstr[0] "Új mappa {0} elemmel"
 msgstr[1] "Új mappa {0} elemmel"
 
-#: app/fileItemMenu.js:351
+#: app/fileItemMenu.js:453
 msgid "Common Properties"
 msgstr "Gyakori tulajdonságok"
 
-#: app/fileItemMenu.js:351
+#: app/fileItemMenu.js:453
 msgid "Properties"
 msgstr "Tulajdonságok"
 
-#: app/fileItemMenu.js:358
+#: app/fileItemMenu.js:461
 msgid "Show All in Files"
 msgstr "Összes megjelenítése a Fájlokban"
 
-#: app/fileItemMenu.js:358
+#: app/fileItemMenu.js:461
 msgid "Show in Files"
 msgstr "Megjelenítés a Fájlokban"
 
-#: app/fileItemMenu.js:449
+#: app/fileItemMenu.js:469
+msgid "Open in Terminal"
+msgstr "Megnyitás terminálban"
+
+#: app/fileItemMenu.js:546
 msgid "No Extraction Folder"
 msgstr "Nincs kicsomagolási mappa"
 
-#: app/fileItemMenu.js:450
+#: app/fileItemMenu.js:547
 msgid "Unable to extract File, extraction Folder Does not Exist"
 msgstr "A fájl nem bontható ki, mert a kicsomagolási mappa nem létezik"
 
-#: app/fileItemMenu.js:470
+#: app/fileItemMenu.js:568
 msgid "Select Extract Destination"
 msgstr "Válassza ki a kicsomagolás célját"
 
-#: app/fileItemMenu.js:475
+#: app/fileItemMenu.js:576
 msgid "Select"
 msgstr "Kiválasztás"
 
-#: app/fileItemMenu.js:516
+#: app/fileItemMenu.js:617
 msgid "Can not email a Directory"
 msgstr "Könyvtár nem küldhető el e-mailben"
 
-#: app/fileItemMenu.js:517
+#: app/fileItemMenu.js:618
 msgid "Selection includes a Directory, compress the directory to a file first."
 msgstr "A kijelölés könyvtárat tartalmaz, előbb tömörítse egy fájlba."
 
-#: app/notifyX11UnderWayland.js:37
+#: app/notifyX11UnderWayland.js:34
 msgid "Desktop Icons NG is running under X11Wayland"
 msgstr "A Desktop Icons NG X11Wayland alatt fut"
 
-#: app/notifyX11UnderWayland.js:38
+#: app/notifyX11UnderWayland.js:35
 msgid ""
 "It seems that you have your system configured to force GTK to use X11. This "
 "works, but it's suboptimal. You should check your system configuration to "
@@ -648,15 +564,15 @@ msgstr ""
 "kényszerítse. Ez működik, de nem optimális. A hiba javításához ellenőrizze a "
 "rendszerbeállításokat."
 
-#: app/notifyX11UnderWayland.js:39 app/showErrorPopup.js:39
+#: app/notifyX11UnderWayland.js:36 app/showErrorPopup.js:36
 msgid "Close"
 msgstr "Bezárás"
 
-#: app/notifyX11UnderWayland.js:47
+#: app/notifyX11UnderWayland.js:44
 msgid "Don't show this message anymore."
 msgstr "Ne jelenjen meg többé ez az üzenet."
 
-#: app/preferences.js:91
+#: app/preferences.js:98
 msgid "Settings"
 msgstr "Beállítások"
 
@@ -793,12 +709,14 @@ msgid "Always"
 msgstr "Mindig"
 
 #: app/thumbnails.js:38
-msgid "GnomeDesktop-3.0 GIR file not found"
+#, fuzzy
+msgid "GnomeDesktop-4.0 GIR file not found"
 msgstr "A GnomeDesktop-3.0 GIR fájl nem található"
 
 #: app/thumbnails.js:39
+#, fuzzy
 msgid ""
-"GnomeDesktop-3.0.gir file is missing. Please, install the required package "
+"GnomeDesktop-4.0.gir file is missing. Please, install the required package "
 "in your system."
 msgstr ""
 "A GnomeDesktop-3.0.gir fájl hiányzik. Telepítse a szükséges csomagot a "
@@ -882,7 +800,8 @@ msgstr "Ikonok rendezve tartása"
 
 #: schemas/org.gnome.shell.extensions.ding.gschema.xml:71
 msgid "Always keep Icons Arranged by the last arranged order"
-msgstr "Az ikonokat mindig az utolsó elrendezési sorrend szerint tartsa rendezve"
+msgstr ""
+"Az ikonokat mindig az utolsó elrendezési sorrend szerint tartsa rendezve"
 
 #: schemas/org.gnome.shell.extensions.ding.gschema.xml:75
 msgid "Arrange Order"
@@ -898,7 +817,8 @@ msgstr "Ikonok halmozva tartása"
 
 #: schemas/org.gnome.shell.extensions.ding.gschema.xml:81
 msgid "Always keep Icons Stacked, Similar types are grouped"
-msgstr "Az ikonokat mindig halmozva tartsa; a hasonló típusok csoportosítva vannak"
+msgstr ""
+"Az ikonokat mindig halmozva tartsa; a hasonló típusok csoportosítva vannak"
 
 #: schemas/org.gnome.shell.extensions.ding.gschema.xml:85
 msgid "Type of Files to not Stack"
@@ -944,6 +864,100 @@ msgstr ""
 "Azt adja meg, hogy a DING megjelenítsen-e előugró ablakot, ha X11Wayland "
 "alatt fut, vagy ha a felhasználó úgy döntött, hogy többé nem kéri."
 
+#~ msgid "Folder name"
+#~ msgstr "Mappanév"
+
+#~ msgid "Create"
+#~ msgstr "Létrehozás"
+
+#~ msgid "GLibUnix GIR file not found"
+#~ msgstr "A GLibUnix GIR fájl nem található"
+
+#~ msgid ""
+#~ "GLibUnix-2.0.gir file is missing. Please, install the required package in "
+#~ "your system."
+#~ msgstr ""
+#~ "A GLibUnix-2.0.gir fájl hiányzik. Telepítse a szükséges csomagot a "
+#~ "rendszerébe."
+
+#~ msgid "New Document"
+#~ msgstr "Új dokumentum"
+
+#~ msgid "Paste"
+#~ msgstr "Beillesztés"
+
+#~ msgid "Undo"
+#~ msgstr "Visszavonás"
+
+#~ msgid "Redo"
+#~ msgstr "Újra"
+
+#~ msgid "Select All"
+#~ msgstr "Összes kijelölése"
+
+#~ msgid "Show Desktop in Files"
+#~ msgstr "Asztal megjelenítése a Fájlokban"
+
+#~ msgid "Change Background…"
+#~ msgstr "Háttér megváltoztatása…"
+
+#~ msgid "Desktop Icons Settings"
+#~ msgstr "Asztali ikonok beállítása"
+
+#~ msgid "Display Settings"
+#~ msgstr "Megjelenítés beállításai"
+
+#~ msgid "Template Creation Failed"
+#~ msgstr "A sablon létrehozása nem sikerült"
+
+#~ msgid "Error while trying to create a Document"
+#~ msgstr "Hiba történt a dokumentum létrehozásakor"
+
+#~ msgid "Arrange Icons"
+#~ msgstr "Ikonok elrendezése"
+
+#~ msgid "Arrange By..."
+#~ msgstr "Rendezés…"
+
+#~ msgid "Keep Arranged..."
+#~ msgstr "Rendezve tartás…"
+
+#~ msgid "Keep Stacked by type..."
+#~ msgstr "Típus szerinti halmozás…"
+
+#~ msgid "Sort Home/Drives/Trash..."
+#~ msgstr "Saját mappa / meghajtók / Kuka rendezése…"
+
+#~ msgid "Sort by Name"
+#~ msgstr "Rendezés név szerint"
+
+#~ msgid "Sort by Name Descending"
+#~ msgstr "Rendezés név szerint csökkenő"
+
+#~ msgid "Sort by Modified Time"
+#~ msgstr "Rendezés módosítási idő szerint"
+
+#~ msgid "Sort by Type"
+#~ msgstr "Rendezés típus szerint"
+
+#~ msgid "Sort by Size"
+#~ msgstr "Rendezés méret szerint"
+
+#~ msgid "Home Selected"
+#~ msgstr "Saját mappa kijelölve"
+
+#~ msgid "Trash Selected"
+#~ msgstr "Kuka kijelölve"
+
+#~ msgid "${VisibleName} Stack"
+#~ msgstr "${VisibleName} halom"
+
+#~ msgid "${VisibleName} Stack Selected"
+#~ msgstr "${VisibleName} halom kijelölve"
+
+#~ msgid "Scripts"
+#~ msgstr "Parancsfájlok"
+
 #, fuzzy
 #~ msgid "Folder"
 #~ msgstr "Új mappa"
@@ -973,9 +987,6 @@ msgstr ""
 
 #~ msgid "Execute"
 #~ msgstr "Végrehajtás"
-
-#~ msgid "New folder"
-#~ msgstr "Új mappa"
 
 #~ msgid "Delete"
 #~ msgstr "Törlés"

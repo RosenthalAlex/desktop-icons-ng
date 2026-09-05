@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: desktop-icons master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-24 20:44+0100\n"
+"POT-Creation-Date: 2026-09-05 08:41+0200\n"
 "PO-Revision-Date: 2025-09-17 14:29+0800\n"
 "Last-Translator: Luke Na <narukeu@outlook.com>\n"
 "Language-Team: Chinese (Taiwan) <chinese-l10n@googlegroups.com>\n"
@@ -19,317 +19,209 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.7\n"
 
-#: app/askRenamePopup.js:50
-msgid "Folder name"
-msgstr "資料夾名稱"
+#: app/askRenamePopup.js:54
+#, fuzzy
+msgid "Rename folder"
+msgstr "新增資料夾"
 
-#: app/askRenamePopup.js:50
-msgid "File name"
+#: app/askRenamePopup.js:54
+#, fuzzy
+msgid "Rename file"
+msgstr "重新命名"
+
+#: app/askRenamePopup.js:64
+#, fuzzy
+msgid "New filename"
 msgstr "檔案名稱"
 
-#: app/askRenamePopup.js:59 app/autoAr.js:305 app/desktopManager.js:1091
+#: app/askRenamePopup.js:69 app/autoAr.js:307 app/autoAr.js:559
+#: app/desktopManager.js:1036
 msgid "OK"
 msgstr "確定"
 
-#: app/askRenamePopup.js:59
+#: app/askRenamePopup.js:69
 msgid "Rename"
 msgstr "重新命名"
 
-#: app/autoAr.js:88
+#: app/autoAr.js:76
 msgid "AutoAr is not installed"
 msgstr "AutoAr 未安裝"
 
-#: app/autoAr.js:89
+#: app/autoAr.js:77
 msgid ""
 "To be able to work with compressed files, install file-roller and/or gir-1.2-"
 "gnomeAutoAr"
 msgstr "若要能夠處理壓縮檔，請安裝 file-roller 及/或 gir-1.2-gnomeAutoAr"
 
-#: app/autoAr.js:224
+#: app/autoAr.js:216
 msgid "Extracting files"
 msgstr "正在解壓縮檔案"
 
-#: app/autoAr.js:241
+#: app/autoAr.js:233
 msgid "Compressing files"
 msgstr "正在壓縮檔案"
 
-#: app/autoAr.js:297 app/autoAr.js:636 app/desktopManager.js:1093
-#: app/fileItemMenu.js:474
+#: app/autoAr.js:299 app/autoAr.js:566 app/desktopManager.js:1039
+#: app/fileItemMenu.js:575
 msgid "Cancel"
 msgstr "取消"
 
-#: app/autoAr.js:318 app/autoAr.js:619
+#: app/autoAr.js:320 app/autoAr.js:635
 msgid "Enter a password here"
 msgstr "請在此輸入密碼"
 
-#: app/autoAr.js:359
+#: app/autoAr.js:353
 msgid "Removing partial file '${outputFile}'"
 msgstr "正在移除未完成的檔案「${outputFile}」"
 
-#: app/autoAr.js:378
+#: app/autoAr.js:372
 msgid "Creating destination folder"
 msgstr "正在建立目標資料夾"
 
-#: app/autoAr.js:410
+#: app/autoAr.js:404
 msgid "Extracting files into '${outputPath}'"
 msgstr "正在將檔案解壓縮至 '${outputPath}'"
 
-#: app/autoAr.js:442
+#: app/autoAr.js:436
 msgid "Extraction completed"
 msgstr "解壓縮完成"
 
-#: app/autoAr.js:443
+#: app/autoAr.js:437
 msgid "Extracting '${fullPathFile}' has been completed."
 msgstr "解壓縮 '${fullPathFile}' 已完成。"
 
-#: app/autoAr.js:449
+#: app/autoAr.js:443
 msgid "Extraction cancelled"
 msgstr "解壓縮已取消"
 
-#: app/autoAr.js:450
+#: app/autoAr.js:444
 msgid "Extracting '${fullPathFile}' has been cancelled by the user."
 msgstr "使用者已取消解壓縮 '${fullPathFile}'。"
 
-#: app/autoAr.js:460
+#: app/autoAr.js:454
 msgid "Passphrase required for ${filename}"
 msgstr "需要「${filename}」的通行片語"
 
-#: app/autoAr.js:463
+#: app/autoAr.js:457
 msgid "Error during extraction"
 msgstr "解壓縮時發生錯誤"
 
-#: app/autoAr.js:492
+#: app/autoAr.js:486
 msgid "Compressing files into '${outputFile}'"
 msgstr "正在將檔案壓縮至「${outputFile}」"
 
-#: app/autoAr.js:505
+#: app/autoAr.js:499
 msgid "Compression completed"
 msgstr "壓縮完成"
 
-#: app/autoAr.js:506
+#: app/autoAr.js:500
 msgid "Compressing files into '${outputFile}' has been completed."
 msgstr "將檔案壓縮至「${outputFile}」已完成。"
 
-#: app/autoAr.js:510 app/autoAr.js:517
+#: app/autoAr.js:504 app/autoAr.js:511
 msgid "Cancelled compression"
 msgstr "壓縮已取消"
 
-#: app/autoAr.js:511
+#: app/autoAr.js:505
 msgid "The output file '${outputFile}' already exists."
 msgstr "輸出檔案「${outputFile}」已存在。"
 
-#: app/autoAr.js:518
+#: app/autoAr.js:512
 msgid "Compressing files into '${outputFile}' has been cancelled by the user."
 msgstr "使用者已取消將檔案壓縮至「${outputFile}」。"
 
-#: app/autoAr.js:521
+#: app/autoAr.js:515
 msgid "Error during compression"
 msgstr "壓縮時發生錯誤"
 
-#: app/autoAr.js:554
+#: app/autoAr.js:548
 msgid "Create archive"
 msgstr "建立壓縮檔"
 
-#: app/autoAr.js:579
+#: app/autoAr.js:592
 msgid "Archive name"
 msgstr "壓縮檔名稱"
 
-#: app/autoAr.js:614
+#: app/autoAr.js:630
 msgid "Password"
 msgstr "密碼"
 
-#: app/autoAr.js:633
-msgid "Create"
-msgstr "建立"
-
-#: app/autoAr.js:712
+#: app/autoAr.js:719
 msgid "Compatible with all operating systems."
 msgstr "與所有作業系統相容。"
 
-#: app/autoAr.js:718
+#: app/autoAr.js:725
 msgid "Password protected .zip, must be installed on Windows and Mac."
 msgstr "受密碼保護的 .zip，必須在 Windows 和 Mac 上安裝。"
 
-#: app/autoAr.js:724
+#: app/autoAr.js:731
 msgid "Smaller archives but Linux and Mac only."
 msgstr "壓縮檔較小，但僅限 Linux 和 Mac。"
 
-#: app/autoAr.js:730
+#: app/autoAr.js:737
 msgid "Smaller archives but must be installed on Windows and Mac."
 msgstr "壓縮檔較小，但必須在 Windows 和 Mac 上安裝。"
 
-#: app/dbusUtils.js:69
+#: app/dbusUtils.js:73
 msgid "\"${programName}\" is needed for Desktop Icons"
 msgstr "Desktop Icons 需要「${programName}」"
 
-#: app/dbusUtils.js:70
+#: app/dbusUtils.js:74
 msgid ""
 "For this functionality to work in Desktop Icons, you must install \"$"
 "{programName}\" in your system."
 msgstr ""
 "為使此功能在 Desktop Icons 中運作，您必須在系統中安裝「${programName}」。"
 
-#: app/desktopIconsUtil.js:157
+#: app/desktopIconsUtil.js:170
 msgid "Command not found"
 msgstr "無法找到指令"
 
-#: app/desktopManager.js:264
+#: app/desktopManager.js:279
 msgid "Nautilus File Manager not found"
 msgstr "找不到「檔案」(Nautilus)"
 
-#: app/desktopManager.js:265
+#: app/desktopManager.js:280
 msgid "The Nautilus File Manager is mandatory to work with Desktop Icons NG."
 msgstr "Desktop Icons NG 需要「檔案」才能運作。"
 
-#: app/desktopManager.js:271
-msgid "GLibUnix GIR file not found"
-msgstr ""
-
-#: app/desktopManager.js:272
-msgid ""
-"GLibUnix-2.0.gir file is missing. Please, install the required package in "
-"your system."
-msgstr ""
-
-#: app/desktopManager.js:1050
+#: app/desktopManager.js:935
 msgid "Clear Current Selection before New Search"
 msgstr "在新搜尋前清除目前選取項目"
 
-#: app/desktopManager.js:1095
+#: app/desktopManager.js:1026
 msgid "Find Files on Desktop"
 msgstr "在桌面上尋找檔案"
 
-#: app/desktopManager.js:1163 app/desktopManager.js:1875
+#: app/desktopManager.js:1713
 msgid "New Folder"
 msgstr "新增資料夾"
 
-#: app/desktopManager.js:1167
-msgid "New Document"
-msgstr "新增文件"
-
-#: app/desktopManager.js:1172
-msgid "Paste"
-msgstr "貼上"
-
-#: app/desktopManager.js:1176
-msgid "Undo"
-msgstr "復原"
-
-#: app/desktopManager.js:1180
-msgid "Redo"
-msgstr "重做"
-
-#: app/desktopManager.js:1186
-msgid "Select All"
-msgstr "全選"
-
-#: app/desktopManager.js:1194
-msgid "Show Desktop in Files"
-msgstr "在「檔案」中顯示桌面"
-
-#: app/desktopManager.js:1198 app/fileItemMenu.js:365
-msgid "Open in Terminal"
-msgstr "在終端機中開啟"
-
-#: app/desktopManager.js:1204
-msgid "Change Background…"
-msgstr "變更背景…"
-
-#: app/desktopManager.js:1215
-msgid "Desktop Icons Settings"
-msgstr "桌面圖示設定"
-
-#: app/desktopManager.js:1228
-msgid "Display Settings"
-msgstr "顯示設定"
-
-#: app/desktopManager.js:1888
+#: app/desktopManager.js:1726
 msgid "Folder Creation Failed"
 msgstr "建立資料夾失敗"
 
-#: app/desktopManager.js:1889
+#: app/desktopManager.js:1727
 msgid "Error while trying to create a Folder"
 msgstr "嘗試建立資料夾時發生錯誤"
-
-#: app/desktopManager.js:1925
-msgid "Template Creation Failed"
-msgstr "建立範本失敗"
-
-#: app/desktopManager.js:1926
-msgid "Error while trying to create a Document"
-msgstr "嘗試建立文件時發生錯誤"
-
-#: app/desktopManager.js:1934
-msgid "Arrange Icons"
-msgstr "排列圖示"
-
-#: app/desktopManager.js:1938
-msgid "Arrange By..."
-msgstr "排序方式…"
-
-#: app/desktopManager.js:1947
-msgid "Keep Arranged..."
-msgstr "保持排列…"
-
-#: app/desktopManager.js:1951
-msgid "Keep Stacked by type..."
-msgstr "按類型保持堆疊…"
-
-#: app/desktopManager.js:1956
-msgid "Sort Home/Drives/Trash..."
-msgstr "排序家資料夾/磁碟機/垃圾桶…"
-
-#: app/desktopManager.js:1962
-msgid "Sort by Name"
-msgstr "按名稱排序"
-
-#: app/desktopManager.js:1964
-msgid "Sort by Name Descending"
-msgstr "按名稱降序排序"
-
-#: app/desktopManager.js:1967
-msgid "Sort by Modified Time"
-msgstr "按修改時間排序"
-
-#: app/desktopManager.js:1970
-msgid "Sort by Type"
-msgstr "按類型排序"
-
-#: app/desktopManager.js:1973
-msgid "Sort by Size"
-msgstr "按大小排序"
 
 #. * TRANSLATORS: when using a screen reader, this is the text read when the user's personal folder is
 #. * highlighted.
 #. TRANSLATORS: "Home" is the text that will be shown in the user's personal folder
-#: app/fileItem.js:120 app/fileItem.js:255
+#: app/fileItem.js:147 app/fileItem.js:269
 msgid "Home"
 msgstr "家資料夾"
 
-#. * TRANSLATORS: when using a screen reader, this is the text read when the user's personal folder is
-#. * highlighted and selected.
-#: app/fileItem.js:123
-#, fuzzy
-msgid "Home Selected"
-msgstr "選擇"
-
 #. * TRANSLATORS: when using a screen reader, this is the text read when the trash folder is
 #. * highlighted.
-#: app/fileItem.js:128
+#: app/fileItem.js:152
 msgid "Trash"
 msgstr "垃圾桶"
-
-#. * TRANSLATORS: when using a screen reader, this is the text read when the trash folder is
-#. * highlighted and selected.
-#: app/fileItem.js:131
-#, fuzzy
-msgid "Trash Selected"
-msgstr "選擇"
 
 #. * TRANSLATORS: when using a screen reader, this is the role used when an external drive is
 #. * highlighted. Example: if a USB stick named "my_portable" is highlighted, it will say "my_portable Drive".
 #. * It is mandatory to say the file name first and the role after.
-#: app/fileItem.js:137
+#: app/fileItem.js:160
 msgid "${VisibleName} Drive"
 msgstr "${VisibleName} 磁碟機"
 
@@ -337,37 +229,22 @@ msgstr "${VisibleName} 磁碟機"
 #. * highlighted and selected. Example: if a USB stick named "my_portable" is highlighted and selected, it
 #. * will say "my_portable Drive Selected". It is mandatory to say the file name first, then the role, and
 #. * finally "Selected".
-#: app/fileItem.js:142
+#: app/fileItem.js:165
 #, fuzzy
 msgid "${VisibleName} Drive Selected"
 msgstr "${VisibleName} 磁碟機"
 
-#. * TRANSLATORS: when using a screen reader, this is the role used when a stack is
-#. * highlighted. Example: if a stack named "pictures" is selected, it will say "pictures Stack".
-#. * It is mandatory to say the file name first and the role after.
-#: app/fileItem.js:148
-msgid "${VisibleName} Stack"
-msgstr "${VisibleName} 堆疊"
-
-#. * TRANSLATORS: when using a screen reader, this is the role used when a stack is highlighted and
-#. * selected. Example: if a stack named "pictures" is highlighted and selected, it will say "pictures Stack Selected".
-#. * It is mandatory to say the file name first, then the role, and finally "Selected".
-#: app/fileItem.js:152
-#, fuzzy
-msgid "${VisibleName} Stack Selected"
-msgstr "${VisibleName} 堆疊"
-
 #. * TRANSLATORS: when using a screen reader, this is the role used when a folder is
 #. * highlighted. Example: if a folder named "things" is highlighted, it will say "things Folder".
 #. * It is mandatory to say the file name first and the role after.
-#: app/fileItem.js:158
+#: app/fileItem.js:171
 msgid "${VisibleName} Folder"
 msgstr "${VisibleName} 資料夾"
 
 #. * TRANSLATORS: when using a screen reader, this is the role used when a folder is
 #. * highlighted and selected. Example: if a folder named "things" is highlighted and selected, it will say
 #. * "things Folder Selected". It is mandatory to say the file name first, then the role, and finally "Selected".
-#: app/fileItem.js:162
+#: app/fileItem.js:175
 #, fuzzy
 msgid "${VisibleName} Folder Selected"
 msgstr "${VisibleName} 資料夾"
@@ -375,7 +252,7 @@ msgstr "${VisibleName} 資料夾"
 #. * TRANSLATORS: when using a screen reader, this is the role used when a trusted desktop file is
 #. * highlighted. Example: if a desktop file named "My App" is highlighted and it is trusted, it will
 #. * say "My App Application". It is mandatory to say the file name first and the role after.
-#: app/fileItem.js:168
+#: app/fileItem.js:181
 #, fuzzy
 msgid "${VisibleName} Application"
 msgstr "${VisibleName} 檔案"
@@ -383,46 +260,86 @@ msgstr "${VisibleName} 檔案"
 #. * TRANSLATORS: when using a screen reader, this is the role used when a trusted desktop file is
 #. * highlighted. Example: if a desktop file named "My App" is highlighted and selected and it is trusted, it will
 #. * say "My App Application Selected". It is mandatory to say the file name first and the role after.
-#: app/fileItem.js:172
+#: app/fileItem.js:185
 #, fuzzy
 msgid "${VisibleName} Application Selected"
 msgstr "${VisibleName} 檔案"
 
 #. * TRANSLATORS: when using a screen reader, this is the text read when a normal file is
 #. * highlighted. Example: if a file named "my_picture.jpg" is highlighted, it will say "my_picture.jpg File"
-#: app/fileItem.js:178
+#: app/fileItem.js:191
 msgid "${VisibleName} File"
 msgstr "${VisibleName} 檔案"
 
 #. * TRANSLATORS: when using a screen reader, this is the text read when a normal file is highlighted and
 #. * selected. Example: if a file named "my_picture.jpg" is highlighted and selected, it will say
 #. * "my_picture.jpg File Selected". It is mandatory to say the file name first and the role after.
-#: app/fileItem.js:182
+#: app/fileItem.js:195
 #, fuzzy
 msgid "${VisibleName} File Selected"
 msgstr "${VisibleName} 檔案"
 
-#: app/fileItem.js:348
+#: app/fileItem.js:364
 msgid "Error while reading Desktop file"
 msgstr "讀取 .desktop 檔時發生錯誤"
 
-#: app/fileItem.js:390
+#: app/fileItem.js:421
 msgid "Broken Link"
 msgstr "損壞的連結"
 
-#: app/fileItem.js:391
+#: app/fileItem.js:422
 msgid "Can not open this File because it is a Broken Symlink"
 msgstr "無法開啟此檔案，因為它是一個損壞的符號連結"
 
-#: app/fileItem.js:423
+#: app/fileItem.js:458
 msgid "Can't open the file"
 msgstr "無法開啟檔案"
 
-#: app/fileItem.js:449
+#: app/fileItem.js:486
+#, fuzzy
+msgid "Invalid Permissions on AppImage File"
+msgstr ".desktop 檔權限無效"
+
+#: app/fileItem.js:487
+#, fuzzy
+msgid ""
+"This .appimage File has incorrect Permissions. Right Click to edit "
+"Properties, then:\n"
+msgstr "此 .desktop 檔的權限不正確。請按右鍵開啟「內容」，然後：\n"
+
+#: app/fileItem.js:489 app/fileItem.js:522
+msgid ""
+"\n"
+"<b>Set Permissions, in \"Others Access\", \"Read Only\" or \"None\"</b>"
+msgstr ""
+"\n"
+"<b>設定權限，在「其他存取權」中，設為「唯讀」或「無」</b>"
+
+#: app/fileItem.js:492 app/fileItem.js:525
+msgid ""
+"\n"
+"<b>Enable option, \"Allow Executing File as a Program\"</b>"
+msgstr ""
+"\n"
+"<b>勾選「允許檔案作為程式執行」選項</b>"
+
+#: app/fileItem.js:500
+#, fuzzy
+msgid ""
+"This .appimage file is not trusted, it can not be launched. To enable "
+"launching, right-click, then:\n"
+"\n"
+"<b>Enable \"Allow Launching\"</b>"
+msgstr ""
+"此 .desktop 檔不受信任，無法啟動。若要啟用啟動，請按右鍵，然後：\n"
+"\n"
+"<b>啟用「允許啟動」</b>"
+
+#: app/fileItem.js:512
 msgid "Broken Desktop File"
 msgstr "損壞的 .desktop 檔"
 
-#: app/fileItem.js:450
+#: app/fileItem.js:513
 msgid ""
 "This .desktop file has errors or points to a program without permissions. It "
 "can not be executed.\n"
@@ -433,33 +350,17 @@ msgstr ""
 "\n"
 "\t<b>請編輯檔案以設定正確的可執行程式。</b>"
 
-#: app/fileItem.js:456
+#: app/fileItem.js:519
 msgid "Invalid Permissions on Desktop File"
 msgstr ".desktop 檔權限無效"
 
-#: app/fileItem.js:457
+#: app/fileItem.js:520
 msgid ""
 "This .desktop File has incorrect Permissions. Right Click to edit "
 "Properties, then:\n"
 msgstr "此 .desktop 檔的權限不正確。請按右鍵開啟「內容」，然後：\n"
 
-#: app/fileItem.js:459
-msgid ""
-"\n"
-"<b>Set Permissions, in \"Others Access\", \"Read Only\" or \"None\"</b>"
-msgstr ""
-"\n"
-"<b>設定權限，在「其他存取權」中，設為「唯讀」或「無」</b>"
-
-#: app/fileItem.js:462
-msgid ""
-"\n"
-"<b>Enable option, \"Allow Executing File as a Program\"</b>"
-msgstr ""
-"\n"
-"<b>勾選「允許檔案作為程式執行」選項</b>"
-
-#: app/fileItem.js:470
+#: app/fileItem.js:533
 msgid ""
 "This .desktop file is not trusted, it can not be launched. To enable "
 "launching, right-click, then:\n"
@@ -470,170 +371,178 @@ msgstr ""
 "\n"
 "<b>啟用「允許啟動」</b>"
 
-#: app/fileItem.js:669
+#: app/fileItem.js:731
 msgid "Failed to set execution flag"
 msgstr "設定執行權限失敗"
 
-#: app/fileItem.js:681 app/fileItem.js:688
+#: app/fileItem.js:750 app/fileItem.js:757
 msgid "Could not apply discrete GPU environment"
 msgstr "無法套用獨立顯示卡執行環境"
 
-#: app/fileItem.js:717
+#: app/fileItem.js:786
 msgid "Could not find discrete GPU data"
 msgstr "找不到獨立顯示卡資料"
 
-#: app/fileItem.js:842
+#: app/fileItem.js:911 app/fileItem.js:945
 msgid "Failed to set metadata::trusted flag"
 msgstr "設定 metadata::trusted 屬性失敗"
 
-#: app/fileItemMenu.js:143
+#: app/fileItemMenu.js:233
 msgid "Open All..."
 msgstr "全部開啟…"
 
-#: app/fileItemMenu.js:143
+#: app/fileItemMenu.js:233
 msgid "Open"
 msgstr "開啟"
 
-#: app/fileItemMenu.js:160
+#: app/fileItemMenu.js:246
 msgid "Stack This Type"
 msgstr "堆疊此類型"
 
-#: app/fileItemMenu.js:160
+#: app/fileItemMenu.js:246
 msgid "Unstack This Type"
 msgstr "取消堆疊此類型"
 
-#: app/fileItemMenu.js:173
-msgid "Scripts"
-msgstr "指令稿"
-
-#: app/fileItemMenu.js:178
+#: app/fileItemMenu.js:265
 msgid "Open All With Other Application..."
 msgstr "以其他應用程式全部開啟…"
 
-#: app/fileItemMenu.js:178
+#: app/fileItemMenu.js:265
 msgid "Open With Other Application"
 msgstr "使用其他應用程式開啟"
 
-#: app/fileItemMenu.js:184
+#: app/fileItemMenu.js:272
 msgid "Launch using Dedicated Graphics Card"
 msgstr "使用獨立顯示卡啟動"
 
-#: app/fileItemMenu.js:195
+#: app/fileItemMenu.js:283
 msgid "Run as a program"
 msgstr "以程式方式執行"
 
-#: app/fileItemMenu.js:203
+#: app/fileItemMenu.js:298
 msgid "Cut"
 msgstr "剪下"
 
-#: app/fileItemMenu.js:210
+#: app/fileItemMenu.js:304
 msgid "Copy"
 msgstr "複製"
 
-#: app/fileItemMenu.js:218
+#: app/fileItemMenu.js:311
 msgid "Rename…"
 msgstr "重新命名…"
 
-#: app/fileItemMenu.js:228
+#: app/fileItemMenu.js:321
 msgid "Move to Trash"
 msgstr "移動到垃圾桶"
 
-#: app/fileItemMenu.js:236
+#: app/fileItemMenu.js:328
 msgid "Delete permanently"
 msgstr "永久刪除"
 
-#: app/fileItemMenu.js:246
+#: app/fileItemMenu.js:337
 msgid "Don't Allow Launching"
 msgstr "停用啟動"
 
-#: app/fileItemMenu.js:246
+#: app/fileItemMenu.js:337
 msgid "Allow Launching"
 msgstr "允許啟動"
 
-#: app/fileItemMenu.js:259
+#: app/fileItemMenu.js:344
+msgid "Don't use sandboxing"
+msgstr ""
+
+#: app/fileItemMenu.js:344
+msgid "Use sandboxing if available"
+msgstr ""
+
+#: app/fileItemMenu.js:358
 msgid "Empty Trash"
 msgstr "清空垃圾桶"
 
-#: app/fileItemMenu.js:272
+#: app/fileItemMenu.js:370
 msgid "Eject"
 msgstr "退出"
 
-#: app/fileItemMenu.js:280
+#: app/fileItemMenu.js:378
 msgid "Unmount"
 msgstr "卸載"
 
-#: app/fileItemMenu.js:294 app/fileItemMenu.js:301
+#: app/fileItemMenu.js:392 app/fileItemMenu.js:400
 msgid "Extract Here"
 msgstr "解壓縮至此"
 
-#: app/fileItemMenu.js:308
+#: app/fileItemMenu.js:406
 msgid "Extract To..."
 msgstr "解壓縮到…"
 
-#: app/fileItemMenu.js:317
+#: app/fileItemMenu.js:414
 msgid "Send to..."
 msgstr "傳送到…"
 
-#: app/fileItemMenu.js:325
+#: app/fileItemMenu.js:423
 msgid "Compress {0} folder"
 msgid_plural "Compress {0} folders"
 msgstr[0] "壓縮 {0} 個資料夾"
 
-#: app/fileItemMenu.js:332
+#: app/fileItemMenu.js:432
 msgid "Compress {0} file"
 msgid_plural "Compress {0} files"
 msgstr[0] "壓縮 {0} 個檔案"
 
-#: app/fileItemMenu.js:340
+#: app/fileItemMenu.js:442
 msgid "New Folder with {0} item"
 msgid_plural "New Folder with {0} items"
 msgstr[0] "新增含 {0} 個項目的資料夾"
 
-#: app/fileItemMenu.js:351
+#: app/fileItemMenu.js:453
 msgid "Common Properties"
 msgstr "共同內容"
 
-#: app/fileItemMenu.js:351
+#: app/fileItemMenu.js:453
 msgid "Properties"
 msgstr "內容"
 
-#: app/fileItemMenu.js:358
+#: app/fileItemMenu.js:461
 msgid "Show All in Files"
 msgstr "在「檔案」中顯示全部"
 
-#: app/fileItemMenu.js:358
+#: app/fileItemMenu.js:461
 msgid "Show in Files"
 msgstr "在「檔案」中顯示"
 
-#: app/fileItemMenu.js:449
+#: app/fileItemMenu.js:469
+msgid "Open in Terminal"
+msgstr "在終端機中開啟"
+
+#: app/fileItemMenu.js:546
 msgid "No Extraction Folder"
 msgstr "沒有解壓縮資料夾"
 
-#: app/fileItemMenu.js:450
+#: app/fileItemMenu.js:547
 msgid "Unable to extract File, extraction Folder Does not Exist"
 msgstr "無法解壓縮檔案，解壓縮資料夾不存在"
 
-#: app/fileItemMenu.js:470
+#: app/fileItemMenu.js:568
 msgid "Select Extract Destination"
 msgstr "選擇解壓縮的位置"
 
-#: app/fileItemMenu.js:475
+#: app/fileItemMenu.js:576
 msgid "Select"
 msgstr "選擇"
 
-#: app/fileItemMenu.js:516
+#: app/fileItemMenu.js:617
 msgid "Can not email a Directory"
 msgstr "無法寄送資料夾"
 
-#: app/fileItemMenu.js:517
+#: app/fileItemMenu.js:618
 msgid "Selection includes a Directory, compress the directory to a file first."
 msgstr "已選項目含資料夾，先把資料夾壓縮成一個檔案。"
 
-#: app/notifyX11UnderWayland.js:37
+#: app/notifyX11UnderWayland.js:34
 msgid "Desktop Icons NG is running under X11Wayland"
 msgstr "Desktop Icons NG 正在 X11Wayland 下執行"
 
-#: app/notifyX11UnderWayland.js:38
+#: app/notifyX11UnderWayland.js:35
 msgid ""
 "It seems that you have your system configured to force GTK to use X11. This "
 "works, but it's suboptimal. You should check your system configuration to "
@@ -642,15 +551,15 @@ msgstr ""
 "您的系統似乎被設定為強制 GTK 使用 X11。這樣可以運作，但並非最佳選擇。您應該檢"
 "查您的系統設定來修正此問題。"
 
-#: app/notifyX11UnderWayland.js:39 app/showErrorPopup.js:39
+#: app/notifyX11UnderWayland.js:36 app/showErrorPopup.js:36
 msgid "Close"
 msgstr "關閉"
 
-#: app/notifyX11UnderWayland.js:47
+#: app/notifyX11UnderWayland.js:44
 msgid "Don't show this message anymore."
 msgstr "不要再顯示此訊息。"
 
-#: app/preferences.js:91
+#: app/preferences.js:98
 msgid "Settings"
 msgstr "設定"
 
@@ -787,12 +696,12 @@ msgid "Always"
 msgstr "一律"
 
 #: app/thumbnails.js:38
-msgid "GnomeDesktop-3.0 GIR file not found"
+msgid "GnomeDesktop-4.0 GIR file not found"
 msgstr ""
 
 #: app/thumbnails.js:39
 msgid ""
-"GnomeDesktop-3.0.gir file is missing. Please, install the required package "
+"GnomeDesktop-4.0.gir file is missing. Please, install the required package "
 "in your system."
 msgstr ""
 
@@ -929,6 +838,93 @@ msgid ""
 msgstr ""
 "DING 是否應在 X11Wayland 上執行時顯示彈出視窗，或使用者已決定不再顯示。"
 
+#~ msgid "Folder name"
+#~ msgstr "資料夾名稱"
+
+#~ msgid "Create"
+#~ msgstr "建立"
+
+#~ msgid "New Document"
+#~ msgstr "新增文件"
+
+#~ msgid "Paste"
+#~ msgstr "貼上"
+
+#~ msgid "Undo"
+#~ msgstr "復原"
+
+#~ msgid "Redo"
+#~ msgstr "重做"
+
+#~ msgid "Select All"
+#~ msgstr "全選"
+
+#~ msgid "Show Desktop in Files"
+#~ msgstr "在「檔案」中顯示桌面"
+
+#~ msgid "Change Background…"
+#~ msgstr "變更背景…"
+
+#~ msgid "Desktop Icons Settings"
+#~ msgstr "桌面圖示設定"
+
+#~ msgid "Display Settings"
+#~ msgstr "顯示設定"
+
+#~ msgid "Template Creation Failed"
+#~ msgstr "建立範本失敗"
+
+#~ msgid "Error while trying to create a Document"
+#~ msgstr "嘗試建立文件時發生錯誤"
+
+#~ msgid "Arrange Icons"
+#~ msgstr "排列圖示"
+
+#~ msgid "Arrange By..."
+#~ msgstr "排序方式…"
+
+#~ msgid "Keep Arranged..."
+#~ msgstr "保持排列…"
+
+#~ msgid "Keep Stacked by type..."
+#~ msgstr "按類型保持堆疊…"
+
+#~ msgid "Sort Home/Drives/Trash..."
+#~ msgstr "排序家資料夾/磁碟機/垃圾桶…"
+
+#~ msgid "Sort by Name"
+#~ msgstr "按名稱排序"
+
+#~ msgid "Sort by Name Descending"
+#~ msgstr "按名稱降序排序"
+
+#~ msgid "Sort by Modified Time"
+#~ msgstr "按修改時間排序"
+
+#~ msgid "Sort by Type"
+#~ msgstr "按類型排序"
+
+#~ msgid "Sort by Size"
+#~ msgstr "按大小排序"
+
+#, fuzzy
+#~ msgid "Home Selected"
+#~ msgstr "選擇"
+
+#, fuzzy
+#~ msgid "Trash Selected"
+#~ msgstr "選擇"
+
+#~ msgid "${VisibleName} Stack"
+#~ msgstr "${VisibleName} 堆疊"
+
+#, fuzzy
+#~ msgid "${VisibleName} Stack Selected"
+#~ msgstr "${VisibleName} 堆疊"
+
+#~ msgid "Scripts"
+#~ msgstr "指令稿"
+
 #, fuzzy
 #~ msgid "Folder"
 #~ msgstr "新增資料夾"
@@ -957,9 +953,6 @@ msgstr ""
 
 #~ msgid "Execute"
 #~ msgstr "執行"
-
-#~ msgid "New folder"
-#~ msgstr "新增資料夾"
 
 #~ msgid "Delete"
 #~ msgstr "刪除"

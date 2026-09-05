@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ding\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-24 20:44+0100\n"
+"POT-Creation-Date: 2026-09-05 08:41+0200\n"
 "PO-Revision-Date: 2025-12-13 08:37+0100\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
@@ -18,27 +18,35 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.8\n"
 
-#: app/askRenamePopup.js:50
-msgid "Folder name"
-msgstr "საქაღალდის სახელი"
+#: app/askRenamePopup.js:54
+#, fuzzy
+msgid "Rename folder"
+msgstr "სახელის გადარქმევა"
 
-#: app/askRenamePopup.js:50
-msgid "File name"
+#: app/askRenamePopup.js:54
+#, fuzzy
+msgid "Rename file"
+msgstr "სახელის გადარქმევა"
+
+#: app/askRenamePopup.js:64
+#, fuzzy
+msgid "New filename"
 msgstr "ფაილის სახელი"
 
-#: app/askRenamePopup.js:59 app/autoAr.js:305 app/desktopManager.js:1091
+#: app/askRenamePopup.js:69 app/autoAr.js:307 app/autoAr.js:559
+#: app/desktopManager.js:1036
 msgid "OK"
 msgstr "დიახ"
 
-#: app/askRenamePopup.js:59
+#: app/askRenamePopup.js:69
 msgid "Rename"
 msgstr "სახელის გადარქმევა"
 
-#: app/autoAr.js:88
+#: app/autoAr.js:76
 msgid "AutoAr is not installed"
 msgstr "AutoAr დაყენებული არაა"
 
-#: app/autoAr.js:89
+#: app/autoAr.js:77
 msgid ""
 "To be able to work with compressed files, install file-roller and/or gir-1.2-"
 "gnomeAutoAr"
@@ -46,124 +54,120 @@ msgstr ""
 "იმისათვის, რომ გქონდეთ საშუალება, იმუშაოთ შეკუმშულ ფაილებთან, დააყენეთ file-"
 "roller ან/და gir-1.2-gnomeAutoAr"
 
-#: app/autoAr.js:224
+#: app/autoAr.js:216
 msgid "Extracting files"
 msgstr "ფაილების ამოღება"
 
-#: app/autoAr.js:241
+#: app/autoAr.js:233
 msgid "Compressing files"
 msgstr "ფაილების შეკუმშვა"
 
-#: app/autoAr.js:297 app/autoAr.js:636 app/desktopManager.js:1093
-#: app/fileItemMenu.js:474
+#: app/autoAr.js:299 app/autoAr.js:566 app/desktopManager.js:1039
+#: app/fileItemMenu.js:575
 msgid "Cancel"
 msgstr "გაუქმება"
 
-#: app/autoAr.js:318 app/autoAr.js:619
+#: app/autoAr.js:320 app/autoAr.js:635
 msgid "Enter a password here"
 msgstr "შეიყვანეთ პაროლი აქ"
 
-#: app/autoAr.js:359
+#: app/autoAr.js:353
 msgid "Removing partial file '${outputFile}'"
 msgstr "ნაწილობრივი ფაილის '${outputFile}' წაშლა"
 
-#: app/autoAr.js:378
+#: app/autoAr.js:372
 msgid "Creating destination folder"
 msgstr "იქმნება სამიზნე საქარალდე"
 
-#: app/autoAr.js:410
+#: app/autoAr.js:404
 msgid "Extracting files into '${outputPath}'"
 msgstr "მიმდინარეობს ფაილების ამოღება საქაღალდეში '${outputPath}'"
 
-#: app/autoAr.js:442
+#: app/autoAr.js:436
 msgid "Extraction completed"
 msgstr "ამოღება დასულდა"
 
-#: app/autoAr.js:443
+#: app/autoAr.js:437
 msgid "Extracting '${fullPathFile}' has been completed."
 msgstr "არქივის '${fullPathFile}' გაშლა დასრულდა."
 
-#: app/autoAr.js:449
+#: app/autoAr.js:443
 msgid "Extraction cancelled"
 msgstr "გაშლა გაუქმდა"
 
-#: app/autoAr.js:450
+#: app/autoAr.js:444
 msgid "Extracting '${fullPathFile}' has been cancelled by the user."
 msgstr "'${fullPathFile}'-ის გაშლა გაუქმდა მომხმარებლის მიერ."
 
-#: app/autoAr.js:460
+#: app/autoAr.js:454
 msgid "Passphrase required for ${filename}"
 msgstr "${filename}-ს საკვანძო ფრაზა სჭირდება"
 
-#: app/autoAr.js:463
+#: app/autoAr.js:457
 msgid "Error during extraction"
 msgstr "შეცდომა გაშლისას"
 
-#: app/autoAr.js:492
+#: app/autoAr.js:486
 msgid "Compressing files into '${outputFile}'"
 msgstr "ფაილების შეკუმშვა არქივში '${outputFile}'"
 
-#: app/autoAr.js:505
+#: app/autoAr.js:499
 msgid "Compression completed"
 msgstr "შეკუმშვა დასრულდა"
 
-#: app/autoAr.js:506
+#: app/autoAr.js:500
 msgid "Compressing files into '${outputFile}' has been completed."
 msgstr "ფაილების არქივში '${outputFile}' შეკუმშვა დასრულდა."
 
-#: app/autoAr.js:510 app/autoAr.js:517
+#: app/autoAr.js:504 app/autoAr.js:511
 msgid "Cancelled compression"
 msgstr "შეკუმშვა გაუქმდა"
 
-#: app/autoAr.js:511
+#: app/autoAr.js:505
 msgid "The output file '${outputFile}' already exists."
 msgstr "გამოტანის ფაილი '${outputFile}' უკვე არსებობს."
 
-#: app/autoAr.js:518
+#: app/autoAr.js:512
 msgid "Compressing files into '${outputFile}' has been cancelled by the user."
 msgstr "ფაილების შეკუმშვა არქივში '${outputFile}' გაუქმდა მომხმარებლის მიერ."
 
-#: app/autoAr.js:521
+#: app/autoAr.js:515
 msgid "Error during compression"
 msgstr "შეკუმშვის შეცდომა"
 
-#: app/autoAr.js:554
+#: app/autoAr.js:548
 msgid "Create archive"
 msgstr "არქივის შექმნა"
 
-#: app/autoAr.js:579
+#: app/autoAr.js:592
 msgid "Archive name"
 msgstr "არქივის სახელი"
 
-#: app/autoAr.js:614
+#: app/autoAr.js:630
 msgid "Password"
 msgstr "პაროლი"
 
-#: app/autoAr.js:633
-msgid "Create"
-msgstr "შექმნა"
-
-#: app/autoAr.js:712
+#: app/autoAr.js:719
 msgid "Compatible with all operating systems."
 msgstr "თავსებადია ყველა ოპერაციულ სისტემასთან."
 
-#: app/autoAr.js:718
+#: app/autoAr.js:725
 msgid "Password protected .zip, must be installed on Windows and Mac."
 msgstr "პაროლით დაცული .zip. Windows-ზე და Mac-ზე დაყენებაა საჭირო."
 
-#: app/autoAr.js:724
+#: app/autoAr.js:731
 msgid "Smaller archives but Linux and Mac only."
 msgstr "არქივები უფრო პატარაა, მაგრამ მხოლოდ Linux-ზე და Mac-ზე მუშაობს."
 
-#: app/autoAr.js:730
+#: app/autoAr.js:737
 msgid "Smaller archives but must be installed on Windows and Mac."
 msgstr "უფრო პატარა არქივი, მაგრამ Windows-ზე და Mac-ზე დაყენება სჭირდება."
 
-#: app/dbusUtils.js:69
+#: app/dbusUtils.js:73
 msgid "\"${programName}\" is needed for Desktop Icons"
 msgstr "სამუშაო მაგიდის ხატულებისთვის საჭიროა \"${programName}\""
 
-#: app/dbusUtils.js:70
+#: app/dbusUtils.js:74
 msgid ""
 "For this functionality to work in Desktop Icons, you must install \"$"
 "{programName}\" in your system."
@@ -171,166 +175,56 @@ msgstr ""
 "იმისათვის, რომ ამ ფუნქციონალმა .desktop ფაილების ხატულებში იმუშაოს, "
 "სისტემაში უნდა გქონდეთ დაყენებული პროგრამა \"${programName}"
 
-#: app/desktopIconsUtil.js:157
+#: app/desktopIconsUtil.js:170
 msgid "Command not found"
 msgstr "ბრძანება ნაპოვნი არაა"
 
-#: app/desktopManager.js:264
+#: app/desktopManager.js:279
 msgid "Nautilus File Manager not found"
 msgstr "ფაილების მმართველი Nautilus აღმოჩენილი არაა"
 
-#: app/desktopManager.js:265
+#: app/desktopManager.js:280
 msgid "The Nautilus File Manager is mandatory to work with Desktop Icons NG."
 msgstr ""
 "ფაილების მმართველი Nautilus აუცილებელია Desktop Icons NG-ისთან სამუშაოდ."
 
-#: app/desktopManager.js:271
-msgid "GLibUnix GIR file not found"
-msgstr "GLibUnix-ის GIR ფაილი აღმოჩენილი არაა"
-
-#: app/desktopManager.js:272
-msgid ""
-"GLibUnix-2.0.gir file is missing. Please, install the required package in "
-"your system."
-msgstr "ფაილი GLibUnix-2.0.gir აღმოჩენილი არაა. დააყენეთ აუცილებელი პაკეტი."
-
-#: app/desktopManager.js:1050
+#: app/desktopManager.js:935
 msgid "Clear Current Selection before New Search"
 msgstr "მიმდინარე მონიშნულის გასუფთავება ახალ ძებნამდე"
 
-#: app/desktopManager.js:1095
+#: app/desktopManager.js:1026
 msgid "Find Files on Desktop"
 msgstr "ფაილების ძებნა სამუშაო მაგიდაზე"
 
-#: app/desktopManager.js:1163 app/desktopManager.js:1875
+#: app/desktopManager.js:1713
 msgid "New Folder"
 msgstr "ახალი საქაღალდე"
 
-#: app/desktopManager.js:1167
-msgid "New Document"
-msgstr "ახალი დოკუმენტი"
-
-#: app/desktopManager.js:1172
-msgid "Paste"
-msgstr "ჩასმა"
-
-#: app/desktopManager.js:1176
-msgid "Undo"
-msgstr "გაუქმება"
-
-#: app/desktopManager.js:1180
-msgid "Redo"
-msgstr "გამეორება"
-
-#: app/desktopManager.js:1186
-msgid "Select All"
-msgstr "ყველას მონიშვნა"
-
-#: app/desktopManager.js:1194
-msgid "Show Desktop in Files"
-msgstr "ფაილებში სამუშაო მაგიდის ჩვენება"
-
-#: app/desktopManager.js:1198 app/fileItemMenu.js:365
-msgid "Open in Terminal"
-msgstr "ტერმინალში გახსნა"
-
-#: app/desktopManager.js:1204
-msgid "Change Background…"
-msgstr "ფონის შეცვლა…"
-
-#: app/desktopManager.js:1215
-msgid "Desktop Icons Settings"
-msgstr "სამუშაო მაგიდის ხატულას პარამეტრები"
-
-#: app/desktopManager.js:1228
-msgid "Display Settings"
-msgstr "ეკრანის მორგება"
-
-#: app/desktopManager.js:1888
+#: app/desktopManager.js:1726
 msgid "Folder Creation Failed"
 msgstr "საქაღალდის შექმნის შეცდომა"
 
-#: app/desktopManager.js:1889
+#: app/desktopManager.js:1727
 msgid "Error while trying to create a Folder"
 msgstr "შეცდომა საქაღალდის შექმნის მცდელობისას"
-
-#: app/desktopManager.js:1925
-msgid "Template Creation Failed"
-msgstr "შაბლონის შექმნა ჩავარდა"
-
-#: app/desktopManager.js:1926
-msgid "Error while trying to create a Document"
-msgstr "შეცდომა დოკუმენტის შექმნის მცდელობისას"
-
-#: app/desktopManager.js:1934
-msgid "Arrange Icons"
-msgstr "ხატულების დალაგება"
-
-#: app/desktopManager.js:1938
-msgid "Arrange By..."
-msgstr "დალაგების პირობა..."
-
-#: app/desktopManager.js:1947
-msgid "Keep Arranged..."
-msgstr "დალაგებულად დატოვება..."
-
-#: app/desktopManager.js:1951
-msgid "Keep Stacked by type..."
-msgstr "დაჯგუფებულად შენარჩუნება ტიპის მიხედვით..."
-
-#: app/desktopManager.js:1956
-msgid "Sort Home/Drives/Trash..."
-msgstr "საწყისი საქაღალდის/დისკების/ნაგვის ყუთის დალაგება..."
-
-#: app/desktopManager.js:1962
-msgid "Sort by Name"
-msgstr "დალაგება სახელით"
-
-#: app/desktopManager.js:1964
-msgid "Sort by Name Descending"
-msgstr "სახელის დაღმავლობით დალაგება"
-
-#: app/desktopManager.js:1967
-msgid "Sort by Modified Time"
-msgstr "ცვლილების დროით დალაგება"
-
-#: app/desktopManager.js:1970
-msgid "Sort by Type"
-msgstr "ტიპის მიხედვით დალაგება"
-
-#: app/desktopManager.js:1973
-msgid "Sort by Size"
-msgstr "ზომით დალაგება"
 
 #. * TRANSLATORS: when using a screen reader, this is the text read when the user's personal folder is
 #. * highlighted.
 #. TRANSLATORS: "Home" is the text that will be shown in the user's personal folder
-#: app/fileItem.js:120 app/fileItem.js:255
+#: app/fileItem.js:147 app/fileItem.js:269
 msgid "Home"
 msgstr "საწყისი"
 
-#. * TRANSLATORS: when using a screen reader, this is the text read when the user's personal folder is
-#. * highlighted and selected.
-#: app/fileItem.js:123
-msgid "Home Selected"
-msgstr "მონიშნულია საწყისი საქაღალდე"
-
 #. * TRANSLATORS: when using a screen reader, this is the text read when the trash folder is
 #. * highlighted.
-#: app/fileItem.js:128
+#: app/fileItem.js:152
 msgid "Trash"
 msgstr "ნაგვის ყუთი"
-
-#. * TRANSLATORS: when using a screen reader, this is the text read when the trash folder is
-#. * highlighted and selected.
-#: app/fileItem.js:131
-msgid "Trash Selected"
-msgstr "მონიშნულია ნაგვის ყუთი"
 
 #. * TRANSLATORS: when using a screen reader, this is the role used when an external drive is
 #. * highlighted. Example: if a USB stick named "my_portable" is highlighted, it will say "my_portable Drive".
 #. * It is mandatory to say the file name first and the role after.
-#: app/fileItem.js:137
+#: app/fileItem.js:160
 msgid "${VisibleName} Drive"
 msgstr "${VisibleName} დისკი"
 
@@ -338,86 +232,116 @@ msgstr "${VisibleName} დისკი"
 #. * highlighted and selected. Example: if a USB stick named "my_portable" is highlighted and selected, it
 #. * will say "my_portable Drive Selected". It is mandatory to say the file name first, then the role, and
 #. * finally "Selected".
-#: app/fileItem.js:142
+#: app/fileItem.js:165
 msgid "${VisibleName} Drive Selected"
 msgstr "${VisibleName} დისკი მონიშნულია"
-
-#. * TRANSLATORS: when using a screen reader, this is the role used when a stack is
-#. * highlighted. Example: if a stack named "pictures" is selected, it will say "pictures Stack".
-#. * It is mandatory to say the file name first and the role after.
-#: app/fileItem.js:148
-msgid "${VisibleName} Stack"
-msgstr "${VisibleName} დასტა"
-
-#. * TRANSLATORS: when using a screen reader, this is the role used when a stack is highlighted and
-#. * selected. Example: if a stack named "pictures" is highlighted and selected, it will say "pictures Stack Selected".
-#. * It is mandatory to say the file name first, then the role, and finally "Selected".
-#: app/fileItem.js:152
-msgid "${VisibleName} Stack Selected"
-msgstr "${VisibleName} დასტა მონიშნულია"
 
 #. * TRANSLATORS: when using a screen reader, this is the role used when a folder is
 #. * highlighted. Example: if a folder named "things" is highlighted, it will say "things Folder".
 #. * It is mandatory to say the file name first and the role after.
-#: app/fileItem.js:158
+#: app/fileItem.js:171
 msgid "${VisibleName} Folder"
 msgstr "${VisibleName} საქაღალდე"
 
 #. * TRANSLATORS: when using a screen reader, this is the role used when a folder is
 #. * highlighted and selected. Example: if a folder named "things" is highlighted and selected, it will say
 #. * "things Folder Selected". It is mandatory to say the file name first, then the role, and finally "Selected".
-#: app/fileItem.js:162
+#: app/fileItem.js:175
 msgid "${VisibleName} Folder Selected"
 msgstr "${VisibleName} საქაღალდე მონიშნულია"
 
 #. * TRANSLATORS: when using a screen reader, this is the role used when a trusted desktop file is
 #. * highlighted. Example: if a desktop file named "My App" is highlighted and it is trusted, it will
 #. * say "My App Application". It is mandatory to say the file name first and the role after.
-#: app/fileItem.js:168
+#: app/fileItem.js:181
 msgid "${VisibleName} Application"
 msgstr "${VisibleName} აპლიკაცია"
 
 #. * TRANSLATORS: when using a screen reader, this is the role used when a trusted desktop file is
 #. * highlighted. Example: if a desktop file named "My App" is highlighted and selected and it is trusted, it will
 #. * say "My App Application Selected". It is mandatory to say the file name first and the role after.
-#: app/fileItem.js:172
+#: app/fileItem.js:185
 msgid "${VisibleName} Application Selected"
 msgstr "${VisibleName} აპლიკაცია მონიშნულია"
 
 #. * TRANSLATORS: when using a screen reader, this is the text read when a normal file is
 #. * highlighted. Example: if a file named "my_picture.jpg" is highlighted, it will say "my_picture.jpg File"
-#: app/fileItem.js:178
+#: app/fileItem.js:191
 msgid "${VisibleName} File"
 msgstr "${VisibleName} ფაილი"
 
 #. * TRANSLATORS: when using a screen reader, this is the text read when a normal file is highlighted and
 #. * selected. Example: if a file named "my_picture.jpg" is highlighted and selected, it will say
 #. * "my_picture.jpg File Selected". It is mandatory to say the file name first and the role after.
-#: app/fileItem.js:182
+#: app/fileItem.js:195
 msgid "${VisibleName} File Selected"
 msgstr "${VisibleName} ფაილი მონიშნულია"
 
-#: app/fileItem.js:348
+#: app/fileItem.js:364
 msgid "Error while reading Desktop file"
 msgstr "შეცდომა .desktop ფაილის კითხვისას"
 
-#: app/fileItem.js:390
+#: app/fileItem.js:421
 msgid "Broken Link"
 msgstr "გაფუჭებული ბმული"
 
-#: app/fileItem.js:391
+#: app/fileItem.js:422
 msgid "Can not open this File because it is a Broken Symlink"
 msgstr "ამ ფაილის გახსნა შეუძლებელია, რადგან ის გაფუჭებულ სიმბმულს წარმოადგენს"
 
-#: app/fileItem.js:423
+#: app/fileItem.js:458
 msgid "Can't open the file"
 msgstr "ფაილის გახსნა შეუძლებელია"
 
-#: app/fileItem.js:449
+#: app/fileItem.js:486
+#, fuzzy
+msgid "Invalid Permissions on AppImage File"
+msgstr "არასწორი წვდომები .desktop ფაილზე"
+
+#: app/fileItem.js:487
+#, fuzzy
+msgid ""
+"This .appimage File has incorrect Permissions. Right Click to edit "
+"Properties, then:\n"
+msgstr ""
+"ამ .desktop ფაილის წვდომები არასწორია. დააწკაპუნეთ მარჯვენა ღილაკით, რომ "
+"ჩაასწოროთ თვისებები. შემდეგ:\n"
+
+#: app/fileItem.js:489 app/fileItem.js:522
+msgid ""
+"\n"
+"<b>Set Permissions, in \"Others Access\", \"Read Only\" or \"None\"</b>"
+msgstr ""
+"\n"
+"<b>დააყენეთ წვდომები \"სხვების წვდომა\", \"მხოლოდ წაკითხვადი\" ან "
+"\"არაფერი\"</b>"
+
+#: app/fileItem.js:492 app/fileItem.js:525
+msgid ""
+"\n"
+"<b>Enable option, \"Allow Executing File as a Program\"</b>"
+msgstr ""
+"\n"
+"<b>ჩართეთ პარამეტრი \"ფაილის პროგრამის სახით გაშვება\"</b>"
+
+#: app/fileItem.js:500
+#, fuzzy
+msgid ""
+"This .appimage file is not trusted, it can not be launched. To enable "
+"launching, right-click, then:\n"
+"\n"
+"<b>Enable \"Allow Launching\"</b>"
+msgstr ""
+"ეს .desktop ფაილი სანდო არაა და მას ვერ გაუშვებთ. გაშვების დასაშვებად, "
+"მარჯვენა წკაპი ზედ, შემდეგ კი:\n"
+"\n"
+"<b>ჩართეთ 'გაშვების დაშვება'</b>"
+
+#: app/fileItem.js:512
 msgid "Broken Desktop File"
 msgstr "გაფუჭებული Desktop ფაილი"
 
-#: app/fileItem.js:450
+#: app/fileItem.js:513
 msgid ""
 "This .desktop file has errors or points to a program without permissions. It "
 "can not be executed.\n"
@@ -429,11 +353,11 @@ msgstr ""
 "\n"
 "\t<b>ჩაასწორეთ ფაილი და დააყენეთ სწორი შესრულებადი პროგრამა.</b>"
 
-#: app/fileItem.js:456
+#: app/fileItem.js:519
 msgid "Invalid Permissions on Desktop File"
 msgstr "არასწორი წვდომები .desktop ფაილზე"
 
-#: app/fileItem.js:457
+#: app/fileItem.js:520
 msgid ""
 "This .desktop File has incorrect Permissions. Right Click to edit "
 "Properties, then:\n"
@@ -441,24 +365,7 @@ msgstr ""
 "ამ .desktop ფაილის წვდომები არასწორია. დააწკაპუნეთ მარჯვენა ღილაკით, რომ "
 "ჩაასწოროთ თვისებები. შემდეგ:\n"
 
-#: app/fileItem.js:459
-msgid ""
-"\n"
-"<b>Set Permissions, in \"Others Access\", \"Read Only\" or \"None\"</b>"
-msgstr ""
-"\n"
-"<b>დააყენეთ წვდომები \"სხვების წვდომა\", \"მხოლოდ წაკითხვადი\" ან "
-"\"არაფერი\"</b>"
-
-#: app/fileItem.js:462
-msgid ""
-"\n"
-"<b>Enable option, \"Allow Executing File as a Program\"</b>"
-msgstr ""
-"\n"
-"<b>ჩართეთ პარამეტრი \"ფაილის პროგრამის სახით გაშვება\"</b>"
-
-#: app/fileItem.js:470
+#: app/fileItem.js:533
 msgid ""
 "This .desktop file is not trusted, it can not be launched. To enable "
 "launching, right-click, then:\n"
@@ -470,173 +377,181 @@ msgstr ""
 "\n"
 "<b>ჩართეთ 'გაშვების დაშვება'</b>"
 
-#: app/fileItem.js:669
+#: app/fileItem.js:731
 msgid "Failed to set execution flag"
 msgstr "გაშვების ალმის დაყენება ჩავარდა"
 
-#: app/fileItem.js:681 app/fileItem.js:688
+#: app/fileItem.js:750 app/fileItem.js:757
 msgid "Could not apply discrete GPU environment"
 msgstr "დისკრეტული GPU-ის გარემოს გადატარება შეუძლებელია"
 
-#: app/fileItem.js:717
+#: app/fileItem.js:786
 msgid "Could not find discrete GPU data"
 msgstr "დისკრეტული GPU-ის მონაცემების პოვნის შეცდომა"
 
-#: app/fileItem.js:842
+#: app/fileItem.js:911 app/fileItem.js:945
 msgid "Failed to set metadata::trusted flag"
 msgstr "ალმის metadata::trusted დაყენება ჩავარდა"
 
-#: app/fileItemMenu.js:143
+#: app/fileItemMenu.js:233
 msgid "Open All..."
 msgstr "ყველას გახსნა..."
 
-#: app/fileItemMenu.js:143
+#: app/fileItemMenu.js:233
 msgid "Open"
 msgstr "გახსნა"
 
-#: app/fileItemMenu.js:160
+#: app/fileItemMenu.js:246
 msgid "Stack This Type"
 msgstr "ამ ტიპის დასტის შექმნა"
 
-#: app/fileItemMenu.js:160
+#: app/fileItemMenu.js:246
 msgid "Unstack This Type"
 msgstr "ამ ტიპის დასტის დაშლა"
 
-#: app/fileItemMenu.js:173
-msgid "Scripts"
-msgstr "სკრიპტები"
-
-#: app/fileItemMenu.js:178
+#: app/fileItemMenu.js:265
 msgid "Open All With Other Application..."
 msgstr "ყველას გახსნა სხვა აპლიკაციით...."
 
-#: app/fileItemMenu.js:178
+#: app/fileItemMenu.js:265
 msgid "Open With Other Application"
 msgstr "სხვა პროგრამით გახსნა"
 
-#: app/fileItemMenu.js:184
+#: app/fileItemMenu.js:272
 msgid "Launch using Dedicated Graphics Card"
 msgstr "დისკრეტული ვიდეობარათით გაშვება"
 
-#: app/fileItemMenu.js:195
+#: app/fileItemMenu.js:283
 msgid "Run as a program"
 msgstr "გაშვება პროგრამის სახით"
 
-#: app/fileItemMenu.js:203
+#: app/fileItemMenu.js:298
 msgid "Cut"
 msgstr "ამოჭრა"
 
-#: app/fileItemMenu.js:210
+#: app/fileItemMenu.js:304
 msgid "Copy"
 msgstr "კოპირება"
 
-#: app/fileItemMenu.js:218
+#: app/fileItemMenu.js:311
 msgid "Rename…"
 msgstr "სახელის გადარქმევა…"
 
-#: app/fileItemMenu.js:228
+#: app/fileItemMenu.js:321
 msgid "Move to Trash"
 msgstr "ნაგვის ყუთში გადატანა"
 
-#: app/fileItemMenu.js:236
+#: app/fileItemMenu.js:328
 msgid "Delete permanently"
 msgstr "სამუდამოდ წაშლა"
 
-#: app/fileItemMenu.js:246
+#: app/fileItemMenu.js:337
 msgid "Don't Allow Launching"
 msgstr "გაშვების არდაშვება"
 
-#: app/fileItemMenu.js:246
+#: app/fileItemMenu.js:337
 msgid "Allow Launching"
 msgstr "გაშვების ნების დართვა"
 
-#: app/fileItemMenu.js:259
+#: app/fileItemMenu.js:344
+msgid "Don't use sandboxing"
+msgstr ""
+
+#: app/fileItemMenu.js:344
+msgid "Use sandboxing if available"
+msgstr ""
+
+#: app/fileItemMenu.js:358
 msgid "Empty Trash"
 msgstr "ნაგვის ყუთის დაცარიელება"
 
-#: app/fileItemMenu.js:272
+#: app/fileItemMenu.js:370
 msgid "Eject"
 msgstr "გამოღება"
 
-#: app/fileItemMenu.js:280
+#: app/fileItemMenu.js:378
 msgid "Unmount"
 msgstr "მოხსნა"
 
-#: app/fileItemMenu.js:294 app/fileItemMenu.js:301
+#: app/fileItemMenu.js:392 app/fileItemMenu.js:400
 msgid "Extract Here"
 msgstr "აქ გაშლა"
 
-#: app/fileItemMenu.js:308
+#: app/fileItemMenu.js:406
 msgid "Extract To..."
 msgstr "გაშლის სამიზნე..."
 
-#: app/fileItemMenu.js:317
+#: app/fileItemMenu.js:414
 msgid "Send to..."
 msgstr "გაგზავნა ვისთან..."
 
-#: app/fileItemMenu.js:325
+#: app/fileItemMenu.js:423
 msgid "Compress {0} folder"
 msgid_plural "Compress {0} folders"
 msgstr[0] "{0} საქაღალდის შეკუმშვა"
 msgstr[1] "{0} საქაღალდის შეკუმშვა"
 
-#: app/fileItemMenu.js:332
+#: app/fileItemMenu.js:432
 msgid "Compress {0} file"
 msgid_plural "Compress {0} files"
 msgstr[0] "{0} ფაილის შეკუმშვა"
 msgstr[1] "{0} ფაილის შეკუმშვა"
 
-#: app/fileItemMenu.js:340
+#: app/fileItemMenu.js:442
 msgid "New Folder with {0} item"
 msgid_plural "New Folder with {0} items"
 msgstr[0] "ახალი საქაღალდე {0} ელემენტით"
 msgstr[1] "ახალი საქაღალდე {0} ელემენტით"
 
-#: app/fileItemMenu.js:351
+#: app/fileItemMenu.js:453
 msgid "Common Properties"
 msgstr "საერთო თვისებები"
 
-#: app/fileItemMenu.js:351
+#: app/fileItemMenu.js:453
 msgid "Properties"
 msgstr "თვისებები"
 
-#: app/fileItemMenu.js:358
+#: app/fileItemMenu.js:461
 msgid "Show All in Files"
 msgstr "ყველას ჩვენება Files-ში"
 
-#: app/fileItemMenu.js:358
+#: app/fileItemMenu.js:461
 msgid "Show in Files"
 msgstr "ფაილებში ჩვენება"
 
-#: app/fileItemMenu.js:449
+#: app/fileItemMenu.js:469
+msgid "Open in Terminal"
+msgstr "ტერმინალში გახსნა"
+
+#: app/fileItemMenu.js:546
 msgid "No Extraction Folder"
 msgstr "გასაშლელი საქაღალდის გარეშე"
 
-#: app/fileItemMenu.js:450
+#: app/fileItemMenu.js:547
 msgid "Unable to extract File, extraction Folder Does not Exist"
 msgstr "ფაილის გაშლა შეუძლებელია, რადგან გასაშლელი საქაღალდე აღმოჩენილი არაა"
 
-#: app/fileItemMenu.js:470
+#: app/fileItemMenu.js:568
 msgid "Select Extract Destination"
 msgstr "აირჩიეთ გაშლის დანიშნულება"
 
-#: app/fileItemMenu.js:475
+#: app/fileItemMenu.js:576
 msgid "Select"
 msgstr "არჩევა"
 
-#: app/fileItemMenu.js:516
+#: app/fileItemMenu.js:617
 msgid "Can not email a Directory"
 msgstr "საქაღალდის ელფოსტაზე გაგზავნა შეუძლებელია"
 
-#: app/fileItemMenu.js:517
+#: app/fileItemMenu.js:618
 msgid "Selection includes a Directory, compress the directory to a file first."
 msgstr "მონიშნული საქაღალდეს მოიცავს. ჯერ შეკუმშეთ საქაღალდე ფაილში."
 
-#: app/notifyX11UnderWayland.js:37
+#: app/notifyX11UnderWayland.js:34
 msgid "Desktop Icons NG is running under X11Wayland"
 msgstr "Desktop Icons NG გაშვებულია X11Wayland-ზე"
 
-#: app/notifyX11UnderWayland.js:38
+#: app/notifyX11UnderWayland.js:35
 msgid ""
 "It seems that you have your system configured to force GTK to use X11. This "
 "works, but it's suboptimal. You should check your system configuration to "
@@ -646,15 +561,15 @@ msgstr ""
 "ეს მუშაობს, მაგრამ ოპტიმალური არაა. შეამოწმეთ სისტემის კონფიგურაციის ფაილები "
 "და გაასწორეთ ეს."
 
-#: app/notifyX11UnderWayland.js:39 app/showErrorPopup.js:39
+#: app/notifyX11UnderWayland.js:36 app/showErrorPopup.js:36
 msgid "Close"
 msgstr "დახურვა"
 
-#: app/notifyX11UnderWayland.js:47
+#: app/notifyX11UnderWayland.js:44
 msgid "Don't show this message anymore."
 msgstr "ეს შეტყობინება აღარ მაჩვენო."
 
-#: app/preferences.js:91
+#: app/preferences.js:98
 msgid "Settings"
 msgstr "მორგება"
 
@@ -791,12 +706,14 @@ msgid "Always"
 msgstr "ყოველთვის"
 
 #: app/thumbnails.js:38
-msgid "GnomeDesktop-3.0 GIR file not found"
+#, fuzzy
+msgid "GnomeDesktop-4.0 GIR file not found"
 msgstr "GnomeDesktop-3.0-ის GIR ფაილი აღმოჩენილი არაა"
 
 #: app/thumbnails.js:39
+#, fuzzy
 msgid ""
-"GnomeDesktop-3.0.gir file is missing. Please, install the required package "
+"GnomeDesktop-4.0.gir file is missing. Please, install the required package "
 "in your system."
 msgstr ""
 "ფაილი GnomeDesktop-3.0.gir აღმოჩენილი არაა. დააყენეთ აუცილებელი პაკეტი."
@@ -940,3 +857,95 @@ msgid ""
 msgstr ""
 "უნდა აჩვენოს თუ არა DING-მა, როცა ის X11Wayland-ზეა გაშვებული, ან "
 "მომხმარებელმა გადაწყვიტა, რომ მისი ნახვა აღარ უნდა."
+
+#~ msgid "Folder name"
+#~ msgstr "საქაღალდის სახელი"
+
+#~ msgid "Create"
+#~ msgstr "შექმნა"
+
+#~ msgid "GLibUnix GIR file not found"
+#~ msgstr "GLibUnix-ის GIR ფაილი აღმოჩენილი არაა"
+
+#~ msgid ""
+#~ "GLibUnix-2.0.gir file is missing. Please, install the required package in "
+#~ "your system."
+#~ msgstr "ფაილი GLibUnix-2.0.gir აღმოჩენილი არაა. დააყენეთ აუცილებელი პაკეტი."
+
+#~ msgid "New Document"
+#~ msgstr "ახალი დოკუმენტი"
+
+#~ msgid "Paste"
+#~ msgstr "ჩასმა"
+
+#~ msgid "Undo"
+#~ msgstr "გაუქმება"
+
+#~ msgid "Redo"
+#~ msgstr "გამეორება"
+
+#~ msgid "Select All"
+#~ msgstr "ყველას მონიშვნა"
+
+#~ msgid "Show Desktop in Files"
+#~ msgstr "ფაილებში სამუშაო მაგიდის ჩვენება"
+
+#~ msgid "Change Background…"
+#~ msgstr "ფონის შეცვლა…"
+
+#~ msgid "Desktop Icons Settings"
+#~ msgstr "სამუშაო მაგიდის ხატულას პარამეტრები"
+
+#~ msgid "Display Settings"
+#~ msgstr "ეკრანის მორგება"
+
+#~ msgid "Template Creation Failed"
+#~ msgstr "შაბლონის შექმნა ჩავარდა"
+
+#~ msgid "Error while trying to create a Document"
+#~ msgstr "შეცდომა დოკუმენტის შექმნის მცდელობისას"
+
+#~ msgid "Arrange Icons"
+#~ msgstr "ხატულების დალაგება"
+
+#~ msgid "Arrange By..."
+#~ msgstr "დალაგების პირობა..."
+
+#~ msgid "Keep Arranged..."
+#~ msgstr "დალაგებულად დატოვება..."
+
+#~ msgid "Keep Stacked by type..."
+#~ msgstr "დაჯგუფებულად შენარჩუნება ტიპის მიხედვით..."
+
+#~ msgid "Sort Home/Drives/Trash..."
+#~ msgstr "საწყისი საქაღალდის/დისკების/ნაგვის ყუთის დალაგება..."
+
+#~ msgid "Sort by Name"
+#~ msgstr "დალაგება სახელით"
+
+#~ msgid "Sort by Name Descending"
+#~ msgstr "სახელის დაღმავლობით დალაგება"
+
+#~ msgid "Sort by Modified Time"
+#~ msgstr "ცვლილების დროით დალაგება"
+
+#~ msgid "Sort by Type"
+#~ msgstr "ტიპის მიხედვით დალაგება"
+
+#~ msgid "Sort by Size"
+#~ msgstr "ზომით დალაგება"
+
+#~ msgid "Home Selected"
+#~ msgstr "მონიშნულია საწყისი საქაღალდე"
+
+#~ msgid "Trash Selected"
+#~ msgstr "მონიშნულია ნაგვის ყუთი"
+
+#~ msgid "${VisibleName} Stack"
+#~ msgstr "${VisibleName} დასტა"
+
+#~ msgid "${VisibleName} Stack Selected"
+#~ msgstr "${VisibleName} დასტა მონიშნულია"
+
+#~ msgid "Scripts"
+#~ msgstr "სკრიპტები"

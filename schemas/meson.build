@@ -1,6 +1,6 @@
 gnome.compile_schemas()
 
-extension_uuid=get_option('extension_uuid')
+extension_uuid=get_option('extension_uuid').replace('@rastersoft.com','')
 
 install_data(
   'org.gnome.shell.extensions.ding.gschema.xml',

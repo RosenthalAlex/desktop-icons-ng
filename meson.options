@@ -1,0 +1,1 @@
+option('extension_name', type : 'string', value : 'ding@rastersoft.com', description : 'The extension name. Can be configured for those distros that include their own version and do not allow to install this one.')

@@ -1,6 +1,7 @@
 prefix = get_option('prefix')
+extension_name = get_option('extension_name')
 
-extensions_dir = join_paths(prefix, 'share', 'gnome-shell', 'extensions', 'ding@rastersoft.com', 'app')
+extensions_dir = join_paths(prefix, 'share', 'gnome-shell', 'extensions', extension_name, 'app')
 
 install_data([
     'askRenamePopup.js',

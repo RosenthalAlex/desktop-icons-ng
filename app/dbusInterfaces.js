@@ -119,12 +119,13 @@ var DBusInterfaces = {
   </node>`,
 
   // org.gnome.NautilusPreviewer
-  'org.gnome.NautilusPreviewer': `<node>
-    <interface name='org.gnome.NautilusPreviewer'>
+  'org.gnome.NautilusPreviewer2': `<node>
+    <interface name='org.gnome.NautilusPreviewer2'>
       <method name='ShowFile'>
         <arg name='FileUri' type='s' direction='in'/>
-        <arg name='ParentXid' type='i' direction='in'/>
-        <arg name='CloseIfShown' type='b' direction='in'/>
+        <arg name='WindowHandle' type='s' direction='in'/>
+        <arg name='CloseIfAlreadyShown' type='b' direction='in'/>
+        <arg name='ActivationToken' type='s' direction='in'/>
       </method>
     </interface>
   </node>`,

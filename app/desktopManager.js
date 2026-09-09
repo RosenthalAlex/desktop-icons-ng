@@ -882,7 +882,7 @@ var DesktopManager = class {
             }
         } else if (selection && keyval == Gdk.KEY_space) {
             // Support previewing other grids file items.
-            DBusUtils.RemoteFileOperations.ShowFileRemote(selection[0].uri, 0, true);
+            DBusUtils.RemoteFileOperations.ShowFileRemote(selection[0].uri, "", true, "");
             return true;
         } else if (isCtrl && ((keyval == Gdk.KEY_A) || (keyval == Gdk.KEY_a))) {
             this.selectAll();

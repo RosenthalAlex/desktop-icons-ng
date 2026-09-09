@@ -503,12 +503,12 @@ class DbusOperationsManager {
         );
     }
 
-    ShowFileRemote(uri, integer, boolean, callback) {
+    ShowFileRemote(uri, windowHandle, boolean, activationToken, callback) {
         if (!this.gnomeNautilusPreviewManager.proxy) {
             this._sendNoProxyError(callback);
             return;
         }
-        this.gnomeNautilusPreviewManager.proxy.ShowFileRemote(uri, integer, boolean,
+        this.gnomeNautilusPreviewManager.proxy.ShowFileRemote(uri, windowHandle, boolean, activationToken,
             (result, error) => {
                 if (callback) {
                     callback(result, error);
@@ -995,7 +995,7 @@ function init(mainApp) {
         dbusManagerObject,
         'org.gnome.NautilusPreviewer',
         '/org/gnome/NautilusPreviewer',
-        'org.gnome.NautilusPreviewer',
+        'org.gnome.NautilusPreviewer2',
         Enums.DBusBus.SESSION,
         'Nautilus-Sushi'
     );

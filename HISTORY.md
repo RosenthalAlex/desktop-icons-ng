@@ -1,6 +1,10 @@
 # History of versions #
 
-* Versio 51.0.7 (2026-08-25)
+* Version 51.0.8 (2026-09-09)
+  * Allows to change the extension name (needed for ubuntu .deb package)
+  * Updated .po files
+
+* Version 51.0.7 (2026-08-25)
   * Support for DnD of files onto trusted .desktop files
   * Fixed proxy-wrappers bug (thanks to Daniel Van Vugt)
 

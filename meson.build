@@ -11,9 +11,10 @@ prefix = get_option('prefix')
 datadir = join_paths (prefix, get_option('datadir'))
 schema_dir = join_paths(datadir, 'glib-2.0', 'schemas')
 
+extension_uuid = get_option('extension_uuid')
 extension_name = get_option('extension_name')
 
-extensions_dir = join_paths(prefix, 'share', 'gnome-shell', 'extensions', extension_name)
+extensions_dir = join_paths(prefix, 'share', 'gnome-shell', 'extensions', extension_uuid)
 
 install_data([
     'emulateX11WindowType.js',
@@ -38,4 +39,4 @@ subdir(
   'apparmor'
 )
 
-meson.add_install_script('meson_post_install.py', extension_name)
+meson.add_install_script('meson_post_install.py', extension_uuid, extension_name)

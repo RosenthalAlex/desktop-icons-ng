@@ -1,1 +1,2 @@
-option('extension_name', type : 'string', value : 'ding@rastersoft.com', description : 'The extension name. Can be configured for those distros that include their own version and do not allow to install this one.')
+option('extension_uuid', type : 'string', value : 'ding@rastersoft.com', description : 'The extension uuid. Can be configured for those distros that include their own version and do not allow to install this one from extensions.gnome.org.')
+option('extension_name', type : 'string', value : 'Desktop Icons NG (DING)', description : 'The extension name. Can be configured for those distros that include their own version and do not allow to install this one and do not allow to install this one from extensions.gnome.org.')

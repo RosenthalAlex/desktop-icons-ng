@@ -1,4 +1,4 @@
-Source: gnome-shell-extension-desktop-icons-ng
+Source: gnome-shell-extension-ding
 Section: gnome
 Priority: optional
 Maintainer: Sergio Costas Rodriguez <rastersoft@gmail.com>
@@ -16,7 +16,7 @@ Vcs-Git: https://gitlab.com/rastersoft/desktop-icons-ng.git
 Vcs-Browser: https://gitlab.com/rastersoft/desktop-icons-ng
 Rules-Requires-Root: no
 
-Package: gnome-shell-extension-desktop-icons-ng
+Package: gnome-shell-extension-ding
 Architecture: all
 Depends: gir1.2-gnomeautoar-0.1,
          gir1.2-gnomedesktop-3.0,
@@ -29,4 +29,4 @@ Description: desktop icon support for GNOME Shell
  of ~/Desktop on the desktop of the Shell. Common file management
  operations such as launching, copy/paste, rename and deleting are
  supported.
-Version: 51.0.6
+Version: 51.0.8

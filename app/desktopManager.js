@@ -61,18 +61,15 @@ var DesktopManager = class {
             this.mainApp.hold(); // Don't close the application if there are no desktops
             this._hold_active = true;
             if (this.using_X11) {
-                let usingWayland = GLib.getenv('XDG_SESSION_TYPE') == 'wayland';
-                if (usingWayland) {
-                    // the system is using Wayland, but GTK is using X11!!!!!!
-                    DBusUtils.extensionControl.activate_action('disableTimer', null);
-                    if (Prefs.desktopSettings.get_boolean('check-x11wayland')) {
-                        this._notifyX11UnderWayland = new NotifyX11UnderWayland.NotifyX11UnderWayland(doNotShowAnymore => {
-                            this._notifyX11UnderWayland = null;
-                            if (doNotShowAnymore) {
-                                Prefs.desktopSettings.set_boolean('check-x11wayland', false);
-                            }
-                        });
-                    }
+                // the system is using Wayland, but GTK is using X11!!!!!!
+                DBusUtils.extensionControl.activate_action('disableTimer', null);
+                if (Prefs.desktopSettings.get_boolean('check-x11wayland')) {
+                    this._notifyX11UnderWayland = new NotifyX11UnderWayland.NotifyX11UnderWayland(doNotShowAnymore => {
+                        this._notifyX11UnderWayland = null;
+                        if (doNotShowAnymore) {
+                            Prefs.desktopSettings.set_boolean('check-x11wayland', false);
+                        }
+                    });
                 }
             } else {
                 // if the problem is fixed and appears again, DING should show the message
@@ -86,30 +83,8 @@ var DesktopManager = class {
         this.dbusManager = dbusManager;
         this._cssColorProviderSelection = null;
         this._adwStyleManager = Adw.StyleManager.get_default();
-        try {
-            if (this._adwStyleManager.get_system_supports_accent_colors()) {
-                this._accentColorsAvailable = true;
-                this._adwStyleManager.connect('notify', (obj, spec) => {
-                    if ((spec.get_name() === 'accent-color') || (spec.get_name() === 'accent-color-rgba')) {
-                        this._configureSelectionColor();
-                    }
-                });
-            }
-        } catch (e) {
-            console.log(`System does not support accent colors: ${e.message}\n${e.stack}`);
-            this._accentColorsAvailable = false;
-        }
-
-        this._premultiplied = false;
-        try {
-            for (let f of Prefs.mutterSettings.get_strv('experimental-features')) {
-                if (f == 'scale-monitor-framebuffer') {
-                    this._premultiplied = true;
-                    break;
-                }
-            }
-        } catch (e) {
-        }
+        this._adwStyleManager.connect('notify::accent-color-rgba',
+            () => this._configureSelectionColor());
 
         this.autoAr = new AutoAr.AutoAr(this);
 
@@ -138,15 +113,6 @@ var DesktopManager = class {
         this._monitorDesktopDir.connect('changed', (obj, file, otherFile, eventType) => this._updateDesktopIfChanged(file, otherFile, eventType));
 
         this._fileItemMenu = new FileItemMenu.FileItemMenu(this, mainApp);
-        if (Prefs.schemaGnomeDarkSettings) {
-            if (this._checkApplyDarkModeSetting()) {
-                Prefs.schemaGnomeDarkSettings.connect('changed', (obj, key) => {
-                    if (key === 'color-scheme') {
-                        this._checkApplyDarkModeSetting();
-                    }
-                });
-            }
-        }
         this._showHidden = Prefs.gtkSettings.get_boolean('show-hidden');
         this.showDropPlace = Prefs.desktopSettings.get_boolean('show-drop-place');
         this.useNemo = Prefs.desktopSettings.get_boolean('use-nemo');
@@ -416,29 +382,7 @@ var DesktopManager = class {
             );
         }
 
-        try {
-            if (this._accentColorsAvailable) {
-                this.selectColor = this._adwStyleManager.get_accent_color_rgba();
-            } else {
-                const box = new Gtk.Label();
-                const styleContext = box.get_style_context();
-                styleContext.add_class('view');
-                const [exists, color] = styleContext.lookup_color('accent_bg_color');
-                if (exists)
-                    this.selectColor = color;
-                else
-                    throw new Error('Style Context does not provide accent_bg_color');
-            }
-        } catch (e) {
-            console.log(e.message);
-            console.log('Setting default accent color to blue');
-            this.selectColor = new Gdk.RGBA({
-                red: 0,
-                green: 0,
-                blue: 0.9,
-                alpha: 1.0,
-            });
-        }
+        this.selectColor = this._adwStyleManager.get_accent_color_rgba();
         let cssColorDefinition =
             `@define-color desktop_icons_bg_color ${this.selectColor.to_string()};\n`;
         this._cssColorProviderSelection = new Gtk.CssProvider();
@@ -457,16 +401,6 @@ var DesktopManager = class {
             this._cssColorProviderSelection,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         );
-    }
-
-    _checkApplyDarkModeSetting() {
-        try {
-            let displayGtkSettings = Gtk.Settings.get_for_screen(Gdk.Screen.get_default());
-            displayGtkSettings.gtk_application_prefer_dark_theme = Prefs.schemaGnomeDarkSettings.get_string('color-scheme') === 'prefer-dark';
-            return true;
-        } catch (e) {
-            return false;
-        }
     }
 
     clearFileCoordinates(fileList, dropCoordinates) {

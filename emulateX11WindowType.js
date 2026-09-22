@@ -18,28 +18,21 @@
 'use strict';
 import GLib from 'gi://GLib'
 import Meta from 'gi://Meta'
-import * as Main from 'resource:///org/gnome/shell/ui/main.js'
 
 
 class ManageWindow {
     /* This class is added to each managed window, and it's used to
        make it behave like an X11 Desktop window.
 
-       Trusted windows will set in the title the characters @!, followed
-       by the coordinates where to put the window separated by a colon, and
-       ended in semicolon. After that, it can have one or more of these letters
+       A window can take advantage of these flags by ending its title with
+       blank spaces (one space is treated as @!H, two spaces as @!HTD):
 
-       * B : put this window at the bottom of the screen
-       * T : put this window at the top of the screen
+       * T : put this window at the top of the window stack
        * D : show this window in all desktops
-       * H : hide this window from window list
 
-       Using the title is generally not a problem because the desktop windows
-       doesn't have a tittle. But some other windows may have and still need to
-       take advantage of this, so adding a single blank space at the end of the
-       title is equivalent to @!H, and having two blank spaces at the end of the
-       title is equivalent to @!HTD. This allows to take advantage of these flags
-       even to decorated windows.
+       Using the title is generally not a problem because the desktop window
+       doesn't have a title, and it allows to take advantage of these flags
+       even on decorated windows.
     */
 
     constructor(window, waylandClient, X11Emulator) {
@@ -48,6 +41,8 @@ class ManageWindow {
         this._window = window;
         this._signalIDs = [];
         this.windowUnmanaged = false;
+        this._keepAtTop = false;
+        this._showInAllDesktops = false;
         // This signal is disconnected in `disable`, when `clearWindow()` is
         // called for each window to remove everything added.
         this._signalIDs.push(window.connect('notify::title', () => {
@@ -73,12 +68,13 @@ class ManageWindow {
         this._moveIntoPlace();
     }
 
-    disconnect() {
+    destroy() {
         for (let signalID of this._signalIDs) {
             this._window.disconnect(signalID);
         }
         if (this._moveIntoPlaceID) {
             GLib.source_remove(this._moveIntoPlaceID);
+            this._moveIntoPlaceID = 0;
         }
         if (this._keepAtTop && !this.windowUnmanaged) {
             this._window.unmake_above();
@@ -110,33 +106,16 @@ class ManageWindow {
             }
             const pos = title.search('@!');
             if (pos != -1) {
-                const pos2 = title.search(';', pos);
-                let coords;
-                if (pos2 != -1) {
-                    coords = title.substring(pos + 2, pos2).trim().split(',');
-                } else {
-                    coords = title.substring(pos + 2).trim().split(',');
-                }
-                try {
-                    this._x = parseInt(coords[0]);
-                    this._y = parseInt(coords[1]);
-                } catch (e) {
-                    console.log(`Exception ${e.message}.\n${e.stack}`);
-                }
-                try {
-                    const extraChars = title.substring(pos + 2).trim().toUpperCase();
-                    for (let char of extraChars) {
-                        switch (char) {
-                        case 'T':
-                            this._keepAtTop = true;
-                            break;
-                        case 'D':
-                            this._showInAllDesktops = true;
-                            break;
-                        }
+                const extraChars = title.substring(pos + 2).trim().toUpperCase();
+                for (let char of extraChars) {
+                    switch (char) {
+                    case 'T':
+                        this._keepAtTop = true;
+                        break;
+                    case 'D':
+                        this._showInAllDesktops = true;
+                        break;
                     }
-                } catch (e) {
-                    console.log(`Exception ${e.message}.\n${e.stack}`);
                 }
             }
             // This string must match the one at desktopManager.js
@@ -181,7 +160,6 @@ export class EmulateX11WindowType {
      */
     constructor() {
         this._windowList = [];
-        this._enableRefresh = true;
         this._waylandClient = null;
         this._monitorData = [];
     }
@@ -213,20 +191,9 @@ export class EmulateX11WindowType {
                 this.addWindow(window);
             }
         });
-        this._idDestroy = global.window_manager.connect_after('destroy', (wm, windowActor) => {
-            // if a window is closed, ensure that the desktop doesn't receive the focus
-            let window = windowActor.get_meta_window();
-            if (window && (window.get_window_type() >= Meta.WindowType.DROPDOWN_MENU)) {
-                return;
-            }
-        });
     }
 
     disable() {
-        if (this._activate_window_ID) {
-            GLib.source_remove(this._activate_window_ID);
-            this._activate_window_ID = null;
-        }
         for (let window of this._windowList) {
             this._clearWindow(window);
         }
@@ -236,10 +203,6 @@ export class EmulateX11WindowType {
         if (this._idMap) {
             global.window_manager.disconnect(this._idMap);
             this._idMap = null;
-        }
-        if (this._idDestroy) {
-            global.window_manager.disconnect(this._idDestroy);
-            this._idDestroy = null;
         }
         this.refreshWindowsPosition();
     }
@@ -261,7 +224,7 @@ export class EmulateX11WindowType {
 
     _clearWindow(window) {
         window.disconnect(window.customJS_ding.unmanagedID);
-        window.customJS_ding.disconnect();
+        window.customJS_ding.destroy();
         window.customJS_ding = null;
     }
 };

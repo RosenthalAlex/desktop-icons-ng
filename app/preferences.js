@@ -33,7 +33,6 @@ var nautilusSettings;
 var nautilusCompression;
 var gtkSettings;
 var desktopSettings;
-var mutterSettings = null;
 var a11YKeyboard = null;
 var a11YApplications = null;
 // This is already in Nautilus settings, so it should not be made tweakable here
@@ -62,10 +61,6 @@ function init(path) {
     } else {
         nautilusCompression = new Gio.Settings({ settings_schema: compressionSchema });
     }
-    const schemaDarkSettings = schemaSource.lookup(Enums.SCHEMA_DARK_SETTINGS, true);
-    if (schemaDarkSettings) {
-        this.schemaGnomeDarkSettings = new Gio.Settings({ settings_schema: schemaDarkSettings });
-    }
     const schemaA11YKeyboard = schemaSource.lookup(Enums.SCHEMA_A11Y_KEYBOARD, true);
     if (schemaA11YKeyboard) {
         a11YKeyboard = new Gio.Settings({ settings_schema: schemaA11YKeyboard});
@@ -76,10 +71,6 @@ function init(path) {
     }
 
     desktopSettings = PrefsWindow.get_schema(path, Enums.SCHEMA);
-    let schemaMutter = schemaSource.lookup(Enums.SCHEMA_MUTTER, true);
-    if (schemaMutter) {
-        mutterSettings = new Gio.Settings({ settings_schema: schemaMutter });
-    }
 }
 
 /**

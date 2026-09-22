@@ -45,15 +45,6 @@ export default class DING extends Extension {
         */
         this.data.x11Manager = null;
         this.data.visibleArea = null;
-
-        /* Ensures that there aren't "rogue" processes.
-        * This is a safeguard measure for the case of Gnome Shell being
-        * relaunched (for example, under X11, with Alt+F2 and R), to kill
-        * any old DING instance. That's why it must be here, in init(),
-        * and not in enable() or disable() (disable already guarantees that
-        * the current instance is killed).
-        */
-        this.doKillAllOldDesktopProcesses();
     }
 
     enable() {
@@ -260,50 +251,6 @@ export default class DING extends Extension {
         }
         this.data.x11Manager.setMonitorData(desktopList);
         return new GLib.Variant('av', desktopVariantList);
-    }
-
-    /**
-     * This function checks all the processes in the system and kills those
-     * that are a desktop manager from the current user (but not others).
-     * This allows to avoid having several ones in case gnome shell resets,
-     * or other odd cases. It requires the /proc virtual filesystem, but
-     * doesn't fail if it doesn't exist.
-     */
-    doKillAllOldDesktopProcesses() {
-        let procFolder = Gio.File.new_for_path('/proc');
-        if (!procFolder.query_exists(null)) {
-            return;
-        }
-
-        let fileEnum = procFolder.enumerate_children('standard::*', Gio.FileQueryInfoFlags.NONE, null);
-        let info;
-        while ((info = fileEnum.next_file(null))) {
-            let filename = info.get_name();
-            if (!filename) {
-                break;
-            }
-            let processPath = GLib.build_filenamev(['/proc', filename, 'cmdline']);
-            let processUser = Gio.File.new_for_path(processPath);
-            if (!processUser.query_exists(null)) {
-                continue;
-            }
-            let [binaryData, etag] = processUser.load_bytes(null);
-            let contents = '';
-            let readData = binaryData.get_data();
-            for (let i = 0; i < readData.length; i++) {
-                if (readData[i] < 32) {
-                    contents += ' ';
-                } else {
-                    contents += String.fromCharCode(readData[i]);
-                }
-            }
-            let path = `gjs ${GLib.build_filenamev([this.path, 'app', 'ding.js'])}`;
-            if (contents.startsWith(path)) {
-                let proc = new Gio.Subprocess({ argv: ['/bin/kill', filename] });
-                proc.init(null);
-                proc.wait(null);
-            }
-        }
     }
 
     /**

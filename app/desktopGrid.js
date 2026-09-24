@@ -15,21 +15,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-/* exported DesktopGrid */
+// SPDX-License-Identifier: GPL-3.0-only
 'use strict';
-const GLib = imports.gi.GLib;
-const GObject = imports.gi.GObject;
-const Gsk = imports.gi.Gsk;
-const Gtk = imports.gi.Gtk;
-const Gdk = imports.gi.Gdk;
-const Graphene = imports.gi.Graphene;
+import GObject from 'gi://GObject';
+import Gsk from 'gi://Gsk';
+import Gtk from 'gi://Gtk?version=4.0';
+import Gdk from 'gi://Gdk?version=4.0';
+import Graphene from 'gi://Graphene';
 
-const Prefs = imports.preferences;
-const Enums = imports.enums;
-const DesktopIconsUtil = imports.desktopIconsUtil;
-const SignalManager = imports.signalManager;
-const dndClipboardUtils = imports.dndClipboardUtils;
-const DBusUtils = imports.dbusUtils;
+import * as Prefs from './preferences.js';
+import * as Enums from './enums.js';
+import * as DesktopIconsUtil from './desktopIconsUtil.js';
+import * as SignalManager from './signalManager.js';
+import * as dndClipboardUtils from './dndClipboardUtils.js';
 
 const Gettext = imports.gettext.domain('ding');
 
@@ -38,7 +36,7 @@ const _ = Gettext.gettext;
 
 var elementSpacing = 2;
 
-var DesktopGrid = class extends SignalManager.SignalManager {
+export var DesktopGrid = class extends SignalManager.SignalManager {
     constructor(desktopManager, desktopName, desktopDescription, asDesktop) {
         super();
         this._signalIds = [];
@@ -51,7 +49,7 @@ var DesktopGrid = class extends SignalManager.SignalManager {
         this.updateUnscaledHeightWidthMargins();
 
         // we don't use Adw.ApplicationWindow because it has rounded corners, which is something that we don't want for the desktop
-        this._window = new Gtk.ApplicationWindow({ application: desktopManager.mainApp, 'title': desktopName });
+        this._window = new Gtk.ApplicationWindow({application: desktopManager.mainApp, 'title': desktopName});
         this._window.set_decorated(false);
         if (this._asDesktop) {
             this._window.set_deletable(false);
@@ -63,9 +61,9 @@ var DesktopGrid = class extends SignalManager.SignalManager {
         }
         this._window.set_resizable(false);
         this.connectSignal(this._window, 'close-request', () => {
-            if (this._destroying) {
+            if (this._destroying)
                 return false;
-            }
+
             if (this._asDesktop) {
                 // Do not destroy window when closing if the instance is working as desktop
                 return true;
@@ -89,37 +87,37 @@ var DesktopGrid = class extends SignalManager.SignalManager {
         this._window.set_size_request(this._windowWidth, this._windowHeight);
         this._window.set_default_size(this._windowWidth, this._windowHeight);
 
-        let buttonMenuController = new Gtk.GestureClick();
+        const buttonMenuController = new Gtk.GestureClick();
         buttonMenuController.propagation_phase = Gtk.PropagationPhase.BUBBLE;
         buttonMenuController.button = 3;
         this._container.add_controller(buttonMenuController);
-        this.connectSignal(buttonMenuController, 'pressed', (controller, n_press, x, y) => {
+        this.connectSignal(buttonMenuController, 'pressed', (controller, nPress, x, y) => {
             this._desktopManager.onPressRightButton(controller, x, y, this._container);
         });
 
-        let buttonMainController = new Gtk.GestureClick();
+        const buttonMainController = new Gtk.GestureClick();
         buttonMenuController.propagation_phase = Gtk.PropagationPhase.BUBBLE;
         buttonMainController.button = 1;
         this._container.add_controller(buttonMainController);
-        this.connectSignal(buttonMainController, 'pressed', (controller, n_press, x, y) => {
+        this.connectSignal(buttonMainController, 'pressed', (controller, nPress, x, y) => {
             [x, y] = this.coordinatesLocalToGlobal(x, y);
             this._desktopManager.onPressMainButton(controller, x, y, this._container);
         });
         this.connectSignal(buttonMainController, 'cancel', () => {
             this._desktopManager.onCancelledMainButton();
         });
-        this.connectSignal(buttonMainController, 'released', (controller, n_press, x, y) => {
+        this.connectSignal(buttonMainController, 'released', () => {
             this._desktopManager.onReleaseMainButton();
         });
-        let motionController = new Gtk.EventControllerMotion();
+        const motionController = new Gtk.EventControllerMotion();
         this._container.add_controller(motionController);
         this.connectSignal(motionController, 'motion', (controller, x, y) => {
             [x, y] = this.coordinatesLocalToGlobal(x, y);
             this._desktopManager.onMotion(x, y);
-        })
+        });
 
 
-        let keyController = new Gtk.EventControllerKey();
+        const keyController = new Gtk.EventControllerKey();
         this._window.add_controller(keyController);
         this.connectSignal(keyController, 'key-pressed', (controller, keyval, keycode, state) => {
             return this._desktopManager.onKeyPress(keyval, keycode, state, this, controller.get_current_event_time());
@@ -162,8 +160,8 @@ var DesktopGrid = class extends SignalManager.SignalManager {
         this._marginBottom = Math.floor(this._marginBottom / this._size_divisor);
         this._marginLeft = Math.floor(this._marginLeft / this._size_divisor);
         this._marginRight = Math.floor(this._marginRight / this._size_divisor);
-        this._maxColumns = Math.floor(this._width / (Prefs.get_desired_width() + 4 * elementSpacing));
-        this._maxRows = Math.floor(this._height / (Prefs.get_desired_height() + 4 * elementSpacing));
+        this._maxColumns = Math.floor(this._width / (Prefs.getDesiredWidth() + 4 * elementSpacing));
+        this._maxRows = Math.floor(this._height / (Prefs.getDesiredHeight() + 4 * elementSpacing));
         this._elementWidth = Math.floor(this._width / this._maxColumns);
         this._elementHeight = Math.floor(this._height / this._maxRows);
     }
@@ -195,9 +193,8 @@ var DesktopGrid = class extends SignalManager.SignalManager {
         this._fileItems = {};
         this._gridStatus = {};
         for (let y = 0; y < this._maxRows; y++) {
-            for (let x = 0; x < this._maxColumns; x++) {
+            for (let x = 0; x < this._maxColumns; x++)
                 this._setGridUse(x, y, false);
-            }
         }
     }
 
@@ -216,7 +213,7 @@ var DesktopGrid = class extends SignalManager.SignalManager {
 
     setDropDestination(dropDestination) {
         const dropTarget = new Gtk.DropTargetAsync();
-        const validFormats = Gdk.ContentFormats.new(Enums.MIME_TYPES );
+        const validFormats = Gdk.ContentFormats.new(Enums.MIME_TYPES);
         dropTarget.set_actions(Gdk.DragAction.MOVE | Gdk.DragAction.COPY | Gdk.DragAction.ASK);
         dropTarget.set_formats(validFormats);
 
@@ -232,21 +229,21 @@ var DesktopGrid = class extends SignalManager.SignalManager {
             return Gdk.DragAction.MOVE;
         });
 
-        this.connectSignal(dropTarget, 'drag-leave', (widget, drop) => {
+        this.connectSignal(dropTarget, 'drag-leave', (_widget, _drop) => {
             this._desktopManager.onDragLeave();
         });
 
         this.connectSignal(dropTarget, 'drop', async (widget, drop, x, y) => {
             const dropInfo = await dndClipboardUtils.manageIconDrop(this, drop, x, y);
-            if (dropInfo === null) {
+            if (dropInfo === null)
                 return false;
-            }
+
             x = this._elementWidth * Math.floor(x / this._elementWidth);
             y = this._elementHeight * Math.floor(y / this._elementHeight);
             [x, y] = this.coordinatesLocalToGlobal(x, y);
             try {
                 this._desktopManager.onDragDataReceived(dropInfo, x, y, dropInfo.action === Gdk.DragAction.MOVE);
-            } catch(e) {
+            } catch (e) {
                 print(`Error: ${e}\n`);
             }
             this._paintContainer.queue_draw();
@@ -265,7 +262,7 @@ var DesktopGrid = class extends SignalManager.SignalManager {
     }
 
     highLightGridAt(x, y) {
-        let selected = this.getGridAt(x, y, false);
+        const selected = this.getGridAt(x, y, false);
         this._paintContainer.selectedList = [selected];
     }
 
@@ -282,19 +279,19 @@ var DesktopGrid = class extends SignalManager.SignalManager {
     }
 
     gridInUse(x, y) {
-        let [placeX, placeY] = this._getGridCoordinates(x, y);
+        const [placeX, placeY] = this._getGridCoordinates(x, y);
         return !this._isEmptyAt(placeX, placeY);
     }
 
     getGridLocalCoordinates(x, y) {
-        let [column, row] = this._getGridCoordinates(x, y);
-        let localX = Math.floor(this._width * column / this._maxColumns);
-        let localY = Math.floor(this._height * row / this._maxRows);
+        const [column, row] = this._getGridCoordinates(x, y);
+        const localX = Math.floor(this._width * column / this._maxColumns);
+        const localY = Math.floor(this._height * row / this._maxRows);
         return [localX, localY];
     }
 
     _fileAt(x, y) {
-        let [placeX, placeY] = this._getGridCoordinates(x, y);
+        const [placeX, placeY] = this._getGridCoordinates(x, y);
         return this._gridStatus[placeY * this._maxColumns + placeX];
     }
 
@@ -303,24 +300,22 @@ var DesktopGrid = class extends SignalManager.SignalManager {
             this._paintContainer.selectedList = null;
             return;
         }
-        let newSelectedList = [];
+        const newSelectedList = [];
         for (let [x, y] of selectedList) {
             x += ox;
             y += oy;
-            let r = this.getGridAt(x, y);
-            if (r && !isNaN(r[0]) && !isNaN(r[1]) && (!this.gridInUse(r[0], r[1]) || this._fileAt(r[0], r[1]).isSelected)) {
+            const r = this.getGridAt(x, y);
+            if (r && !isNaN(r[0]) && !isNaN(r[1]) && (!this.gridInUse(r[0], r[1]) || this._fileAt(r[0], r[1]).isSelected))
                 newSelectedList.push(r);
-            }
         }
-        if (newSelectedList.length == 0) {
+        if (newSelectedList.length === 0) {
             this._paintContainer.selectedList = null;
             return;
         }
         if (this._paintContainer.selectedList !== null) {
             if (newSelectedList[0][0] === this._paintContainer.selectedList[0][0] &&
-                newSelectedList[0][1] === this._paintContainer.selectedList[0][1]) {
+                newSelectedList[0][1] === this._paintContainer.selectedList[0][1])
                 return;
-            }
         }
         this._paintContainer.selectedList = newSelectedList;
     }
@@ -339,43 +334,43 @@ var DesktopGrid = class extends SignalManager.SignalManager {
          */
 
         let isFree = false;
-        for (let element in this._gridStatus) {
+        for (const element in this._gridStatus) {
             if (!this._gridStatus[element]) {
                 isFree = true;
                 break;
             }
         }
-        if (!isFree) {
+        if (!isFree)
             return -1;
-        }
-        if (this._coordinatesBelongToThisGrid(x, y)) {
+
+        if (this._coordinatesBelongToThisGrid(x, y))
             return 0;
-        }
+
         return Math.pow(x - (this._x + this._windowWidth * this._zoom / 2), 2) + Math.pow(x - (this._y + this._windowHeight * this._zoom / 2), 2);
     }
 
     coordinatesGlobalToLocal(X, Y) {
         X -= this._x;
         Y -= this._y;
-        let [belong, x, y] = this._window.translate_coordinates(this._container, X, Y);
+        const [unused, x, y] = this._window.translate_coordinates(this._container, X, Y);
         return [Math.floor(x), Math.floor(y)];
     }
 
     coordinatesLocalToGlobal(x, y) {
-        let [belongs, X, Y] = this._container.translate_coordinates(this._window, x, y);
+        const [unused, X, Y] = this._container.translate_coordinates(this._window, x, y);
         return [Math.floor(X + this._x), Math.floor(Y + this._y)];
     }
 
     _addFileItemTo(fileItem, column, row, coordinatesAction) {
-        if (this._destroying) {
+        if (this._destroying)
             return;
-        }
-        let localX = Math.floor(this._width * column / this._maxColumns);
-        let localY = Math.floor(this._height * row / this._maxRows);
+
+        const localX = Math.floor(this._width * column / this._maxColumns);
+        const localY = Math.floor(this._height * row / this._maxRows);
         this._container.put(fileItem.container, localX + elementSpacing, localY + elementSpacing);
         this._setGridUse(column, row, fileItem);
         this._fileItems[fileItem.uri] = [column, row, fileItem];
-        let [x, y] = this.coordinatesLocalToGlobal(localX + elementSpacing, localY + elementSpacing);
+        const [x, y] = this.coordinatesLocalToGlobal(localX + elementSpacing, localY + elementSpacing);
         fileItem.setCoordinates(
             x,
             y,
@@ -390,14 +385,13 @@ var DesktopGrid = class extends SignalManager.SignalManager {
          * Also store the new possition if it has been moved by the user,
          * and not triggered by a screen change.
          */
-        if ((fileItem.savedCoordinates == null) || (coordinatesAction == Enums.StoredCoordinates.OVERWRITE)) {
+        if ((fileItem.savedCoordinates === null) || (coordinatesAction === Enums.StoredCoordinates.OVERWRITE))
             fileItem.savedCoordinates = [x, y];
-        }
     }
 
     removeItem(fileItem) {
         if (fileItem.uri in this._fileItems) {
-            let [column, row, tmp] = this._fileItems[fileItem.uri];
+            const [column, row] = this._fileItems[fileItem.uri];
             this._setGridUse(column, row, false);
             this._container.remove(fileItem.container);
             delete this._fileItems[fileItem.uri];
@@ -405,8 +399,8 @@ var DesktopGrid = class extends SignalManager.SignalManager {
     }
 
     addFileItemCloseTo(fileItem, x, y, coordinatesAction) {
-        let addVolumesOpposite = Prefs.desktopSettings.get_boolean('add-volumes-opposite');
-        let [column, row] = this._getEmptyPlaceClosestTo(x,
+        const addVolumesOpposite = Prefs.desktopSettings.get_boolean('add-volumes-opposite');
+        const [column, row] = this._getEmptyPlaceClosestTo(x,
             y,
             coordinatesAction,
             fileItem.isDrive && addVolumesOpposite);
@@ -438,7 +432,7 @@ var DesktopGrid = class extends SignalManager.SignalManager {
     }
 
     _coordinatesBelongToThisGrid(X, Y) {
-        let checkRectangle = new Gdk.Rectangle({ x: X, y: Y, width: 1, height: 1 });
+        const checkRectangle = new Gdk.Rectangle({x: X, y: Y, width: 1, height: 1});
         return this.gridGlobalRectangle.intersect(checkRectangle)[0];
     }
 
@@ -447,43 +441,43 @@ var DesktopGrid = class extends SignalManager.SignalManager {
         let placeX = Math.floor(x / this._elementWidth);
         let placeY = Math.floor(y / this._elementHeight);
 
-        let cornerInversion = Prefs.get_start_corner();
-        if (reverseHorizontal) {
+        const cornerInversion = Prefs.getStartCorner();
+        if (reverseHorizontal)
             cornerInversion[0] = !cornerInversion[0];
-        }
+
 
         placeX = DesktopIconsUtil.clamp(placeX, 0, this._maxColumns - 1);
         placeY = DesktopIconsUtil.clamp(placeY, 0, this._maxRows - 1);
-        if (this._isEmptyAt(placeX, placeY) && (coordinatesAction != Enums.StoredCoordinates.ASSIGN)) {
+        if (this._isEmptyAt(placeX, placeY) && (coordinatesAction !== Enums.StoredCoordinates.ASSIGN))
             return [placeX, placeY];
-        }
+
         let found = false;
         let resColumn = null;
         let resRow = null;
         let minDistance = Infinity;
         let column, row;
         for (let tmpColumn = 0; tmpColumn < this._maxColumns; tmpColumn++) {
-            if (cornerInversion[0]) {
+            if (cornerInversion[0])
                 column = this._maxColumns - tmpColumn - 1;
-            } else {
+            else
                 column = tmpColumn;
-            }
-            for (let tmpRow = 0; tmpRow < this._maxRows; tmpRow++) {
-                if (cornerInversion[1]) {
-                    row = this._maxRows - tmpRow - 1;
-                } else {
-                    row = tmpRow;
-                }
-                if (!this._isEmptyAt(column, row)) {
-                    continue;
-                }
 
-                let proposedX = column * this._elementWidth;
-                let proposedY = row * this._elementHeight;
-                if (coordinatesAction == Enums.StoredCoordinates.ASSIGN) {
+            for (let tmpRow = 0; tmpRow < this._maxRows; tmpRow++) {
+                if (cornerInversion[1])
+                    row = this._maxRows - tmpRow - 1;
+                else
+                    row = tmpRow;
+
+                if (!this._isEmptyAt(column, row))
+                    continue;
+
+
+                const proposedX = column * this._elementWidth;
+                const proposedY = row * this._elementHeight;
+                if (coordinatesAction === Enums.StoredCoordinates.ASSIGN)
                     return [column, row];
-                }
-                let distance = DesktopIconsUtil.distanceBetweenPoints(proposedX, proposedY, x, y);
+
+                const distance = DesktopIconsUtil.distanceBetweenPoints(proposedX, proposedY, x, y);
                 if (distance < minDistance) {
                     found = true;
                     minDistance = distance;
@@ -493,9 +487,9 @@ var DesktopGrid = class extends SignalManager.SignalManager {
             }
         }
 
-        if (!found) {
-            print("Not enough place at monitor");
-        }
+        if (!found)
+            print('Not enough place at monitor');
+
 
         return [resColumn, resRow];
     }
@@ -536,12 +530,11 @@ class PaintContainer extends Gtk.Widget {
         this.queue_resize();
     }
 
-    vfunc_measure(orientation, forSize) {
-        if (orientation === Gtk.Orientation.HORIZONTAL) {
+    vfunc_measure(orientation, _forSize) {
+        if (orientation === Gtk.Orientation.HORIZONTAL)
             return [this._width, this._width, -1, -1];
-        } else {
+        else
             return [this._height, this._height, -1, -1];
-        }
     }
 
     vfunc_snapshot(snapshot) {
@@ -550,8 +543,8 @@ class PaintContainer extends Gtk.Widget {
 
         if (dm.rubberBand && dm.selectionRectangle) {
             if (grid.gridGlobalRectangle.intersect(dm.selectionRectangle)[0]) {
-                let [xInit, yInit] = grid.coordinatesGlobalToLocal(dm.x1, dm.y1);
-                let [xFin, yFin] = grid.coordinatesGlobalToLocal(dm.x2, dm.y2);
+                const [xInit, yInit] = grid.coordinatesGlobalToLocal(dm.x1, dm.y1);
+                const [xFin, yFin] = grid.coordinatesGlobalToLocal(dm.x2, dm.y2);
 
                 const fillColor = new Gdk.RGBA();
                 fillColor.red = dm.selectColor.red;
@@ -572,7 +565,7 @@ class PaintContainer extends Gtk.Widget {
         }
 
         if (dm.showDropPlace && this._selectedList !== null) {
-            for (let [x, y] of this._selectedList) {
+            for (const [x, y] of this._selectedList) {
                 const fillColor = new Gdk.RGBA();
                 fillColor.red = dm.selectColor.red;
                 fillColor.green = dm.selectColor.green;

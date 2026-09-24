@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Sergio Costas <rastersoft@gmail.com>
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 prefix = get_option('prefix')
 extension_uuid = get_option('extension_uuid')
 

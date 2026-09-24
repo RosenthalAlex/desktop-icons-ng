@@ -14,54 +14,47 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+// SPDX-License-Identifier: GPL-3.0-only
 'use strict';
 
-const DBusUtils = imports.dbusUtils;
-const GLib = imports.gi.GLib;
-const Gdk = imports.gi.Gdk;
-const Gtk = imports.gi.Gtk;
-const Gio = imports.gi.Gio;
+import GLib from 'gi://GLib';
+import Gio from 'gi://Gio';
 
-const TemplatesScriptsManager = imports.templatesScriptsManager;
-const DesktopIconsUtil = imports.desktopIconsUtil;
-const Prefs = imports.preferences;
-const ShowErrorPopup = imports.showErrorPopup;
-const SignalManager = imports.signalManager;
+import * as Prefs from './preferences.js';
 
 const Gettext = imports.gettext.domain('ding');
 
 const _ = Gettext.gettext;
 
-var MenuHelper = class {
+export var MenuHelper = class {
     constructor(desktopManager, mainApp) {
         this._mainApp = mainApp;
         this._desktopManager = desktopManager;
     }
 
     _newMenuElement(text, action, menu, parameter = null) {
-        let item = Gio.MenuItem.new(text, null);
-        if (parameter == null) {
-            item.set_detailed_action("app." + action);
-        } else {
-            item.set_action_and_target_value("app." + action, parameter);
-        }
+        const item = Gio.MenuItem.new(text, null);
+        if (parameter === null)
+            item.set_detailed_action(`app.${action}`);
+        else
+            item.set_action_and_target_value(`app.${action}`, parameter);
+
         menu.append_item(item);
     }
 
     _newSection(menu) {
-        let section = Gio.Menu.new();
+        const section = Gio.Menu.new();
         menu.append_section(null, section);
         return section;
     }
 
     _addNewAction(name, accels, callback, paramType = null) {
-        const newAction = Gio.SimpleAction.new(name, paramType == null ? null : new GLib.VariantType(paramType));
+        const newAction = Gio.SimpleAction.new(name, paramType === null ? null : new GLib.VariantType(paramType));
         newAction.connect('activate', callback);
         this._mainApp.add_action(newAction);
-        if (accels !== null) {
-            this._mainApp.set_accels_for_action("app." + name, accels);
-        }
+        if (accels !== null)
+            this._mainApp.set_accels_for_action(`app.${name}`, accels);
+
         newAction.enabled = true;
         return newAction;
     }
@@ -73,9 +66,9 @@ var MenuHelper = class {
             Prefs.desktopSettings.set_boolean(name, newState.get_boolean());
         });
         this._mainApp.add_action(newAction);
-        if (accels !== null) {
+        if (accels !== null)
             this._mainApp.set_accels_for_action(name, accels);
-        }
+
         newAction.enabled = true;
     }
 
@@ -86,10 +79,9 @@ var MenuHelper = class {
             action.set_state(parameter);
         });
         this._mainApp.add_action(newAction);
-        if (accels !== null) {
+        if (accels !== null)
             this._mainApp.set_accels_for_action(name, accels);
-        }
+
         newAction.enabled = true;
     }
-
-}
+};

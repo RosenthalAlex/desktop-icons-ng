@@ -18,13 +18,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+// SPDX-License-Identifier: GPL-3.0-only
 'use strict';
-const Gtk = imports.gi.Gtk;
-const Gio = imports.gi.Gio;
+import Gtk from 'gi://Gtk?version=4.0';
+import Gio from 'gi://Gio';
 
-const desktopIconItem = imports.desktopIconItem;
+import * as desktopIconItem from './desktopIconItem.js';
 
-const Prefs = imports.preferences;
+import * as Prefs from './preferences.js';
 
 const Signals = imports.signals;
 const Gettext = imports.gettext.domain('ding');
@@ -32,7 +33,7 @@ const Gettext = imports.gettext.domain('ding');
 const _ = Gettext.gettext;
 
 
-var stackItem = class extends desktopIconItem.desktopIconItem {
+export var stackItem = class extends desktopIconItem.desktopIconItem {
     constructor(desktopManager, file, attributeContentType, fileExtra) {
         super(desktopManager, fileExtra);
         this._isSpecial = false;
@@ -56,16 +57,17 @@ var stackItem = class extends desktopIconItem.desktopIconItem {
 
     _createStackTopIcon() {
         let folder = 'folder';
-        if (Prefs.getUnstackList().includes(this._attributeContentType)) {
+        if (Prefs.getUnstackList().includes(this._attributeContentType))
             folder = 'folder-open';
-        }
+
         this._icon.set_paintable(this._createEmblemedIcon(null, folder));
     }
 
     doOpen() {
         this._desktopManager.onToggleStackUnstackThisTypeClicked(this.attributeContentType);
     }
-    _doButtonOnePressed(event, shiftPressed, controlPressed) {
+
+    _doButtonOnePressed() {
         this._desktopManager.onToggleStackUnstackThisTypeClicked(this.attributeContentType);
     }
 
@@ -82,7 +84,7 @@ var stackItem = class extends desktopIconItem.desktopIconItem {
 
     setAccessibleName(filename) {
         const isExpanded = Prefs.getUnstackList().includes(this.attributeContentType);
-        this._accessibleBox.update_property([Gtk.AccessibleProperty.LABEL, Gtk.AccessibleProperty.DESCRIPTION], [filename, ""]);
+        this._accessibleBox.update_property([Gtk.AccessibleProperty.LABEL, Gtk.AccessibleProperty.DESCRIPTION], [filename, '']);
         this._accessibleBox.update_state([Gtk.AccessibleState.CHECKED], [isExpanded ? Gtk.AccessibleTristate.TRUE : Gtk.AccessibleTristate.FALSE]);
     }
 

@@ -14,10 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-/* exported EmulateX11WindowType */
+// SPDX-License-Identifier: GPL-3.0-only
 'use strict';
-import GLib from 'gi://GLib'
-import Meta from 'gi://Meta'
+import GLib from 'gi://GLib';
+import Meta from 'gi://Meta';
 
 
 class ManageWindow {
@@ -52,13 +52,13 @@ class ManageWindow {
     }
 
     _moveIntoPlace() {
-        if (this._moveIntoPlaceID) {
+        if (this._moveIntoPlaceID)
             GLib.source_remove(this._moveIntoPlaceID);
-        }
+
         this._moveIntoPlaceID = GLib.timeout_add(GLib.PRIORITY_LOW, 250, () => {
-            if (this._fixed && (this._x !== null) && (this._y !== null)) {
+            if (this._fixed && (this._x !== null) && (this._y !== null))
                 this._window.move_frame(true, this._x, this._y);
-            }
+
             this._moveIntoPlaceID = 0;
             return GLib.SOURCE_REMOVE;
         });
@@ -69,16 +69,16 @@ class ManageWindow {
     }
 
     destroy() {
-        for (let signalID of this._signalIDs) {
+        for (const signalID of this._signalIDs)
             this._window.disconnect(signalID);
-        }
+
         if (this._moveIntoPlaceID) {
             GLib.source_remove(this._moveIntoPlaceID);
             this._moveIntoPlaceID = 0;
         }
-        if (this._keepAtTop && !this.windowUnmanaged) {
+        if (this._keepAtTop && !this.windowUnmanaged)
             this._window.unmake_above();
-        }
+
         this._window = null;
         this._waylandClient = null;
     }
@@ -96,18 +96,17 @@ class ManageWindow {
         this._showInAllDesktops = false;
         this._fixed = false;
         let title = this._window.get_title();
-        if (title != null) {
-            if ((title.length > 0) && (title[title.length - 1] == ' ')) {
-                if ((title.length > 1) && (title[title.length - 2] == ' ')) {
+        if (title !== null) {
+            if ((title.length > 0) && (title[title.length - 1] === ' ')) {
+                if ((title.length > 1) && (title[title.length - 2] === ' '))
                     title = '@!HTD';
-                } else {
+                else
                     title = '@!H';
-                }
             }
             const pos = title.search('@!');
-            if (pos != -1) {
+            if (pos !== -1) {
                 const extraChars = title.substring(pos + 2).trim().toUpperCase();
-                for (let char of extraChars) {
+                for (const char of extraChars) {
                     switch (char) {
                     case 'T':
                         this._keepAtTop = true;
@@ -119,7 +118,7 @@ class ManageWindow {
                 }
             }
             // This string must match the one at desktopManager.js
-            if (title.startsWith("Desktop Icons ")) {
+            if (title.startsWith('Desktop Icons ')) {
                 this._keepAtTop = false;
                 this._fixed = true;
                 try {
@@ -132,19 +131,17 @@ class ManageWindow {
                 }
                 this._window.set_type(Meta.WindowType.DESKTOP);
             }
-            if (this._keepAtTop != keepAtTop) {
-                if (this._keepAtTop) {
+            if (this._keepAtTop !== keepAtTop) {
+                if (this._keepAtTop)
                     this._window.make_above();
-                } else {
+                else
                     this._window.unmake_above();
-                }
             }
-            if (this._showInAllDesktops != showInAllDesktops) {
-                if (this._showInAllDesktops) {
+            if (this._showInAllDesktops !== showInAllDesktops) {
+                if (this._showInAllDesktops)
                     this._window.stick();
-                } else {
+                else
                     this._window.unstick();
-                }
             }
             this._moveIntoPlace();
         }
@@ -169,34 +166,32 @@ export class EmulateX11WindowType {
     }
 
     getMonitorData(idx) {
-        if (idx >= this._monitorData.length) {
+        if (idx >= this._monitorData.length)
             return null;
-        }
+
         return this._monitorData[idx];
     }
 
     setWaylandClient(client) {
         this._waylandClient = client;
-        for (let window of this._windowList) {
-            if (window.customJS_ding) {
+        for (const window of this._windowList) {
+            if (window.customJS_ding)
                 window.customJS_ding.setWaylandClient(this._waylandClient);
-            }
         }
     }
 
     enable() {
         this._idMap = global.window_manager.connect_after('map', (obj, windowActor) => {
-            let window = windowActor.get_meta_window();
-            if (this._waylandClient && this._waylandClient.query_window_belongs_to(window)) {
+            const window = windowActor.get_meta_window();
+            if (this._waylandClient && this._waylandClient.query_window_belongs_to(window))
                 this.addWindow(window);
-            }
         });
     }
 
     disable() {
-        for (let window of this._windowList) {
+        for (const window of this._windowList)
             this._clearWindow(window);
-        }
+
         this._windowList = [];
 
         // disconnect signals
@@ -210,16 +205,18 @@ export class EmulateX11WindowType {
     addWindow(window) {
         window.customJS_ding = new ManageWindow(window, this._waylandClient, this);
         this._windowList.push(window);
-        window.customJS_ding.unmanagedID = window.connect('unmanaged', window => {
-            window.customJS_ding.windowUnmanaged = true;
-            this._clearWindow(window);
-            this._windowList = this._windowList.filter(item => item !== window);
+        window.customJS_ding.unmanagedID = window.connect('unmanaged', iWindow => {
+            iWindow.customJS_ding.windowUnmanaged = true;
+            this._clearWindow(iWindow);
+            this._windowList = this._windowList.filter(item => item !== iWindow);
         });
         this.refreshWindowsPosition();
     }
 
     refreshWindowsPosition() {
-        this._windowList.forEach(window => { window.customJS_ding.refreshWindowPosition(); });
+        this._windowList.forEach(window => {
+            window.customJS_ding.refreshWindowPosition();
+        });
     }
 
     _clearWindow(window) {

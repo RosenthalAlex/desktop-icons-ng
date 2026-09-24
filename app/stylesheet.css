@@ -1,3 +1,8 @@
+/*
+ *SPDX-FileCopyrightText: 2018 Sergio Costas Rodriguez <rastersoft@gmail.com>
+ *
+ * SPDX-License-Identifier: GPL-3.0-only
+ */
 .file-label, label.file-label:backdrop {
     text-shadow: 0px 0px 3px black;
     color: white;

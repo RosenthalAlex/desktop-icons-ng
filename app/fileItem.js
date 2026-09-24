@@ -16,32 +16,33 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+// SPDX-License-Identifier: GPL-3.0-only
 'use strict';
-const Gtk = imports.gi.Gtk;
-const Gdk = imports.gi.Gdk;
-const Gio = imports.gi.Gio;
-const GioUnix = imports.gi.GioUnix;
-const GLib = imports.gi.GLib;
-const DesktopIconsUtil = imports.desktopIconsUtil;
-const desktopIconItem = imports.desktopIconItem;
-const ShowErrorPopup = imports.showErrorPopup;
+import Gtk from 'gi://Gtk?version=4.0';
+import Gdk from 'gi://Gdk?version=4.0';
+import Gio from 'gi://Gio';
+import GioUnix from 'gi://GioUnix';
+import GLib from 'gi://GLib';
+import * as DesktopIconsUtil from './desktopIconsUtil.js';
+import * as desktopIconItem from './desktopIconItem.js';
+import * as ShowErrorPopup from './showErrorPopup.js';
 
-const Prefs = imports.preferences;
-const Enums = imports.enums;
-const DBusUtils = imports.dbusUtils;
-const dndClipboardUtils = imports.dndClipboardUtils;
+import * as Prefs from './preferences.js';
+import * as Enums from './enums.js';
+import * as DBusUtils from './dbusUtils.js';
+import * as dndClipboardUtils from './dndClipboardUtils.js';
 
 const Signals = imports.signals;
 const Gettext = imports.gettext.domain('ding');
 
 const _ = Gettext.gettext;
 
-var FileItem = class extends desktopIconItem.desktopIconItem {
+export var FileItem = class extends desktopIconItem.desktopIconItem {
     constructor(desktopManager, file, fileInfo, fileExtra, custom) {
         super(desktopManager, fileExtra);
         this._fileInfo = fileInfo;
         this._custom = custom;
-        this._isSpecial = this._fileExtra != Enums.FileType.NONE;
+        this._isSpecial = this._fileExtra !== Enums.FileType.NONE;
         this._file = file;
         this.isStackTop = false;
         this.stackUnique = false;
@@ -60,58 +61,58 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
             print(`Exception while updating an icon: ${e.message}\n${e.stack}`);
         });
 
-        if (this._attributeCanExecute && !this._isValidDesktopFile) {
+        if (this._attributeCanExecute && !this._isValidDesktopFile)
             this._execLine = this.file.get_path();
-        } else {
+        else
             this._execLine = null;
-        }
-        if (fileExtra == Enums.FileType.USER_DIRECTORY_TRASH) {
+
+        if (fileExtra === Enums.FileType.USER_DIRECTORY_TRASH) {
             // if this icon is the trash, monitor the state of the directory to update the icon
             this._trashChanged = false;
             this._queryTrashInfoCancellable = null;
             this._scheduleTrashRefreshId = 0;
             this._monitorTrashDir = this._file.monitor_directory(Gio.FileMonitorFlags.WATCH_MOVES, null);
-            this.connectSignal(this._monitorTrashDir, 'changed', (obj, file, otherFile, eventType) => {
+            this.connectSignal(this._monitorTrashDir, 'changed', (obj, monitorFile, otherFile, eventType) => {
                 switch (eventType) {
-                    case Gio.FileMonitorEvent.DELETED:
-                    case Gio.FileMonitorEvent.MOVED_OUT:
-                    case Gio.FileMonitorEvent.CREATED:
-                    case Gio.FileMonitorEvent.MOVED_IN:
-                        if (this._queryTrashInfoCancellable || this._scheduleTrashRefreshId) {
-                            if (this._scheduleTrashRefreshId) {
-                                GLib.source_remove(this._scheduleTrashRefreshId);
-                            }
-                            if (this._queryTrashInfoCancellable) {
-                                this._queryTrashInfoCancellable.cancel();
-                                this._queryTrashInfoCancellable = null;
-                            }
-                            this._scheduleTrashRefreshId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 200, () => {
-                                this._refreshTrashIcon();
-                                this._scheduleTrashRefreshId = 0;
-                                return GLib.SOURCE_REMOVE;
-                            });
-                        } else {
-                            this._refreshTrashIcon();
-                            // after a refresh, don't allow more refreshes until 200ms after, to coalesce extra events
-                            this._scheduleTrashRefreshId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 200, () => {
-                                this._scheduleTrashRefreshId = 0;
-                                return GLib.SOURCE_REMOVE;
-                            });
+                case Gio.FileMonitorEvent.DELETED:
+                case Gio.FileMonitorEvent.MOVED_OUT:
+                case Gio.FileMonitorEvent.CREATED:
+                case Gio.FileMonitorEvent.MOVED_IN:
+                    if (this._queryTrashInfoCancellable || this._scheduleTrashRefreshId) {
+                        if (this._scheduleTrashRefreshId)
+                            GLib.source_remove(this._scheduleTrashRefreshId);
+
+                        if (this._queryTrashInfoCancellable) {
+                            this._queryTrashInfoCancellable.cancel();
+                            this._queryTrashInfoCancellable = null;
                         }
-                        break;
+                        this._scheduleTrashRefreshId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 200, () => {
+                            this._refreshTrashIcon();
+                            this._scheduleTrashRefreshId = 0;
+                            return GLib.SOURCE_REMOVE;
+                        });
+                    } else {
+                        this._refreshTrashIcon();
+                        // after a refresh, don't allow more refreshes until 200ms after, to coalesce extra events
+                        this._scheduleTrashRefreshId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 200, () => {
+                            this._scheduleTrashRefreshId = 0;
+                            return GLib.SOURCE_REMOVE;
+                        });
+                    }
+                    break;
                 }
             }, {
                 destroyCb: () => {
                     this._monitorTrashDir.cancel();
-                }
+                },
             });
         } else {
             this._monitorTrashId = 0;
         }
         this._updateName();
-        if (this._dropCoordinates) {
+        if (this._dropCoordinates)
             this.setSelected();
-        }
+
         if (this._desktopManager.showDropPlace) {
             this._setDropDestination(this.container);
         } else {
@@ -122,33 +123,32 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
 
     _getEmblem() {
         if (this._isSymlink && (Prefs.showLinkEmblem || this._isBrokenSymlink)) {
-            if (this._isBrokenSymlink) {
+            if (this._isBrokenSymlink)
                 return Gio.ThemedIcon.new('emblem-unreadable');
-            } else {
+            else
                 return Gio.ThemedIcon.new('emblem-symbolic-link');
-            }
         }
-        if (this._isDesktopFile && (!this._isValidDesktopFile || !this.trustedDesktopFile)) {
+        if (this._isDesktopFile && (!this._isValidDesktopFile || !this.trustedDesktopFile))
             return Gio.ThemedIcon.new('emblem-unreadable');
-        }
-        if (this._isAppImageFile && !this.trustedAppImageFile) {
+
+        if (this._isAppImageFile && !this.trustedAppImageFile)
             return Gio.ThemedIcon.new('emblem-unreadable');
-        }
-        if (this._isAppImageFile && !this._useSandboxing) {
+
+        if (this._isAppImageFile && !this._useSandboxing)
             return Gio.ThemedIcon.new('dialog-warning');
-        }
+
         return null;
     }
 
     setAccessibleName(filename) {
         if (this._fileExtra === Enums.FileType.USER_DIRECTORY_HOME) {
             /** TRANSLATORS: when using a screen reader, this is the text read when the user's personal folder is
-              * highlighted. */
+             * highlighted. */
             filename = _('Home');
         }
         if (this._fileExtra === Enums.FileType.USER_DIRECTORY_TRASH) {
             /** TRANSLATORS: when using a screen reader, this is the text read when the trash folder is
-              * highlighted. */
+             * highlighted. */
             filename = _('Trash');
         }
         const specialCases = [
@@ -157,47 +157,47 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
                 /** TRANSLATORS: when using a screen reader, this is the role used when an external drive is
                  * highlighted. Example: if a USB stick named "my_portable" is highlighted, it will say "my_portable Drive".
                  * It is mandatory to say the file name first and the role after. */
-                _('${VisibleName} Drive'),
+                _('{VisibleName} Drive'),
                 /** TRANSLATORS: when using a screen reader, this is the role used when an external drive is
                  * highlighted and selected. Example: if a USB stick named "my_portable" is highlighted and selected, it
                  * will say "my_portable Drive Selected". It is mandatory to say the file name first, then the role, and
                  * finally "Selected". */
-                _('${VisibleName} Drive Selected')
+                _('{VisibleName} Drive Selected'),
             ], [
                 this._isDirectory || (this._fileExtra === Enums.FileType.USER_DIRECTORY_HOME) || (this._fileExtra === Enums.FileType.USER_DIRECTORY_TRASH),
                 /** TRANSLATORS: when using a screen reader, this is the role used when a folder is
                  * highlighted. Example: if a folder named "things" is highlighted, it will say "things Folder".
                  * It is mandatory to say the file name first and the role after. */
-                _('${VisibleName} Folder'),
+                _('{VisibleName} Folder'),
                 /** TRANSLATORS: when using a screen reader, this is the role used when a folder is
                  * highlighted and selected. Example: if a folder named "things" is highlighted and selected, it will say
                  * "things Folder Selected". It is mandatory to say the file name first, then the role, and finally "Selected". */
-                _('${VisibleName} Folder Selected'),
+                _('{VisibleName} Folder Selected'),
             ], [
                 this._isDesktopFile && this.trustedDesktopFile,
                 /** TRANSLATORS: when using a screen reader, this is the role used when a trusted desktop file is
                  * highlighted. Example: if a desktop file named "My App" is highlighted and it is trusted, it will
                  * say "My App Application". It is mandatory to say the file name first and the role after. */
-                _('${VisibleName} Application'),
+                _('{VisibleName} Application'),
                 /** TRANSLATORS: when using a screen reader, this is the role used when a trusted desktop file is
                  * highlighted. Example: if a desktop file named "My App" is highlighted and selected and it is trusted, it will
                  * say "My App Application Selected". It is mandatory to say the file name first and the role after. */
-                _('${VisibleName} Application Selected')
+                _('{VisibleName} Application Selected'),
             ], [
                 // The default value
                 true,
                 /** TRANSLATORS: when using a screen reader, this is the text read when a normal file is
                  * highlighted. Example: if a file named "my_picture.jpg" is highlighted, it will say "my_picture.jpg File" */
-                _('${VisibleName} File'),
+                _('{VisibleName} File'),
                 /** TRANSLATORS: when using a screen reader, this is the text read when a normal file is highlighted and
                  * selected. Example: if a file named "my_picture.jpg" is highlighted and selected, it will say
                  * "my_picture.jpg File Selected". It is mandatory to say the file name first and the role after. */
-                _('${VisibleName} File Selected')
-            ]
+                _('{VisibleName} File Selected'),
+            ],
         ];
 
-        var name = "";
-        for (let c of specialCases) {
+        var name = '';
+        for (const c of specialCases) {
             if (c[0]) {
                 name = this._isSelected ? c[2] : c[1];
                 break;
@@ -205,14 +205,14 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
         }
         /** TRANSLATORS: the "selected" string is for screen readers. It is added at the end of the speaked sentence when the icon
             is selected. */
-        const visibleNameAndRole = name.replace('${VisibleName}', filename);
-        this._accessibleBox.update_property([Gtk.AccessibleProperty.LABEL, Gtk.AccessibleProperty.DESCRIPTION], [visibleNameAndRole, ""]);
+        const visibleNameAndRole = name.replace('{VisibleName}', filename);
+        this._accessibleBox.update_property([Gtk.AccessibleProperty.LABEL, Gtk.AccessibleProperty.DESCRIPTION], [visibleNameAndRole, '']);
     }
 
     setRenamePopup(renameWindow) {
-        if (this._realizeId) {
+        if (this._realizeId)
             this.container.disconnect(this._realizeId);
-        }
+
         this._realizeId = this.container.connect_after('realize', () => {
             renameWindow.updateFileItem(this);
             this.container.disconnect(this._realizeId);
@@ -252,19 +252,16 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
      ***********************/
 
     _getVisibleName() {
-        if (this._fileExtra == Enums.FileType.EXTERNAL_DRIVE) {
+        if (this._fileExtra === Enums.FileType.EXTERNAL_DRIVE)
             return this._custom.get_name();
-        } else {
-            if (this._isValidDesktopFile && !this._desktopManager.writableByOthers && !this._writableByOthers && this.trustedDesktopFile) {
-                return this._desktopFile.get_locale_string('Name');
-            } else {
-                return this._fileInfo.get_display_name();
-            }
-        }
+        else if (this._isValidDesktopFile && !this._desktopManager.writableByOthers && !this._writableByOthers && this.trustedDesktopFile)
+            return this._desktopFile.get_locale_string('Name');
+        else
+            return this._fileInfo.get_display_name();
     }
 
     _setFileName(text) {
-        if (this._fileExtra == Enums.FileType.USER_DIRECTORY_HOME) {
+        if (this._fileExtra === Enums.FileType.USER_DIRECTORY_HOME) {
             // TRANSLATORS: "Home" is the text that will be shown in the user's personal folder
             text = _('Home');
         }
@@ -274,12 +271,11 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
 
     _readCoordinatesFromAttribute(fileInfo, attribute) {
         let savedCoordinates = fileInfo.get_attribute_as_string(attribute);
-        if ((savedCoordinates != null) && (savedCoordinates != '')) {
+        if ((savedCoordinates !== null) && (savedCoordinates !== '')) {
             savedCoordinates = savedCoordinates.split(',');
             if (savedCoordinates.length >= 2) {
-                if (!isNaN(savedCoordinates[0]) && !isNaN(savedCoordinates[1])) {
+                if (!isNaN(savedCoordinates[0]) && !isNaN(savedCoordinates[1]))
                     return [Number(savedCoordinates[0]), Number(savedCoordinates[1])];
-                }
             }
         }
         return null;
@@ -292,20 +288,19 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
 
     _checkForRename() {
         if (this._desktopManager.newFolderDoRename) {
-            if (this._desktopManager.newFolderDoRename == this.fileName) {
+            if (this._desktopManager.newFolderDoRename === this.fileName)
                 this._desktopManager.doRename(this, true);
-            }
         }
     }
 
     _refreshMetadataAsync(rebuild) {
-        if (this._destroyed) {
+        if (this._destroyed)
             return;
-        }
 
-        if (this._queryFileInfoCancellable) {
+
+        if (this._queryFileInfoCancellable)
             this._queryFileInfoCancellable.cancel();
-        }
+
         this._queryFileInfoCancellable = new Gio.Cancellable();
         this._file.query_info_async(Enums.DEFAULT_ATTRIBUTES,
             Gio.FileQueryInfoFlags.NONE,
@@ -324,9 +319,8 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
                     }
                     this._updateName();
                 } catch (error) {
-                    if (!error.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.CANCELLED)) {
+                    if (!error.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.CANCELLED))
                         print(`Error getting the file info: ${error}`);
-                    }
                 }
             }
         );
@@ -335,21 +329,21 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
     _updateMetadataFromFileInfo(fileInfo) {
         this._fileInfo = fileInfo;
 
-        let oldLabelText = this._currentFileName;
+        const oldLabelText = this._currentFileName;
 
         this._displayName = this._getVisibleName();
         this._attributeCanExecute = fileInfo.get_attribute_boolean('access::can-execute');
         this._unixmode = fileInfo.get_attribute_uint32('unix::mode');
-        this._writableByOthers = (this._unixmode & Enums.S_IWOTH) != 0;
-        this._trusted = fileInfo.get_attribute_as_string('metadata::trusted') == 'true';
-        this._useSandboxing = fileInfo.get_attribute_as_string('metadata::nosandbox') == 'false';
+        this._writableByOthers = (this._unixmode & Enums.S_IWOTH) !== 0;
+        this._trusted = fileInfo.get_attribute_as_string('metadata::trusted') === 'true';
+        this._useSandboxing = fileInfo.get_attribute_as_string('metadata::nosandbox') === 'false';
         this._attributeContentType = fileInfo.get_content_type();
-        this._isDesktopFile = this._attributeContentType == 'application/x-desktop';
-        this._isAppImageFile = this._attributeContentType == 'application/vnd.appimage';
+        this._isDesktopFile = this._attributeContentType === 'application/x-desktop';
+        this._isAppImageFile = this._attributeContentType === 'application/vnd.appimage';
 
-        if (this._isDesktopFile && this._writableByOthers) {
+        if (this._isDesktopFile && this._writableByOthers)
             console.log(`desktop-icons: File ${this._displayName} is writable by others - will not allow launching`);
-        }
+
 
         if (this._isDesktopFile) {
             try {
@@ -361,22 +355,22 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
                     this._isValidDesktopFile = true;
                 }
             } catch (e) {
-                let title = _("Error while reading Desktop file");
-                let error = `${this.uri}: ${e}`;
+                const title = _('Error while reading Desktop file');
+                const error = `${this.uri}: ${e}`;
                 this._logAndPopupError(title, error, `${title}: ${error}`);
             }
         } else {
             this._isValidDesktopFile = false;
         }
 
-        if (this.displayName != oldLabelText) {
+        if (this.displayName !== oldLabelText)
             this._setFileName(this.displayName);
-        }
+
 
         this._fileType = fileInfo.get_file_type();
-        this._isDirectory = this._fileType == Gio.FileType.DIRECTORY;
-        this._isSpecial = this._fileExtra != Enums.FileType.NONE;
-        if (this._fileExtra == Enums.FileType.USER_DIRECTORY_TRASH) {
+        this._isDirectory = this._fileType === Gio.FileType.DIRECTORY;
+        this._isSpecial = this._fileExtra !== Enums.FileType.NONE;
+        if (this._fileExtra === Enums.FileType.USER_DIRECTORY_TRASH) {
             this._isHidden = false;
             this._isSymlink = false;
         } else {
@@ -390,10 +384,10 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
          * it must be a broken link.
          * https://developer.gnome.org/gio/stable/GFile.html#g-file-query-info
          */
-        this._isBrokenSymlink = this._isSymlink && this._fileType == Gio.FileType.SYMBOLIC_LINK;
-        this._acceptsDrop = (this._fileExtra == Enums.FileType.USER_DIRECTORY_TRASH) ||
-                            (this._fileExtra == Enums.FileType.USER_DIRECTORY_HOME) ||
-                            (this._fileExtra == Enums.FileType.EXTERNAL_DRIVE) ||
+        this._isBrokenSymlink = this._isSymlink && this._fileType === Gio.FileType.SYMBOLIC_LINK;
+        this._acceptsDrop = (this._fileExtra === Enums.FileType.USER_DIRECTORY_TRASH) ||
+                            (this._fileExtra === Enums.FileType.USER_DIRECTORY_HOME) ||
+                            (this._fileExtra === Enums.FileType.EXTERNAL_DRIVE) ||
                             this._isDirectory ||
                             this.trustedDesktopFile;
     }
@@ -405,22 +399,22 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
 
     _getDefaultLaunchContext(timestamp) {
         const launchContext = Gdk.Display.get_default().get_app_launch_context();
-        if (timestamp) {
+        if (timestamp)
             launchContext.set_timestamp(timestamp);
-        } else {
+        else
             launchContext.set_timestamp(Gdk.CURRENT_TIME);
-        }
+
         return launchContext;
     }
 
     _doOpenContext(context, fileList) {
-        if (!fileList) {
+        if (!fileList)
             fileList = [];
-        }
+
         if (this._isBrokenSymlink) {
-            let title = _('Broken Link');
-            let error = _('Can not open this File because it is a Broken Symlink');
-            let logError = `Error: Can’t open ${this.file.get_uri()} because it is a broken symlink.`;
+            const title = _('Broken Link');
+            const error = _('Can not open this File because it is a Broken Symlink');
+            const logError = `Error: Can’t open ${this.file.get_uri()} because it is a broken symlink.`;
             this._logAndPopupError(title, error, logError);
             return;
         }
@@ -430,9 +424,9 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
             return;
         }
 
-        if (this._isAppImageFile) {
+        if (this._isAppImageFile)
             this._launchAppImageFile(context, fileList);
-        }
+
 
         if (this._isDirectory && this._desktopManager.useNemo) {
             try {
@@ -455,9 +449,9 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
                 try {
                     Gio.AppInfo.launch_default_for_uri_finish(result);
                 } catch (e) {
-                    let title = _("Can't open the file");
-                    let error = `${e.message}`;
-                    let logError = `while opening file ${this.file.get_uri()}: ${e.message}`;
+                    const title = _("Can't open the file");
+                    const error = `${e.message}`;
+                    const logError = `while opening file ${this.file.get_uri()}: ${e.message}`;
                     this._logAndPopupError(title, error, logError);
                 }
             }
@@ -472,7 +466,7 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
         );
     }
 
-    _launchAppImageFile(context, fileList) {
+    _launchAppImageFile(_context, _fileList) {
         if (this.trustedAppImageFile) {
             let commandLine = `"${this._execLine}"`;
             if (!this._useSandboxing)
@@ -483,21 +477,21 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
         }
 
         if (this._writableByOthers || !this._attributeCanExecute) {
-            let title = _('Invalid Permissions on AppImage File');
+            const title = _('Invalid Permissions on AppImage File');
             let error = _('This .appimage File has incorrect Permissions. Right Click to edit Properties, then:\n');
-            if (this._writableByOthers) {
+            if (this._writableByOthers)
                 error += _('\n<b>Set Permissions, in "Others Access", "Read Only" or "None"</b>');
-            }
-            if (!this._attributeCanExecute) {
+
+            if (!this._attributeCanExecute)
                 error += _('\n<b>Enable option, "Allow Executing File as a Program"</b>');
-            }
+
             this._showerrorpopup(title, error);
             return;
         }
 
         if (!this.trustedAppImageFile) {
-            let title = 'Untrusted AppImage File';
-            let error = _('This .appimage file is not trusted, it can not be launched. To enable launching, right-click, then:\n\n<b>Enable "Allow Launching"</b>');
+            const title = 'Untrusted AppImage File';
+            const error = _('This .appimage file is not trusted, it can not be launched. To enable launching, right-click, then:\n\n<b>Enable "Allow Launching"</b>');
             this._showerrorpopup(title, error);
         }
     }
@@ -509,28 +503,28 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
         }
 
         if (!this._isValidDesktopFile) {
-            let title = _('Broken Desktop File');
-            let error = _('This .desktop file has errors or points to a program without permissions. It can not be executed.\n\n\t<b>Edit the file to set the correct executable Program.</b>');
+            const title = _('Broken Desktop File');
+            const error = _('This .desktop file has errors or points to a program without permissions. It can not be executed.\n\n\t<b>Edit the file to set the correct executable Program.</b>');
             this._showerrorpopup(title, error);
             return;
         }
 
         if (this._writableByOthers || !this._attributeCanExecute) {
-            let title = _('Invalid Permissions on Desktop File');
+            const title = _('Invalid Permissions on Desktop File');
             let error = _('This .desktop File has incorrect Permissions. Right Click to edit Properties, then:\n');
-            if (this._writableByOthers) {
+            if (this._writableByOthers)
                 error += _('\n<b>Set Permissions, in "Others Access", "Read Only" or "None"</b>');
-            }
-            if (!this._attributeCanExecute) {
+
+            if (!this._attributeCanExecute)
                 error += _('\n<b>Enable option, "Allow Executing File as a Program"</b>');
-            }
+
             this._showerrorpopup(title, error);
             return;
         }
 
         if (!this.trustedDesktopFile) {
-            let title = 'Untrusted Desktop File';
-            let error = _('This .desktop file is not trusted, it can not be launched. To enable launching, right-click, then:\n\n<b>Enable "Allow Launching"</b>');
+            const title = 'Untrusted Desktop File';
+            const error = _('This .desktop file is not trusted, it can not be launched. To enable launching, right-click, then:\n\n<b>Enable "Allow Launching"</b>');
             this._showerrorpopup(title, error);
         }
     }
@@ -543,22 +537,20 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
      * Button Clicks *
      ***********************/
 
-    _doButtonOnePressed(controller, n_press, x, y) {
-        super._doButtonOnePressed(controller, n_press, x, y);
-        if (n_press == 2 && !Prefs.CLICK_POLICY_SINGLE) {
+    _doButtonOnePressed(controller, nPress, x, y) {
+        super._doButtonOnePressed(controller, nPress, x, y);
+        if (nPress === 2 && !Prefs.CLICK_POLICY_SINGLE)
             this.doOpen(controller.get_current_event_time());
-        }
     }
 
-    _doButtonOneReleased(controller, n_press, x, y, state) {
-        super._doButtonOneReleased(controller, n_press, x, y);
+    _doButtonOneReleased(controller, nPress, x, y, state) {
+        super._doButtonOneReleased(controller, nPress, x, y);
         // primaryButtonPressed is TRUE only if the user has pressed the button
         // over an icon, and if (s)he has not started a drag&drop operation
         if (!state.shift && !state.control) {
             this._desktopManager.selected(this, Enums.Selection.RELEASE);
-            if (Prefs.CLICK_POLICY_SINGLE) {
+            if (Prefs.CLICK_POLICY_SINGLE)
                 this.doOpen(controller.get_current_event_time());
-            }
         }
     }
 
@@ -567,13 +559,13 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
      ***********************/
 
     _setDropDestination(dropDestination) {
-        if ((this._fileExtra != Enums.FileType.USER_DIRECTORY_TRASH) &&
-            (this._fileExtra != Enums.FileType.USER_DIRECTORY_HOME) &&
-            (this._fileExtra != Enums.FileType.EXTERNAL_DRIVE) &&
-            (!this._isDirectory) &&
-            (!this.trustedDesktopFile)) {
+        if ((this._fileExtra !== Enums.FileType.USER_DIRECTORY_TRASH) &&
+            (this._fileExtra !== Enums.FileType.USER_DIRECTORY_HOME) &&
+            (this._fileExtra !== Enums.FileType.EXTERNAL_DRIVE) &&
+            !this._isDirectory &&
+            !this.trustedDesktopFile)
             return;
-        }
+
         const dropTarget = new Gtk.DropTargetAsync();
         const validFormats = Gdk.ContentFormats.new(Enums.MIME_TYPES);
         dropTarget.set_actions(Gdk.DragAction.MOVE | Gdk.DragAction.COPY | Gdk.DragAction.ASK);
@@ -589,15 +581,15 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
             return Gdk.DragAction.MOVE;
         });
 
-        this.connectSignal(dropTarget, 'drag-leave', (widget, drop) => {
+        this.connectSignal(dropTarget, 'drag-leave', () => {
             this.unHighLightDropTarget();
         });
 
         this.connectSignal(dropTarget, 'drop', async (widget, drop, x, y) => {
             const dropInfo = await dndClipboardUtils.manageIconDrop(this, drop, x, y);
-            if (dropInfo === null) {
+            if (dropInfo === null)
                 return false;
-            }
+
 
             if (this.trustedDesktopFile) {
                 this.doOpen(null, dropInfo.filelist);
@@ -605,11 +597,10 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
             }
 
             try {
-                if (dropInfo.action === Gdk.DragAction.MOVE) {
+                if (dropInfo.action === Gdk.DragAction.MOVE)
                     DBusUtils.RemoteFileOperations.MoveURIsRemote(dropInfo.filelist, this.uri);
-                } else {
+                else
                     DBusUtils.RemoteFileOperations.CopyURIsRemote(dropInfo.filelist, this.uri);
-                }
             } catch (e) {
                 print(`Error: ${e}\n`);
             }
@@ -637,9 +628,9 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
             this._queryTrashInfoCancellable.cancel();
             this._queryTrashInfoCancellable = null;
         }
-        if (!this._file.query_exists(null)) {
+        if (!this._file.query_exists(null))
             return false;
-        }
+
         this._queryTrashInfoCancellable = new Gio.Cancellable();
 
         this._file.query_info_async(Enums.DEFAULT_ATTRIBUTES,
@@ -654,9 +645,8 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
                         print(`Exception while updating the trash icon: ${e.message}\n${e.stack}`);
                     });
                 } catch (error) {
-                    if (!error.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.CANCELLED)) {
+                    if (!error.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.CANCELLED))
                         print(`Error getting the number of files in the trash: ${error.message}\n${error.stack}`);
-                    }
                 }
             });
         return false;
@@ -668,12 +658,11 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
      ***********************/
 
     onAttributeChanged() {
-        if (this._destroyed) {
+        if (this._destroyed)
             return;
-        }
-        if (this._isDesktopFile) {
+
+        if (this._isDesktopFile)
             this._refreshMetadataAsync(true);
-        }
     }
 
     updatedMetadata() {
@@ -702,9 +691,9 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
     }
 
     doOpen(timestamp, fileList) {
-        if (!fileList) {
+        if (!fileList)
             fileList = [];
-        }
+
         this._doOpenContext(this._getDefaultLaunchContext(timestamp), fileList);
     }
 
@@ -717,8 +706,8 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
          * it.
          */
         if (this.metadataTrusted && !this._attributeCanExecute) {
-            let info = new Gio.FileInfo();
-            let newUnixMode = this._unixmode | Enums.S_IXUSR;
+            const info = new Gio.FileInfo();
+            const newUnixMode = this._unixmode | Enums.S_IXUSR;
             info.set_attribute_uint32(Gio.FILE_ATTRIBUTE_UNIX_MODE, newUnixMode);
             this._file.set_attributes_async(info,
                 Gio.FileQueryInfoFlags.NONE,
@@ -728,9 +717,9 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
                     try {
                         source.set_attributes_finish(result);
                     } catch (error) {
-                        let title = _('Failed to set execution flag');
-                        let err = error.message;
-                        let logError = `${title}: ${err}`;
+                        const title = _('Failed to set execution flag');
+                        const err = error.message;
+                        const logError = `${title}: ${err}`;
                         this._logAndPopupError(title, err, logError);
                     }
                 });
@@ -747,44 +736,44 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
 
     doDiscreteGpu(timestamp) {
         if (!DBusUtils.discreteGpuAvailable) {
-            let title = _('Could not apply discrete GPU environment');
-            let error = 'switcheroo-control not available';
+            const title = _('Could not apply discrete GPU environment');
+            const error = 'switcheroo-control not available';
             this._logAndPopupError(title, error, `${title}: ${error}`);
             return;
         }
-        let gpus = DBusUtils.SwitcherooControl.proxy.GPUs;
+        const gpus = DBusUtils.SwitcherooControl.proxy.GPUs;
         if (!gpus) {
-            let title = _('Could not apply discrete GPU environment');
-            let error = 'No GPUs in list.';
+            const title = _('Could not apply discrete GPU environment');
+            const error = 'No GPUs in list.';
             this._logAndPopupError(title, error, `${title}: ${error}`);
             return;
         }
 
-        for (let gpu in gpus) {
-            if (!gpus[gpu]) {
+        for (const gpu in gpus) {
+            if (!gpus[gpu])
                 continue;
-            }
 
-            let default_variant = gpus[gpu]['Default'];
-            if (!default_variant || default_variant.get_boolean()) {
+
+            const defaultVariant = gpus[gpu]['Default'];
+            if (!defaultVariant || defaultVariant.get_boolean())
                 continue;
-            }
 
-            let env = gpus[gpu]['Environment'];
-            if (!env) {
+
+            const env = gpus[gpu]['Environment'];
+            if (!env)
                 continue;
-            }
 
-            let envS = env.get_strv();
+
+            const envS = env.get_strv();
             const context = this._getDefaultLaunchContext(timestamp);
-            for (let i = 0; i < envS.length; i += 2) {
+            for (let i = 0; i < envS.length; i += 2)
                 context.setenv(envS[i], envS[i + 1]);
-            }
+
             this._doOpenContext(context, null);
             return;
         }
-        let title = _('Could not find discrete GPU data');
-        let error = 'Could not find discrete GPU data in switcheroo-control';
+        const title = _('Could not find discrete GPU data');
+        const error = 'Could not find discrete GPU data in switcheroo-control';
         this._logAndPopupError(title, error, error);
     }
 
@@ -805,29 +794,27 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
     }
 
     get canEject() {
-        if (this._custom) {
+        if (this._custom)
             return this._custom.can_eject();
-        } else {
+        else
             return false;
-        }
     }
 
     get canRename() {
-        return !this.trustedDesktopFile && (this._fileExtra == Enums.FileType.NONE);
+        return !this.trustedDesktopFile && (this._fileExtra === Enums.FileType.NONE);
     }
 
     get canUnmount() {
-        if (this._custom) {
+        if (this._custom)
             return this._custom.can_unmount();
-        } else {
+        else
             return false;
-        }
     }
 
     get displayName() {
-        if (this.trustedDesktopFile) {
+        if (this.trustedDesktopFile)
             return this._desktopFile.get_name();
-        }
+
         return this._displayName || null;
     }
 
@@ -837,8 +824,8 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
 
     set dropCoordinates(pos) {
         try {
-            let info = new Gio.FileInfo();
-            if (pos != null) {
+            const info = new Gio.FileInfo();
+            if (pos !== null) {
                 this._dropCoordinates = [pos[0], pos[1]];
                 info.set_attribute_string('metadata::nautilus-drop-position', `${pos[0]},${pos[1]}`);
             } else {
@@ -868,7 +855,7 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
     }
 
     get isAllSelectable() {
-        return this._fileExtra == Enums.FileType.NONE;
+        return this._fileExtra === Enums.FileType.NONE;
     }
 
     get isDirectory() {
@@ -890,11 +877,11 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
     set metadataTrusted(value) {
         this._trusted = value;
 
-        if (this._setMetadataTrustedCancellable) {
+        if (this._setMetadataTrustedCancellable)
             this._setMetadataTrustedCancellable.cancel();
-        }
+
         this._setMetadataTrustedCancellable = new Gio.Cancellable();
-        let info = new Gio.FileInfo();
+        const info = new Gio.FileInfo();
         info.set_attribute_string('metadata::trusted',
             value ? 'true' : 'false');
         this._file.set_attributes_async(info,
@@ -908,9 +895,9 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
                     this._refreshMetadataAsync(true);
                 } catch (error) {
                     if (!error.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.CANCELLED)) {
-                        let title = _('Failed to set metadata::trusted flag');
-                        let err = error.message;
-                        let logError = `${title}: ${err}`;
+                        const title = _('Failed to set metadata::trusted flag');
+                        const err = error.message;
+                        const logError = `${title}: ${err}`;
                         this._logAndPopupError(title, err, logError);
                     }
                 }
@@ -924,11 +911,11 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
     set metadataUseSandboxing(value) {
         this._useSandboxing = value;
 
-        if (this._setMetadataSandboxingCancellable) {
+        if (this._setMetadataSandboxingCancellable)
             this._setMetadataSandboxingCancellable.cancel();
-        }
+
         this._setMetadataSandboxingCancellable = new Gio.Cancellable();
-        let info = new Gio.FileInfo();
+        const info = new Gio.FileInfo();
         info.set_attribute_string('metadata::nosandbox',
             value ? 'false' : 'true');
         this._file.set_attributes_async(info,
@@ -942,9 +929,9 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
                     this._refreshMetadataAsync(true);
                 } catch (error) {
                     if (!error.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.CANCELLED)) {
-                        let title = _('Failed to set metadata::trusted flag');
-                        let err = error.message;
-                        let logError = `${title}: ${err}`;
+                        const title = _('Failed to set metadata::trusted flag');
+                        const err = error.message;
+                        const logError = `${title}: ${err}`;
                         this._logAndPopupError(title, err, logError);
                     }
                 }
@@ -965,8 +952,8 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
 
     set savedCoordinates(pos) {
         try {
-            let info = new Gio.FileInfo();
-            if (pos != null) {
+            const info = new Gio.FileInfo();
+            if (pos !== null) {
                 this._savedCoordinates = [pos[0], pos[1]];
                 info.set_attribute_string('metadata::nautilus-icon-position', `${pos[0]},${pos[1]}`);
             } else {
@@ -1012,11 +999,10 @@ var FileItem = class extends desktopIconItem.desktopIconItem {
     }
 
     get isStackMarker() {
-        if (this.isStackTop && !this.stackUnique) {
+        if (this.isStackTop && !this.stackUnique)
             return true;
-        } else {
+        else
             return false;
-        }
     }
 };
 Signals.addSignalMethods(FileItem.prototype);

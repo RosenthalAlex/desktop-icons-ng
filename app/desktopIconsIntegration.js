@@ -24,8 +24,8 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
-/*******************************************************************************
+// SPDX-License-Identifier: BSD-1-Clause
+/** *****************************************************************************
  * Integration class
  *
  * This class must be added to other extensions in order to integrate
@@ -55,15 +55,15 @@
  *
  *******************************************************************************/
 'use strict';
-const GLib = imports.gi.GLib;
+import GLib from 'gi://GLib';
 const Main = imports.ui.main;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
 
-const IDENTIFIER_UUID = "130cbc66-235c-4bd6-8571-98d2d8bba5e2";
+const IDENTIFIER_UUID = '130cbc66-235c-4bd6-8571-98d2d8bba5e2';
 
-var DesktopIconsUsableAreaClass = class {
+export var DesktopIconsUsableAreaClass = class {
     constructor() {
         this._extensionManager = Main.extensionManager;
         this._timedMarginsID = 0;
@@ -97,10 +97,10 @@ var DesktopIconsUsableAreaClass = class {
      */
     setMargins(monitor, top, bottom, left, right) {
         this._margins[monitor] = {
-            'top': top,
-            'bottom': bottom,
-            'left': left,
-            'right': right
+            top,
+            bottom,
+            left,
+            right,
         };
         this._changedMargins();
     }
@@ -131,9 +131,9 @@ var DesktopIconsUsableAreaClass = class {
     }
 
     _changedMargins() {
-        if (this._timedMarginsID) {
+        if (this._timedMarginsID)
             GLib.source_remove(this._timedMarginsID);
-        }
+
         this._timedMarginsID = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
             this._sendMarginsToAll();
             this._timedMarginsID = 0;
@@ -156,4 +156,4 @@ var DesktopIconsUsableAreaClass = class {
         if (usableArea?.uuid === IDENTIFIER_UUID)
             usableArea.setMarginsForExtension(Me.uuid, this._margins);
     }
-}
+};

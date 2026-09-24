@@ -15,15 +15,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+// SPDX-License-Identifier: GPL-3.0-only
 'use strict';
-import GLib from 'gi://GLib'
-import Gio from 'gi://Gio'
-import Meta from 'gi://Meta'
-import St from 'gi://St'
+import GLib from 'gi://GLib';
+import Gio from 'gi://Gio';
+import Meta from 'gi://Meta';
+import St from 'gi://St';
 
-import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
+import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 
-import * as Main from 'resource:///org/gnome/shell/ui/main.js'
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
 import * as EmulateX11 from './emulateX11WindowType.js';
 import * as VisibleArea from './visibleArea.js';
@@ -48,9 +49,9 @@ export default class DING extends Extension {
     }
 
     enable() {
-        if (!this.data.x11Manager) {
+        if (!this.data.x11Manager)
             this.data.x11Manager = new EmulateX11.EmulateX11WindowType();
-        }
+
         if (!this.DesktopIconsUsableArea) {
             this.DesktopIconsUsableArea = new VisibleArea.VisibleArea();
             this.data.visibleArea = this.DesktopIconsUsableArea;
@@ -156,11 +157,11 @@ export default class DING extends Extension {
             () => this.updateDesktopGeometry());
 
         this.data.isEnabled = true;
-        if (this.data.launchDesktopId) {
+        if (this.data.launchDesktopId)
             GLib.source_remove(this.data.launchDesktopId);
-        }
 
-        this.data.dbusConnectionId = Gio.bus_own_name(Gio.BusType.SESSION, 'com.rastersoft.dingextension', Gio.BusNameOwnerFlags.NONE, null, (connection, name) => {
+
+        this.data.dbusConnectionId = Gio.bus_own_name(Gio.BusType.SESSION, 'com.rastersoft.dingextension', Gio.BusNameOwnerFlags.NONE, null, connection => {
             this.data.dbusConnection = connection;
 
             this.data.disableTimer = new Gio.SimpleAction({
@@ -169,9 +170,8 @@ export default class DING extends Extension {
             this.data.desktopGeometry = Gio.SimpleAction.new_stateful('desktopGeometry', new GLib.VariantType('av'), this.getDesktopGeometry());
             this.data.desktopGeometry.set_enabled(true);
             this.data.disableTimerId = this.data.disableTimer.connect('activate', () => {
-                if (this.data.currentProcess && this.data.currentProcess.subprocess) {
+                if (this.data.currentProcess && this.data.currentProcess.subprocess)
                     this.data.currentProcess.cancel_timer();
-                }
             });
             this.data.actionGroup = new Gio.SimpleActionGroup();
             this.data.actionGroup.add_action(this.data.disableTimer);
@@ -208,7 +208,7 @@ export default class DING extends Extension {
      *
      */
     updateDesktopGeometry() {
-        if (this.data.actionGroup && (Main.layoutManager.monitors.length != 0)) {
+        if (this.data.actionGroup && (Main.layoutManager.monitors.length !== 0)) {
             this.data.actionGroup.change_action_state('desktopGeometry', this.getDesktopGeometry());
             this.data.x11Manager.refreshWindowsPosition();
         }
@@ -218,18 +218,18 @@ export default class DING extends Extension {
      *
      */
     getDesktopGeometry() {
-        let desktopVariantList = [];
-        let desktopList = [];
+        const desktopVariantList = [];
+        const desktopList = [];
         const ws = global.workspace_manager.get_active_workspace();
-        const { scaleFactor } = St.ThemeContext.get_for_stage(global.stage);
+        const {scaleFactor} = St.ThemeContext.get_for_stage(global.stage);
         for (let monitorIndex = 0; monitorIndex < Main.layoutManager.monitors.length; monitorIndex++) {
-            let area = this.data.visibleArea.getMonitorGeometry(ws, monitorIndex);
-            let monitorData = {
+            const area = this.data.visibleArea.getMonitorGeometry(ws, monitorIndex);
+            const monitorData = {
                 'x': area.x,
                 'y': area.y,
                 'width': area.width,
                 'height': area.height,
-                'scaleFactor': scaleFactor,
+                scaleFactor,
                 'marginTop': area.marginTop,
                 'marginBottom': area.marginBottom,
                 'marginLeft': area.marginLeft,
@@ -241,11 +241,11 @@ export default class DING extends Extension {
                 'windowMarginLeft': area.windowMarginLeft,
                 'windowMarginRight': area.windowMarginRight,
             };
-            /*console.log(`Monitor ${monitorIndex}`);
+            /* console.log(`Monitor ${monitorIndex}`);
             for (let a in monitorData) {
                 console.log(`    ${a}: ${monitorData[a]}`);
             }*/
-            let desktopListElement = new GLib.Variant('a{sd}', monitorData);
+            const desktopListElement = new GLib.Variant('a{sd}', monitorData);
             desktopVariantList.push(desktopListElement);
             desktopList.push(monitorData);
         }
@@ -255,15 +255,15 @@ export default class DING extends Extension {
 
     /**
      *
-     * @param reloadTime
+     * @param {int} reloadTime
      */
     doRelaunch(reloadTime) {
         this.data.currentProcess = null;
         this.data.x11Manager.setWaylandClient(null);
         if (this.data.isEnabled) {
-            if (this.data.launchDesktopId) {
+            if (this.data.launchDesktopId)
                 GLib.source_remove(this.data.launchDesktopId);
-            }
+
             this.data.launchDesktopId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, reloadTime, () => {
                 this.data.launchDesktopId = 0;
                 this.launchDesktop();
@@ -280,7 +280,7 @@ export default class DING extends Extension {
      */
     launchDesktop() {
         console.log('Launching DING process');
-        let argv = [];
+        const argv = [];
         argv.push(GLib.build_filenamev([this.path, 'app', 'ding.js']));
         // Specify that it must work as true desktop
         argv.push('-E');
@@ -303,21 +303,20 @@ export default class DING extends Extension {
         * too fast if it has a bug that makes it fail continuously, avoiding filling the journal too fast.
         */
         this.data.currentProcess.subprocess.wait_async(null, (obj, res) => {
-            let delta = GLib.get_monotonic_time() - this.data.launchTime;
+            const delta = GLib.get_monotonic_time() - this.data.launchTime;
+            // if the process just died after having run for at least one second, reload it ASAP
+            var reloadTime = 1;
             if (delta < 1000000) {
-                // If the process is dying over and over again, ensure that it isn't respawn faster than once per second
-                var reloadTime = 1000;
-            } else {
-                // but if the process just died after having run for at least one second, reload it ASAP
-                var reloadTime = 1;
+                // but if the process is dying over and over again, ensure that it isn't respawn faster than once per second
+                reloadTime = 1000;
             }
             obj.wait_finish(res);
-            if (!this.data.currentProcess || obj !== this.data.currentProcess.subprocess) {
+            if (!this.data.currentProcess || obj !== this.data.currentProcess.subprocess)
                 return;
-            }
-            if (obj.get_if_exited()) {
+
+            if (obj.get_if_exited())
                 obj.get_exit_status();
-            }
+
             this.doRelaunch(reloadTime);
         });
     }
@@ -333,10 +332,10 @@ export default class DING extends Extension {
  * @param {string} process_id An string id for the debug output
  */
 class LaunchSubprocess {
-    constructor(flags, process_id) {
-        this._process_id = process_id;
+    constructor(flags, processId) {
+        this._process_id = processId;
         this.cancellable = new Gio.Cancellable();
-        this._launcher = new Gio.SubprocessLauncher({ flags: flags | Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_MERGE });
+        this._launcher = new Gio.SubprocessLauncher({flags: flags | Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_MERGE});
         this.subprocess = null;
         this.process_running = false;
         this._launch_timer = 0;
@@ -346,7 +345,7 @@ class LaunchSubprocess {
     spawnv(argv) {
         try {
             // New API introduced in https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/4491
-            this._waylandClient = Meta.WaylandClient.new_subprocess (global.context, this._launcher, argv);
+            this._waylandClient = Meta.WaylandClient.new_subprocess(global.context, this._launcher, argv);
             this.subprocess = this._waylandClient.get_subprocess();
         } catch (e) {
             this.subprocess = null;
@@ -369,7 +368,7 @@ class LaunchSubprocess {
                 this.cancel_timer();
             });
             this.process_running = true;
-            if (Main.layoutManager.monitors.length != 0) {
+            if (Main.layoutManager.monitors.length !== 0) {
                 // This ensures that, if the DING window isn't detected in three seconds
                 // after launch, the desktop will be killed and, thus, relaunched again.
                 this._waiting_for_windows = Main.layoutManager.monitors.length;
@@ -384,7 +383,7 @@ class LaunchSubprocess {
     }
 
     cancel_timer() {
-        if (this._launch_timer != 0) {
+        if (this._launch_timer !== 0) {
             GLib.source_remove(this._launch_timer);
             this._launch_timer = 0;
             this._waiting_for_windows = 0;
@@ -396,19 +395,18 @@ class LaunchSubprocess {
     }
 
     read_output() {
-        if (!this._dataInputStream) {
+        if (!this._dataInputStream)
             return;
-        }
+
         this._dataInputStream.read_line_async(GLib.PRIORITY_DEFAULT, this.cancellable, (object, res) => {
             try {
                 const [output, length] = object.read_line_finish_utf8(res);
-                if (length) {
+                if (length)
                     print(`${this._process_id}: ${output}`);
-                }
             } catch (e) {
-                if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.CANCELLED)) {
+                if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.CANCELLED))
                     return;
-                }
+
                 console.error(e, `${this._process_id}_Error`);
             }
 
@@ -422,17 +420,16 @@ class LaunchSubprocess {
      * @param {MetaWindow} window The window to check.
      */
     query_window_belongs_to(window) {
-        if (!this.process_running) {
+        if (!this.process_running)
             return false;
-        }
+
         try {
-            let ownsWindow = this._waylandClient.owns_window(window);
-            if (ownsWindow && (this._launch_timer != 0) && (this._waiting_for_windows != 0)) {
+            const ownsWindow = this._waylandClient.owns_window(window);
+            if (ownsWindow && (this._launch_timer !== 0) && (this._waiting_for_windows !== 0)) {
                 console.log(`Received notification for window. ${this._waiting_for_windows - 1} notifications remaining.`);
                 this._waiting_for_windows--;
-                if (this._waiting_for_windows == 0) {
+                if (this._waiting_for_windows === 0)
                     this.cancel_timer();
-                }
             }
             return ownsWindow;
         } catch (error) {

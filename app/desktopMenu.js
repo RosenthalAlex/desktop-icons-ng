@@ -16,27 +16,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+// SPDX-License-Identifier: GPL-3.0-only
 'use strict';
-const DBusUtils = imports.dbusUtils;
-const GLib = imports.gi.GLib;
-const Gio = imports.gi.Gio;
-const GioUnix = imports.gi.GioUnix;
-const Gtk = imports.gi.Gtk;
-const Gdk = imports.gi.Gdk;
-const Prefs = imports.preferences;
+import * as DBusUtils from './dbusUtils.js';
+import GLib from 'gi://GLib';
+import Gio from 'gi://Gio';
+import GioUnix from 'gi://GioUnix';
+import Gtk from 'gi://Gtk?version=4.0';
+import Gdk from 'gi://Gdk?version=4.0';
+import * as Prefs from './preferences.js';
 
-const TemplatesScriptsManager = imports.templatesScriptsManager;
-const DesktopIconsUtil = imports.desktopIconsUtil;
-const MenuHelper = imports.menuHelper;
-const FileUtils = imports.fileUtils;
-const dndClipboardUtils = imports.dndClipboardUtils;
-const Enums = imports.enums;
+import * as TemplatesScriptsManager from './templatesScriptsManager.js';
+import * as DesktopIconsUtil from './desktopIconsUtil.js';
+import * as MenuHelper from './menuHelper.js';
+import * as Enums from './enums.js';
 
 const Gettext = imports.gettext.domain('ding');
 
 const _ = Gettext.gettext;
 
-var DesktopMenu = class extends MenuHelper.MenuHelper {
+export var DesktopMenu = class extends MenuHelper.MenuHelper {
     constructor(desktopManager, mainApp, dbusManager) {
         super(desktopManager, mainApp);
 
@@ -48,7 +47,9 @@ var DesktopMenu = class extends MenuHelper.MenuHelper {
         );
         this._desktopDir = DesktopIconsUtil.getDesktopDir();
         this._addActions();
-        this._desktopManager.updateClipboard().catch(e => {console.log(`Error updating clipboard: ${e.message}\n${e.stack}`)});
+        this._desktopManager.updateClipboard().catch(e => {
+            console.log(`Error updating clipboard: ${e.message}\n${e.stack}`);
+        });
     }
 
     setClickCoordinates(x, y) {
@@ -58,14 +59,14 @@ var DesktopMenu = class extends MenuHelper.MenuHelper {
 
     _newDocument(menuItem, variantPath) {
         const file = Gio.File.new_for_path(variantPath.get_string()[0]);
-        if ((file == null) || !file.query_exists(null)) {
+        if ((file === null) || !file.query_exists(null))
             return;
-        }
+
 
         const fullName = file.get_basename();
         const finalName = this._desktopManager.getDesktopUniqueFileName(fullName);
 
-        let destination = Gio.File.new_for_path(GLib.build_filenamev([GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP), finalName]));
+        const destination = Gio.File.new_for_path(GLib.build_filenamev([GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP), finalName]));
 
         try {
             file.copy(destination, Gio.FileCopyFlags.NONE, null, null);
@@ -83,7 +84,7 @@ var DesktopMenu = class extends MenuHelper.MenuHelper {
 
     _onOpenDesktopInFilesClicked() {
         const context = Gdk.Display.get_default().get_app_launch_context();
-        //context.set_timestamp(Gtk.get_current_event_time());
+        // context.set_timestamp(Gtk.get_current_event_time());
         Gio.AppInfo.launch_default_for_uri_async(this._desktopDir.get_uri(),
             context, null,
             (source, result) => {
@@ -98,13 +99,13 @@ var DesktopMenu = class extends MenuHelper.MenuHelper {
 
     _addActions() {
         this._addNewAction('changeDesktopIconSettings', null, Prefs.showPreferences);
-        this._addNewAction('new-folder', ["<Control><Shift>n"], () => this._desktopManager.doNewFolder());
+        this._addNewAction('new-folder', ['<Control><Shift>n'], () => this._desktopManager.doNewFolder());
         this._addNewAction('create-template', null, this._newDocument.bind(this), 's');
         this._pasteAction = this._addNewAction('paste', null, () => this._desktopManager.doPaste(false));
-        this._addNewAction('undo', ["<Control>z"], () => {
+        this._addNewAction('undo', ['<Control>z'], () => {
             DBusUtils.RemoteFileOperations.UndoRemote();
         });
-        this._addNewAction('redo', ["<Control><Shift>z"], () => {
+        this._addNewAction('redo', ['<Control><Shift>z'], () => {
             DBusUtils.RemoteFileOperations.RedoRemote();
         });
         this._addNewAction('select-all', null, () => this._desktopManager.selectAll());
@@ -127,14 +128,14 @@ var DesktopMenu = class extends MenuHelper.MenuHelper {
             if (GLib.getenv('XDG_CURRENT_DESKTOP').split(':').includes('ubuntu')) {
                 const desktopFile = GioUnix.DesktopAppInfo.new('gnome-ubuntu-panel.desktop');
                 const context = Gdk.Display.get_default().get_app_launch_context();
-                //context.set_timestamp(Gtk.get_current_event_time());
+                // context.set_timestamp(Gtk.get_current_event_time());
                 desktopFile.launch([], context);
             } else {
                 Prefs.showPreferences();
             }
         });
         this._addNewAction('display-settings', null, () => {
-            let desktopFile = GioUnix.DesktopAppInfo.new('gnome-display-panel.desktop');
+            const desktopFile = GioUnix.DesktopAppInfo.new('gnome-display-panel.desktop');
             const context = Gdk.Display.get_default().get_app_launch_context();
             context.set_timestamp(Gdk.CURRENT_TIME);
             desktopFile.launch([], context);
@@ -143,13 +144,13 @@ var DesktopMenu = class extends MenuHelper.MenuHelper {
 
     async showDesktopMenu(x, y, grid) {
         this._pasteAction.enabled = false;
-        if (this._lastBgMenu != null) {
+        if (this._lastBgMenu !== null)
             this._lastBgMenu.grid.remove(this._lastBgMenu.menuPopover);
-        }
-        let menu = await this._createDesktopBackgroundMenu();
-        let menuPopover = Gtk.PopoverMenu.new_from_model_full(menu, Gtk.PopoverMenuFlags.NESTED);
+
+        const menu = this._createDesktopBackgroundMenu();
+        const menuPopover = Gtk.PopoverMenu.new_from_model_full(menu, Gtk.PopoverMenuFlags.NESTED);
         menuPopover.add_css_class('desktopmenu');
-        let rect = new Gdk.Rectangle();
+        const rect = new Gdk.Rectangle();
         rect.x = x;
         rect.y = y;
         rect.width = 1;
@@ -158,28 +159,28 @@ var DesktopMenu = class extends MenuHelper.MenuHelper {
         grid.put(menuPopover, x, y);
         menuPopover.show();
         menuPopover.popup();
-        this._lastBgMenu = { menuPopover, grid };
+        this._lastBgMenu = {menuPopover, grid};
         this._pasteAction.enabled = await this._desktopManager.updateClipboard();
     }
 
     _syncUndoRedo() {
-        if (!DBusUtils.RemoteFileOperations.isAvailable) {
-            return { undo: false, redo: false };
-        }
+        if (!DBusUtils.RemoteFileOperations.isAvailable)
+            return {undo: false, redo: false};
+
         switch (DBusUtils.RemoteFileOperations.UndoStatus()) {
-            case Enums.UndoStatus.UNDO:
-                return { undo: true, redo: false };
-            case Enums.UndoStatus.REDO:
-                return { undo: false, redo: true };
-            default:
-                return { undo: false, redo: false };
+        case Enums.UndoStatus.UNDO:
+            return {undo: true, redo: false};
+        case Enums.UndoStatus.REDO:
+            return {undo: false, redo: true};
+        default:
+            return {undo: false, redo: false};
         }
     }
 
     _addSortingSubMenu() {
-        let arrangeSubMenu = new Gio.Menu();
+        const arrangeSubMenu = new Gio.Menu();
 
-        let section = this._newSection(arrangeSubMenu);
+        const section = this._newSection(arrangeSubMenu);
         this._newMenuElement(_('Keep Arranged...'), 'keep-arranged', section);
         this._newMenuElement(_('Keep Stacked by type...'), 'keep-stacked', section);
         this._newMenuElement(_('Sort Home/Drives/Trash...'), 'sort-special-folders', section);
@@ -193,44 +194,44 @@ var DesktopMenu = class extends MenuHelper.MenuHelper {
         return arrangeSubMenu;
     }
 
-    async _createDesktopBackgroundMenu() {
-        let menuContainer = new Gio.Menu();
+    _createDesktopBackgroundMenu() {
+        const menuContainer = new Gio.Menu();
         let section = this._newSection(menuContainer);
-        this._newMenuElement(_('New Folder'), "new-folder", section);
+        this._newMenuElement(_('New Folder'), 'new-folder', section);
 
-        let templates = this.templatesMonitor.createMenu();
-        if (templates !== null) {
+        const templates = this.templatesMonitor.createMenu();
+        if (templates !== null)
             section.append_submenu(_('New Document'), templates);
-        }
+
 
         section = this._newSection(menuContainer);
-        this._newMenuElement(_('Paste'), "paste", section);
-        let undoredo = this._syncUndoRedo();
-        if (undoredo.undo) {
-            this._newMenuElement(_('Undo'), "undo", section);
-        }
-        if (undoredo.redo) {
-            this._newMenuElement(_('Redo'), "redo", section);
-        }
+        this._newMenuElement(_('Paste'), 'paste', section);
+        const undoredo = this._syncUndoRedo();
+        if (undoredo.undo)
+            this._newMenuElement(_('Undo'), 'undo', section);
+
+        if (undoredo.redo)
+            this._newMenuElement(_('Redo'), 'redo', section);
+
 
         section = this._newSection(menuContainer);
-        this._newMenuElement(_('Select All'), "select-all", section);
+        this._newMenuElement(_('Select All'), 'select-all', section);
 
         section = this._newSection(menuContainer);
-        this._newMenuElement(_('Arrange Icons'), "arrange-icons", section);
+        this._newMenuElement(_('Arrange Icons'), 'arrange-icons', section);
         section.append_submenu(_('Arrange By...'), this._addSortingSubMenu());
 
         section = this._newSection(menuContainer);
-        this._newMenuElement(_('Show Desktop in Files'), "show-in-files", section);
-        this._newMenuElement(_('Open in Terminal'), "open-in-terminal-desktop", section);
+        this._newMenuElement(_('Show Desktop in Files'), 'show-in-files', section);
+        this._newMenuElement(_('Open in Terminal'), 'open-in-terminal-desktop', section);
 
         section = this._newSection(menuContainer);
-        this._newMenuElement(_('Change Background…'), "change-background", section);
+        this._newMenuElement(_('Change Background…'), 'change-background', section);
 
         section = this._newSection(menuContainer);
-        this._newMenuElement(_('Desktop Icons Settings'), "show-settings", section);
-        this._newMenuElement(_('Display Settings'), "display-settings", section);
+        this._newMenuElement(_('Desktop Icons Settings'), 'show-settings', section);
+        this._newMenuElement(_('Display Settings'), 'display-settings', section);
 
         return menuContainer;
     }
-}
+};

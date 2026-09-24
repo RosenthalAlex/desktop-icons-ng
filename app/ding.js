@@ -1,4 +1,4 @@
-#!/usr/bin/env gjs
+#!/usr/bin/env -S gjs -m
 
 /* DING: Desktop Icons New Generation for GNOME Shell
  *
@@ -17,13 +17,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+// SPDX-License-Identifier: GPL-3.0-only
 'use strict';
-imports.gi.versions.Gtk = '4.0';
-const Gtk = imports.gi.Gtk;
-const Gdk = imports.gi.Gdk;
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
-const Adw = imports.gi.Adw;
+import Gdk from 'gi://Gdk?version=4.0';
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import Adw from 'gi://Adw?version=1';
 
 let desktops = [];
 let lastCommand = null;
@@ -61,80 +60,80 @@ function printUsage() {
 
 /**
  *
- * @param argv
+ * @param {Array} argv
  */
 function parseCommandLine(argv) {
     desktops = [];
     let data;
-    for (let arg of argv) {
-        if (lastCommand == null) {
+    for (const arg of argv) {
+        if (lastCommand === null) {
             switch (arg) {
-                case '-h':
-                case '-H':
-                    printUsage();
-                    errorFound = true;
-                    break;
-                case '-E':
-                    // run it as a true desktop (transparent window and so on)
-                    asDesktop = true;
-                    break;
-                case '-P': // Code path
-                case '-D': // Desktop definition: X:Y:WIDTH:HEIGHT:ZOOM:MARGINTOP:MARGINBOTTOM:MARGINLEFT:MARGINRIGHT:MONITORINDEX
-                case '-M': // Primary monitor
-                    lastCommand = arg;
-                    break;
-                default:
-                    print(`Parameter ${arg} not recognized. Aborting.`);
-                    errorFound = true;
-                    break;
+            case '-h':
+            case '-H':
+                printUsage();
+                errorFound = true;
+                break;
+            case '-E':
+                // run it as a true desktop (transparent window and so on)
+                asDesktop = true;
+                break;
+            case '-P': // Code path
+            case '-D': // Desktop definition: X:Y:WIDTH:HEIGHT:ZOOM:MARGINTOP:MARGINBOTTOM:MARGINLEFT:MARGINRIGHT:MONITORINDEX
+            case '-M': // Primary monitor
+                lastCommand = arg;
+                break;
+            default:
+                print(`Parameter ${arg} not recognized. Aborting.`);
+                errorFound = true;
+                break;
             }
             continue;
         }
-        if (errorFound) {
+        if (errorFound)
             break;
-        }
+
         switch (lastCommand) {
-            case '-P':
-                codePath = arg;
+        case '-P':
+            codePath = arg;
+            break;
+        case '-D':
+            data = arg.split(':');
+            if (data.length !== 10) {
+                print('Incorrect number of parameters for -D\n');
+                printUsage();
+                errorFound = true;
                 break;
-            case '-D':
-                data = arg.split(':');
-                if (data.length != 10) {
-                    print('Incorrect number of parameters for -D\n');
-                    printUsage();
-                    errorFound = true;
-                    break;
-                }
-                if (parseFloat(data[4]) < 1.0) {
-                    print("Error: ZOOM value can't be less than one\n");
-                    printUsage();
-                    errorFound = true;
-                    break;
-                }
-                desktops.push({
-                    x: parseInt(data[0]),
-                    y: parseInt(data[1]),
-                    width: parseInt(data[2]),
-                    height: parseInt(data[3]),
-                    zoom: parseFloat(data[4]),
-                    marginTop: parseInt(data[5]),
-                    marginBottom: parseInt(data[6]),
-                    marginLeft: parseInt(data[7]),
-                    marginRight: parseInt(data[8]),
-                    monitorIndex: parseInt(data[9]),
-                    windowMarginTop: 0,
-                    windowMarginBottom: 0,
-                    windowMarginLeft: 0,
-                    windowMarginRight: 0,
-                });
+            }
+            if (parseFloat(data[4]) < 1.0) {
+                print("Error: ZOOM value can't be less than one\n");
+                printUsage();
+                errorFound = true;
                 break;
-            case '-M':
-                primaryIndex = parseInt(arg);
-                break;
+            }
+            desktops.push({
+                x: parseInt(data[0]),
+                y: parseInt(data[1]),
+                width: parseInt(data[2]),
+                height: parseInt(data[3]),
+                zoom: parseFloat(data[4]),
+                marginTop: parseInt(data[5]),
+                marginBottom: parseInt(data[6]),
+                marginLeft: parseInt(data[7]),
+                marginRight: parseInt(data[8]),
+                monitorIndex: parseInt(data[9]),
+                windowMarginTop: 0,
+                windowMarginBottom: 0,
+                windowMarginLeft: 0,
+                windowMarginRight: 0,
+            });
+            break;
+        case '-M':
+            primaryIndex = parseInt(arg);
+            break;
         }
         lastCommand = null;
     }
-    if ((desktops.length == 0) && !asDesktop) {
+    if ((desktops.length === 0) && !asDesktop) {
         /* if no desktop list is provided, like when launching the program in stand-alone mode,
          * configure a 1280x720 desktop
          */
@@ -152,7 +151,8 @@ function parseCommandLine(argv) {
             windowMarginTop: 0,
             windowMarginBottom: 0,
             windowMarginLeft: 0,
-            windowMarginRight: 0, });
+            windowMarginRight: 0,
+        });
         desktops.push({
             x: 0,
             y: 0,
@@ -167,11 +167,11 @@ function parseCommandLine(argv) {
             windowMarginTop: 0,
             windowMarginBottom: 0,
             windowMarginLeft: 0,
-            windowMarginRight: 0, });
+            windowMarginRight: 0,
+        });
     }
-    for (let desktop of desktops) {
+    for (const desktop of desktops)
         desktop.primaryMonitor = primaryIndex;
-    }
 }
 
 parseCommandLine(ARGV);
@@ -180,28 +180,28 @@ parseCommandLine(ARGV);
 
 imports.searchPath.unshift(codePath);
 
-const DBusUtils = imports.dbusUtils;
-const Prefs = imports.preferences;
+import * as DBusUtils from './dbusUtils.js';
+import * as Prefs from './preferences.js';
 const Gettext = imports.gettext;
-const PromiseUtils = imports.promiseUtils;
+import * as PromiseUtils from './promiseUtils.js';
 
-PromiseUtils._promisify({ keepOriginal: true }, Gio.FileEnumerator.prototype, 'close_async');
-PromiseUtils._promisify({ keepOriginal: true }, Gio.FileEnumerator.prototype, 'next_files_async');
-PromiseUtils._promisify({ keepOriginal: true }, Gio._LocalFilePrototype, 'delete_async');
-PromiseUtils._promisify({ keepOriginal: true }, Gio._LocalFilePrototype, 'enumerate_children_async');
-PromiseUtils._promisify({ keepOriginal: true }, Gio._LocalFilePrototype, 'make_directory_async');
-PromiseUtils._promisify({ keepOriginal: true }, Gio._LocalFilePrototype, 'query_info_async');
-PromiseUtils._promisify({ keepOriginal: true }, Gio._LocalFilePrototype, 'set_attributes_async');
-PromiseUtils._promisify({ keepOriginal: true }, Gdk.Drop.prototype, 'read_async');
-PromiseUtils._promisify({ keepOriginal: true }, Gdk.Drop.prototype, 'read_value_async');
-PromiseUtils._promisify({ keepOriginal: true }, Gdk.Clipboard.prototype, 'read_async');
+PromiseUtils._promisify({keepOriginal: true}, Gio.FileEnumerator.prototype, 'close_async');
+PromiseUtils._promisify({keepOriginal: true}, Gio.FileEnumerator.prototype, 'next_files_async');
+PromiseUtils._promisify({keepOriginal: true}, Gio._LocalFilePrototype, 'delete_async');
+PromiseUtils._promisify({keepOriginal: true}, Gio._LocalFilePrototype, 'enumerate_children_async');
+PromiseUtils._promisify({keepOriginal: true}, Gio._LocalFilePrototype, 'make_directory_async');
+PromiseUtils._promisify({keepOriginal: true}, Gio._LocalFilePrototype, 'query_info_async');
+PromiseUtils._promisify({keepOriginal: true}, Gio._LocalFilePrototype, 'set_attributes_async');
+PromiseUtils._promisify({keepOriginal: true}, Gdk.Drop.prototype, 'read_async');
+PromiseUtils._promisify({keepOriginal: true}, Gdk.Drop.prototype, 'read_value_async');
+PromiseUtils._promisify({keepOriginal: true}, Gdk.Clipboard.prototype, 'read_async');
 
-let localePath = GLib.build_filenamev([codePath, '..', 'locale']);
-if (Gio.File.new_for_path(localePath).query_exists(null)) {
+const localePath = GLib.build_filenamev([codePath, '..', 'locale']);
+if (Gio.File.new_for_path(localePath).query_exists(null))
     Gettext.bindtextdomain('ding', localePath);
-}
 
-const DesktopManager = imports.desktopManager;
+
+import * as DesktopManager from './desktopManager.js';
 
 var desktopManager = null;
 var dbusManager = null;
@@ -233,23 +233,25 @@ dingApp.connect('command-line', (app, commandLine) => {
     argv = commandLine.get_arguments();
     parseCommandLine(argv);
     if (!errorFound) {
-        if (commandLine.get_is_remote()) {
+        if (commandLine.get_is_remote())
             desktopManager.updateGridWindows(desktops);
-        } else {
+        else
             dingApp.activate();
-        }
+
         commandLine.set_exit_status(0);
     } else {
         commandLine.set_exit_status(1);
     }
 });
 
-if (!errorFound) {
+if (!errorFound)
     dingApp.run(ARGV);
-}
 
-if (!errorFound) {
+
+if (!errorFound)
+    // eslint-disable-next-line
     0;
-} else {
+else
+    // eslint-disable-next-line
     1;
-}
+

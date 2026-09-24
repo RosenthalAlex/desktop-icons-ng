@@ -15,14 +15,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+// SPDX-License-Identifier: GPL-3.0-only
 'use strict';
-const Gtk = imports.gi.Gtk;
-const DesktopIconsUtil = imports.desktopIconsUtil;
+import Gtk from 'gi://Gtk?version=4.0';
+import * as DesktopIconsUtil from './desktopIconsUtil.js';
 const Gettext = imports.gettext.domain('ding');
 
 const _ = Gettext.gettext;
 
-var ShowErrorPopup = class {
+export var ShowErrorPopup = class {
     constructor(text, secondaryText, modal) {
         this._window = new Gtk.MessageDialog({
             transient_for: null,
@@ -43,9 +44,8 @@ var ShowErrorPopup = class {
             this._window.destroy();
             this._window = null;
         });
-        if (modal) {
+        if (modal)
             this._window.show();
-        }
     }
 
     run() {
@@ -55,8 +55,7 @@ var ShowErrorPopup = class {
 
     async timeoutClose(time) {
         await DesktopIconsUtil.waitDelayMs(time);
-        if (this._window) {
+        if (this._window)
             this.deleteButton.activate();
-        }
     }
 };

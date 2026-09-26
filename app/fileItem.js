@@ -140,16 +140,15 @@ export var FileItem = class extends desktopIconItem.desktopIconItem {
                 emblem = Gio.ThemedIcon.new('emblem-symbolic-link');
         }
 
-        if (emblem === null) {
+        if (emblem === null)
             return null;
-        }
 
         return [
             {
                 icon: emblem,
                 size: 3,
                 position: Enums.EmblemPosition.TOP_LEFT,
-            }
+            },
         ];
     }
 

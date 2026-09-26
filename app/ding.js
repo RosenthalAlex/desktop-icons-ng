@@ -220,10 +220,10 @@ dingApp.connect('startup', () => {
 
 dingApp.connect('activate', () => {
     if (!desktopManager) {
-        const icons_path = GLib.build_filenamev([codePath, 'icons']);
+        const iconsPath = GLib.build_filenamev([codePath, 'icons']);
         const display = Gdk.Display.get_default();
-        const icons_theme = Gtk.IconTheme.get_for_display(display);
-        icons_theme.add_search_path(icons_path);
+        const iconsTheme = Gtk.IconTheme.get_for_display(display);
+        iconsTheme.add_search_path(iconsPath);
         desktopManager = new DesktopManager.DesktopManager(dingApp,
             dbusManager,
             desktops,

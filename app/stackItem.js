@@ -62,7 +62,7 @@ export var stackItem = class extends desktopIconItem.desktopIconItem {
                     icon: Gio.content_type_get_icon(this._attributeContentType),
                     size: 2,
                     position: Enums.EmblemPosition.BOTTOM_RIGHT,
-                }
+                },
             ];
         }
         return null;

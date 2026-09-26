@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ding\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-05 08:41+0200\n"
-"PO-Revision-Date: 2026-01-21 17:26+0100\n"
+"PO-Revision-Date: 2026-09-26 13:00+0200\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: \n"
 "Language: oc\n"
@@ -16,22 +16,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #: app/askRenamePopup.js:54
-#, fuzzy
 msgid "Rename folder"
-msgstr "Repertòri novèl"
+msgstr "Renomenar lo dossièr"
 
 #: app/askRenamePopup.js:54
-#, fuzzy
 msgid "Rename file"
-msgstr "Renomenar"
+msgstr "Renomenar lo fichièr"
 
 #: app/askRenamePopup.js:64
-#, fuzzy
 msgid "New filename"
-msgstr "Nom de fichièr"
+msgstr "Nom novèl del fichièr"
 
 #: app/askRenamePopup.js:69 app/autoAr.js:307 app/autoAr.js:559
 #: app/desktopManager.js:1036
@@ -297,18 +294,16 @@ msgid "Can't open the file"
 msgstr "Impossible de dobrir lo fichièr"
 
 #: app/fileItem.js:486
-#, fuzzy
 msgid "Invalid Permissions on AppImage File"
-msgstr "Autorizacion invalida sul fichièr de burèu"
+msgstr "Autorizacion invalida sul fichièr AppImage"
 
 #: app/fileItem.js:487
-#, fuzzy
 msgid ""
 "This .appimage File has incorrect Permissions. Right Click to edit "
 "Properties, then:\n"
 msgstr ""
-"Aqueste fichièr .desktop a d’autorizacions incorrèctas. Fasètz clicatz drech "
-"per modificar las proprietats, puèi :\n"
+"Aqueste fichièr .appimage a d’autorizacions incorrèctas. Fasètz clicatz "
+"drech per modificar las proprietats, puèi :\n"
 
 #: app/fileItem.js:489 app/fileItem.js:522
 msgid ""
@@ -328,15 +323,14 @@ msgstr ""
 "<b>Activar l’opcion, « Permetre d’executar lo fichièr coma programa »</b>"
 
 #: app/fileItem.js:500
-#, fuzzy
 msgid ""
 "This .appimage file is not trusted, it can not be launched. To enable "
 "launching, right-click, then:\n"
 "\n"
 "<b>Enable \"Allow Launching\"</b>"
 msgstr ""
-"Aqueste fichièr .desktop es pas fisable, se pòt pas lançar. Per autorizar "
-"son lançament, fasètz clic drech puèi :\n"
+"Aqueste fichièr .appimage es pas fisable, se pòt pas lançar. Per autorizar "
+"son lançament, fasètz clic drech puèi :\n"
 "\n"
 "<b>Activar « Autorizar lo lançament »</b>"
 
@@ -458,11 +452,11 @@ msgstr "Permetre l'aviada"
 
 #: app/fileItemMenu.js:344
 msgid "Don't use sandboxing"
-msgstr ""
+msgstr "Utilizar pas l’isolament"
 
 #: app/fileItemMenu.js:344
 msgid "Use sandboxing if available"
-msgstr ""
+msgstr "Utilizar l’isolament se disponible"
 
 #: app/fileItemMenu.js:358
 msgid "Empty Trash"
@@ -710,17 +704,15 @@ msgid "Always"
 msgstr "Totjorn"
 
 #: app/thumbnails.js:38
-#, fuzzy
 msgid "GnomeDesktop-4.0 GIR file not found"
-msgstr "Fichièr GnomeDesktop-3.0 GIR non trobat"
+msgstr "Fichièr GnomeDesktop-4.0 GIR non trobat"
 
 #: app/thumbnails.js:39
-#, fuzzy
 msgid ""
 "GnomeDesktop-4.0.gir file is missing. Please, install the required package "
 "in your system."
 msgstr ""
-"Lo fichièr GnomeDesktop-3.0 GIR es mancant. Mercés d’installar lo paquet "
+"Lo fichièr GnomeDesktop-4.0 GIR es mancant. Mercés d’installar lo paquet "
 "requerit dins lo sistèma."
 
 #: schemas/org.gnome.shell.extensions.ding.gschema.xml:25

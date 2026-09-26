@@ -36,6 +36,11 @@ install_data([
     'stylesheet.css',
     'templatesScriptsManager.js',
     'thumbnails.js',
+    'icons/hicolor/icon-theme.cache',
+    'icons/hicolor/index.theme',
+    'icons/hicolor/scalable/emblems/close-stack.svg',
+    'icons/hicolor/scalable/emblems/open-stack.svg',
   ],
-  install_dir: extensions_dir
+  install_dir: extensions_dir,
+  preserve_path: true
 )

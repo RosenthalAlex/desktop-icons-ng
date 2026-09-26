@@ -121,23 +121,36 @@ export var FileItem = class extends desktopIconItem.desktopIconItem {
         }
     }
 
-    _getEmblem() {
-        if (this._isSymlink && (Prefs.showLinkEmblem || this._isBrokenSymlink)) {
-            if (this._isBrokenSymlink)
-                return Gio.ThemedIcon.new('emblem-unreadable');
-            else
-                return Gio.ThemedIcon.new('emblem-symbolic-link');
-        }
-        if (this._isDesktopFile && (!this._isValidDesktopFile || !this.trustedDesktopFile))
-            return Gio.ThemedIcon.new('emblem-unreadable');
-
-        if (this._isAppImageFile && !this.trustedAppImageFile)
-            return Gio.ThemedIcon.new('emblem-unreadable');
+    _getEmblems() {
+        let emblem = null;
 
         if (this._isAppImageFile && !this._useSandboxing)
-            return Gio.ThemedIcon.new('dialog-warning');
+            emblem = Gio.ThemedIcon.new('dialog-warning');
 
-        return null;
+        if (this._isAppImageFile && !this.trustedAppImageFile)
+            emblem = Gio.ThemedIcon.new('emblem-unreadable');
+
+        if (this._isDesktopFile && (!this._isValidDesktopFile || !this.trustedDesktopFile))
+            emblem = Gio.ThemedIcon.new('emblem-unreadable');
+
+        if (this._isSymlink && (Prefs.showLinkEmblem || this._isBrokenSymlink)) {
+            if (this._isBrokenSymlink)
+                emblem = Gio.ThemedIcon.new('emblem-unreadable');
+            else
+                emblem = Gio.ThemedIcon.new('emblem-symbolic-link');
+        }
+
+        if (emblem === null) {
+            return null;
+        }
+
+        return [
+            {
+                icon: emblem,
+                size: 3,
+                position: Enums.EmblemPosition.TOP_LEFT,
+            }
+        ];
     }
 
     setAccessibleName(filename) {

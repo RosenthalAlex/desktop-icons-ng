@@ -20,6 +20,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 'use strict';
 import Gdk from 'gi://Gdk?version=4.0';
+import Gtk from 'gi://Gtk?version=4.0';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import Adw from 'gi://Adw?version=1';
@@ -219,6 +220,10 @@ dingApp.connect('startup', () => {
 
 dingApp.connect('activate', () => {
     if (!desktopManager) {
+        const icons_path = GLib.build_filenamev([codePath, 'icons']);
+        const display = Gdk.Display.get_default();
+        const icons_theme = Gtk.IconTheme.get_for_display(display);
+        icons_theme.add_search_path(icons_path);
         desktopManager = new DesktopManager.DesktopManager(dingApp,
             dbusManager,
             desktops,

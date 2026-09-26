@@ -24,6 +24,8 @@ import Gtk from 'gi://Gtk?version=4.0';
 import Gdk from 'gi://Gdk?version=4.0';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
+import Graphene from 'gi://Graphene';
+import Gsk from 'gi://Gsk';
 import Pango from 'gi://Pango';
 
 import * as dndClipboardUtils from './dndClipboardUtils.js';
@@ -565,22 +567,36 @@ export var desktopIconItem = class desktopIconItem extends SignalManager.SignalM
     }
 
     _addEmblemsToIconIfNeeded(iconPaintable) {
-        const emblem = this._getEmblem();
+        const emblems = this._getEmblems();
 
-        if (emblem) {
-            const scale = this._icon.get_scale_factor();
-            const finalSize = Math.floor(Prefs.getIconSize() / 3) * scale;
-            const theme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
-            const emblemIcon = theme.lookup_by_gicon(emblem, finalSize / scale, scale, Gtk.TextDirection.NONE, Gtk.IconLookupFlags.FORCE_SIZE);
-            const emblemSnapshot = Gtk.Snapshot.new();
-            const iconPaintableSnapshot = Gtk.Snapshot.new();
-            emblemIcon.snapshot(emblemSnapshot, emblemIcon.get_intrinsic_width(), emblemIcon.get_intrinsic_height());
-            iconPaintable.snapshot(iconPaintableSnapshot, iconPaintable.get_intrinsic_width(), iconPaintable.get_intrinsic_height());
-            iconPaintableSnapshot.append_node(emblemSnapshot.to_node());
-            return iconPaintableSnapshot.to_paintable(null);
-        } else {
+        if (emblems === null)
             return iconPaintable;
+
+        const iconWidth = iconPaintable.get_intrinsic_width();
+        const iconHeight = iconPaintable.get_intrinsic_height();
+        const iconPaintableSnapshot = Gtk.Snapshot.new();
+        iconPaintable.snapshot(iconPaintableSnapshot, iconWidth, iconHeight);
+
+        for (const emblem of emblems) {
+            const scale = this._icon.get_scale_factor();
+            const finalSize = Math.floor(Prefs.getIconSize() / emblem.size);
+            const theme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
+            const emblemIcon = theme.lookup_by_gicon(emblem.icon, finalSize, scale, Gtk.TextDirection.NONE, Gtk.IconLookupFlags.FORCE_SIZE);
+            const emblemSnapshot = Gtk.Snapshot.new();
+            const emblemWidth = emblemIcon.get_intrinsic_width();
+            const emblemHeight = emblemIcon.get_intrinsic_height();
+            emblemIcon.snapshot(emblemSnapshot, emblemWidth, emblemHeight);
+            let node = emblemSnapshot.to_node();
+            if (emblem.position !== Enums.EmblemPosition.TOP_LEFT) {
+                const point = new Graphene.Point();
+                point.x = iconWidth - emblemWidth;
+                point.y = iconHeight - emblemHeight;
+                const translation = new Gsk.Transform().translate(point);
+                node = new Gsk.TransformNode(node, translation);
+            }
+            iconPaintableSnapshot.append_node(node);
         }
+        return iconPaintableSnapshot.to_paintable(null);
     }
 
     _createEmblemedIcon(icon, iconName) {

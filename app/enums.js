@@ -93,6 +93,11 @@ export var CompressionType = {
     ENCRYPTED_ZIP: 3,
 };
 
+export var EmblemPosition = {
+    TOP_LEFT: 0,
+    BOTTOM_RIGHT: 1,
+};
+
 export var DndTargetInfo = {
     DING_ICON_LIST: 'x-special/ding-icon-list',
     GNOME_ICON_LIST: 'x-special/gnome-icon-list',

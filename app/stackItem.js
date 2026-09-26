@@ -24,8 +24,8 @@ import Gtk from 'gi://Gtk?version=4.0';
 import Gio from 'gi://Gio';
 
 import * as desktopIconItem from './desktopIconItem.js';
-
 import * as Prefs from './preferences.js';
+import * as Enums from './enums.js';
 
 const Signals = imports.signals;
 const Gettext = imports.gettext.domain('ding');
@@ -49,9 +49,22 @@ export var stackItem = class extends desktopIconItem.desktopIconItem {
         this.setAccessibleName(this._getVisibleName());
     }
 
-    _getEmblem() {
-        if (!this.stackUnique)
-            return Gio.ThemedIcon.new('list-add');
+    _getEmblems() {
+        if (!this.stackUnique) {
+            const emblem = Prefs.getUnstackList().includes(this._attributeContentType) ? 'close-stack' : 'open-stack';
+            return [
+                {
+                    icon: Gio.ThemedIcon.new(emblem),
+                    size: 3,
+                    position: Enums.EmblemPosition.TOP_LEFT,
+                },
+                {
+                    icon: Gio.content_type_get_icon(this._attributeContentType),
+                    size: 2,
+                    position: Enums.EmblemPosition.BOTTOM_RIGHT,
+                }
+            ];
+        }
         return null;
     }
 

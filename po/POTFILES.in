@@ -7,6 +7,7 @@ app/desktopIconItem.js
 app/desktopIconsIntegration.js
 app/desktopIconsUtil.js
 app/desktopManager.js
+app/desktopMenu.js
 app/ding.js
 emulateX11WindowType.js
 app/enums.js
@@ -14,6 +15,7 @@ extension.js
 app/fileItem.js
 app/fileItemMenu.js
 app/fileUtils.js
+app/menuHelper.js
 app/notifyX11UnderWayland.js
 app/preferences.js
 prefs.js

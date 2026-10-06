@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: desktop-icons master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-05 08:41+0200\n"
-"PO-Revision-Date: 2022-10-03 18:57+0200\n"
+"PO-Revision-Date: 2026-10-06 11:06+0200\n"
 "Last-Translator: Davy Defaud <davy.defaud@free.fr>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "Language: fr\n"
@@ -17,22 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n >= 2);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.9\n"
 
 #: app/askRenamePopup.js:54
-#, fuzzy
 msgid "Rename folder"
-msgstr "Nouveau dossier"
+msgstr "Renommer le dossier"
 
 #: app/askRenamePopup.js:54
-#, fuzzy
 msgid "Rename file"
-msgstr "Renommer"
+msgstr "Renommer le fichier"
 
 #: app/askRenamePopup.js:64
-#, fuzzy
 msgid "New filename"
-msgstr "Nom du fichier"
+msgstr "Nouveau nom de fichier"
 
 #: app/askRenamePopup.js:69 app/autoAr.js:307 app/autoAr.js:559
 #: app/desktopManager.js:1036
@@ -74,7 +71,7 @@ msgstr "Veuillez saisir un mot de passe"
 
 #: app/autoAr.js:353
 msgid "Removing partial file '${outputFile}'"
-msgstr "Suppression du fichier « ${outputFile} »"
+msgstr "Suppression du fichier « ${outputFile} »"
 
 #: app/autoAr.js:372
 msgid "Creating destination folder"
@@ -82,7 +79,7 @@ msgstr "Création du dossier de destination"
 
 #: app/autoAr.js:404
 msgid "Extracting files into '${outputPath}'"
-msgstr "Extraction des fichiers dans « ${outputPath} »"
+msgstr "Extraction des fichiers dans « ${outputPath} »"
 
 #: app/autoAr.js:436
 msgid "Extraction completed"
@@ -90,7 +87,7 @@ msgstr "Extraction terminée"
 
 #: app/autoAr.js:437
 msgid "Extracting '${fullPathFile}' has been completed."
-msgstr "L’extraction de l’archive « ${fullPathFile} » est terminée."
+msgstr "L’extraction de l’archive « ${fullPathFile} » est terminée."
 
 #: app/autoAr.js:443
 msgid "Extraction cancelled"
@@ -99,7 +96,7 @@ msgstr "Extraction annulée"
 #: app/autoAr.js:444
 msgid "Extracting '${fullPathFile}' has been cancelled by the user."
 msgstr ""
-"L’extraction de l’archive « ${fullPathFile} » a été annulée par "
+"L’extraction de l’archive « ${fullPathFile} » a été annulée par "
 "l’utilisateur."
 
 #: app/autoAr.js:454
@@ -112,7 +109,7 @@ msgstr "Erreur durant l’extraction"
 
 #: app/autoAr.js:486
 msgid "Compressing files into '${outputFile}'"
-msgstr "Compression des fichiers dans « ${outputFile} »"
+msgstr "Compression des fichiers dans « ${outputFile} »"
 
 #: app/autoAr.js:499
 msgid "Compression completed"
@@ -120,7 +117,7 @@ msgstr "Compression terminée"
 
 #: app/autoAr.js:500
 msgid "Compressing files into '${outputFile}' has been completed."
-msgstr "La compression des fichiers dans « ${outputFile} » est terminée."
+msgstr "La compression des fichiers dans « ${outputFile} » est terminée."
 
 #: app/autoAr.js:504 app/autoAr.js:511
 msgid "Cancelled compression"
@@ -128,12 +125,12 @@ msgstr "Compression annulée"
 
 #: app/autoAr.js:505
 msgid "The output file '${outputFile}' already exists."
-msgstr "Il existe déjà un fichier « ${outputFile} »."
+msgstr "Il existe déjà un fichier « ${outputFile} »."
 
 #: app/autoAr.js:512
 msgid "Compressing files into '${outputFile}' has been cancelled by the user."
 msgstr ""
-"La compression des fichiers dans « ${outputFile} » a été annulée par "
+"La compression des fichiers dans « ${outputFile} » a été annulée par "
 "l’utilisateur."
 
 #: app/autoAr.js:515
@@ -176,7 +173,7 @@ msgstr ""
 
 #: app/dbusUtils.js:73
 msgid "\"${programName}\" is needed for Desktop Icons"
-msgstr "L’extension Desktop Icons requiert l’application « ${programName} »"
+msgstr "L’extension Desktop Icons requiert l’application « ${programName} »"
 
 #: app/dbusUtils.js:74
 msgid ""
@@ -184,7 +181,7 @@ msgid ""
 "{programName}\" in your system."
 msgstr ""
 "Cette fonctionnalité de l’extension Desktop Icons nécessite l’installation "
-"de « ${programName} » sur votre système."
+"de « ${programName} » sur votre système."
 
 #: app/desktopIconsUtil.js:170
 msgid "Command not found"
@@ -198,7 +195,7 @@ msgstr "Gestionnaire de fichiers Nautilus introuvable"
 msgid "The Nautilus File Manager is mandatory to work with Desktop Icons NG."
 msgstr ""
 "Le gestionnaire de fichiers Nautilus est indispensable au fonctionnement de "
-"Desktop Icons NG."
+"Desktop Icons NG."
 
 #: app/desktopManager.js:935
 msgid "Clear Current Selection before New Search"
@@ -213,14 +210,12 @@ msgid "New Folder"
 msgstr "Nouveau dossier"
 
 #: app/desktopManager.js:1726
-#, fuzzy
 msgid "Folder Creation Failed"
-msgstr "Nom du dossier"
+msgstr "Echec de la création du dossier"
 
 #: app/desktopManager.js:1727
-#, fuzzy
 msgid "Error while trying to create a Folder"
-msgstr "Erreur lors de la suppression des fichiers"
+msgstr "Erreur lors de la création d'un dossier"
 
 #. * TRANSLATORS: when using a screen reader, this is the text read when the user's personal folder is
 #. * highlighted.
@@ -232,16 +227,15 @@ msgstr "Dossier personnel"
 #. * TRANSLATORS: when using a screen reader, this is the text read when the trash folder is
 #. * highlighted.
 #: app/fileItem.js:152
-#, fuzzy
 msgid "Trash"
-msgstr "Vider la corbeille"
+msgstr "Corbeille"
 
 #. * TRANSLATORS: when using a screen reader, this is the role used when an external drive is
 #. * highlighted. Example: if a USB stick named "my_portable" is highlighted, it will say "my_portable Drive".
 #. * It is mandatory to say the file name first and the role after.
 #: app/fileItem.js:160
 msgid "${VisibleName} Drive"
-msgstr ""
+msgstr "${VisibleName} Disque"
 
 #. * TRANSLATORS: when using a screen reader, this is the role used when an external drive is
 #. * highlighted and selected. Example: if a USB stick named "my_portable" is highlighted and selected, it
@@ -249,53 +243,52 @@ msgstr ""
 #. * finally "Selected".
 #: app/fileItem.js:165
 msgid "${VisibleName} Drive Selected"
-msgstr ""
+msgstr "${VisibleName} Disque sélectionné"
 
 #. * TRANSLATORS: when using a screen reader, this is the role used when a folder is
 #. * highlighted. Example: if a folder named "things" is highlighted, it will say "things Folder".
 #. * It is mandatory to say the file name first and the role after.
 #: app/fileItem.js:171
 msgid "${VisibleName} Folder"
-msgstr ""
+msgstr "${VisibleName} Dossier"
 
 #. * TRANSLATORS: when using a screen reader, this is the role used when a folder is
 #. * highlighted and selected. Example: if a folder named "things" is highlighted and selected, it will say
 #. * "things Folder Selected". It is mandatory to say the file name first, then the role, and finally "Selected".
 #: app/fileItem.js:175
 msgid "${VisibleName} Folder Selected"
-msgstr ""
+msgstr "${VisibleName} Dossier sélectionné"
 
 #. * TRANSLATORS: when using a screen reader, this is the role used when a trusted desktop file is
 #. * highlighted. Example: if a desktop file named "My App" is highlighted and it is trusted, it will
 #. * say "My App Application". It is mandatory to say the file name first and the role after.
 #: app/fileItem.js:181
 msgid "${VisibleName} Application"
-msgstr ""
+msgstr "${VisibleName} Application"
 
 #. * TRANSLATORS: when using a screen reader, this is the role used when a trusted desktop file is
 #. * highlighted. Example: if a desktop file named "My App" is highlighted and selected and it is trusted, it will
 #. * say "My App Application Selected". It is mandatory to say the file name first and the role after.
 #: app/fileItem.js:185
 msgid "${VisibleName} Application Selected"
-msgstr ""
+msgstr "${VisibleName} Application sélectionnée"
 
 #. * TRANSLATORS: when using a screen reader, this is the text read when a normal file is
 #. * highlighted. Example: if a file named "my_picture.jpg" is highlighted, it will say "my_picture.jpg File"
 #: app/fileItem.js:191
 msgid "${VisibleName} File"
-msgstr ""
+msgstr "${VisibleName} Fichier"
 
 #. * TRANSLATORS: when using a screen reader, this is the text read when a normal file is highlighted and
 #. * selected. Example: if a file named "my_picture.jpg" is highlighted and selected, it will say
 #. * "my_picture.jpg File Selected". It is mandatory to say the file name first and the role after.
 #: app/fileItem.js:195
 msgid "${VisibleName} File Selected"
-msgstr ""
+msgstr "${VisibleName} Fichier sélectionné"
 
 #: app/fileItem.js:364
-#, fuzzy
 msgid "Error while reading Desktop file"
-msgstr "Erreur lors de la suppression des fichiers"
+msgstr "Erreur lors de la lecture du fichier .desktop"
 
 #: app/fileItem.js:421
 msgid "Broken Link"
@@ -308,23 +301,20 @@ msgstr ""
 "cible n’existe plus"
 
 #: app/fileItem.js:458
-#, fuzzy
 msgid "Can't open the file"
-msgstr "Exécuter le fichier"
+msgstr "Impossible d'ouvrir le fichier"
 
 #: app/fileItem.js:486
-#, fuzzy
 msgid "Invalid Permissions on AppImage File"
-msgstr "Permissions du fichier XDG Desktop incorrectes"
+msgstr "Erreur lors de la lecture du fichier .desktop"
 
 #: app/fileItem.js:487
-#, fuzzy
 msgid ""
 "This .appimage File has incorrect Permissions. Right Click to edit "
 "Properties, then:\n"
 msgstr ""
-"Ce fichier XDG Desktop a des permissions incorrectes. Veuillez modifier ses "
-"propriétés en cliquant sur le bouton droit, puis :\n"
+"Ce fichier .appimage a des permissions incorrectes. Veuillez modifier ses "
+"propriétés en cliquant sur le bouton droit, puis :\n"
 
 #: app/fileItem.js:489 app/fileItem.js:522
 msgid ""
@@ -332,8 +322,8 @@ msgid ""
 "<b>Set Permissions, in \"Others Access\", \"Read Only\" or \"None\"</b>"
 msgstr ""
 "\n"
-"<b>- définissez le droit d’accès dans les permissions pour « autres » à "
-"« lecture seule » ou « aucun » ;</b>"
+"<b>- définissez le droit d’accès dans les permissions pour « autres » à "
+"« lecture seule » ou « aucun » ;</b>"
 
 #: app/fileItem.js:492 app/fileItem.js:525
 msgid ""
@@ -341,11 +331,10 @@ msgid ""
 "<b>Enable option, \"Allow Executing File as a Program\"</b>"
 msgstr ""
 "\n"
-"<b>- activez l’option, « Autoriser l’exécution du fichier comme un "
-"programme ».</b>"
+"<b>- activez l’option, « Autoriser l’exécution du fichier comme un "
+"programme ».</b>"
 
 #: app/fileItem.js:500
-#, fuzzy
 msgid ""
 "This .appimage file is not trusted, it can not be launched. To enable "
 "launching, right-click, then:\n"
@@ -353,9 +342,9 @@ msgid ""
 "<b>Enable \"Allow Launching\"</b>"
 msgstr ""
 "Ce fichier XDG Desktop n’a pas l’autorisation d’être exécuté. Afin de le "
-"rendre exécutable, cliquez sur le bouton droit, puis :\n"
+"rendre exécutable, cliquez sur le bouton droit, puis :\n"
 "\n"
-"<b>Activez « Autoriser l’exécution »</b>"
+"<b>Activez « Autoriser l’exécution »</b>"
 
 #: app/fileItem.js:512
 msgid "Broken Desktop File"
@@ -384,7 +373,7 @@ msgid ""
 "Properties, then:\n"
 msgstr ""
 "Ce fichier XDG Desktop a des permissions incorrectes. Veuillez modifier ses "
-"propriétés en cliquant sur le bouton droit, puis :\n"
+"propriétés en cliquant sur le bouton droit, puis :\n"
 
 #: app/fileItem.js:533
 msgid ""
@@ -394,21 +383,22 @@ msgid ""
 "<b>Enable \"Allow Launching\"</b>"
 msgstr ""
 "Ce fichier XDG Desktop n’a pas l’autorisation d’être exécuté. Afin de le "
-"rendre exécutable, cliquez sur le bouton droit, puis :\n"
+"rendre exécutable, cliquez sur le bouton droit, puis :\n"
 "\n"
-"<b>Activez « Autoriser l’exécution »</b>"
+"<b>Activez « Autoriser l’exécution »</b>"
 
 #: app/fileItem.js:731
 msgid "Failed to set execution flag"
 msgstr ""
 
 #: app/fileItem.js:750 app/fileItem.js:757
+#, fuzzy
 msgid "Could not apply discrete GPU environment"
-msgstr ""
+msgstr "Impossible d'appliquer l'environnement de GPU discret"
 
 #: app/fileItem.js:786
 msgid "Could not find discrete GPU data"
-msgstr ""
+msgstr "Données de GPU discret introuvables"
 
 #: app/fileItem.js:911 app/fileItem.js:945
 msgid "Failed to set metadata::trusted flag"
@@ -476,11 +466,11 @@ msgstr "Autoriser l’exécution"
 
 #: app/fileItemMenu.js:344
 msgid "Don't use sandboxing"
-msgstr ""
+msgstr "Ne pas utiliser de sandboxing"
 
 #: app/fileItemMenu.js:344
 msgid "Use sandboxing if available"
-msgstr ""
+msgstr "Utiliser le sandboxing quand disponible"
 
 #: app/fileItemMenu.js:358
 msgid "Empty Trash"
@@ -509,8 +499,8 @@ msgstr "Envoyer vers…"
 #: app/fileItemMenu.js:423
 msgid "Compress {0} folder"
 msgid_plural "Compress {0} folders"
-msgstr[0] "Compresser {0} fichier"
-msgstr[1] "Compresser {0} fichiers"
+msgstr[0] "Compresser {0} fichier"
+msgstr[1] "Compresser {0} fichiers"
 
 #: app/fileItemMenu.js:432
 msgid "Compress {0} file"
@@ -545,13 +535,12 @@ msgid "Open in Terminal"
 msgstr "Ouvrir un terminal"
 
 #: app/fileItemMenu.js:546
-#, fuzzy
 msgid "No Extraction Folder"
-msgstr "Extraction terminée"
+msgstr "Pas de dossier d'extraction"
 
 #: app/fileItemMenu.js:547
 msgid "Unable to extract File, extraction Folder Does not Exist"
-msgstr ""
+msgstr "Impossible d'extraire le fichier, le dossier d'extraction n'existe pas"
 
 #: app/fileItemMenu.js:568
 msgid "Select Extract Destination"
@@ -572,7 +561,7 @@ msgstr ""
 
 #: app/notifyX11UnderWayland.js:34
 msgid "Desktop Icons NG is running under X11Wayland"
-msgstr ""
+msgstr "Desktop Icons NG fonctionne sous x11Wayland"
 
 #: app/notifyX11UnderWayland.js:35
 msgid ""
@@ -580,6 +569,9 @@ msgid ""
 "works, but it's suboptimal. You should check your system configuration to "
 "fix this."
 msgstr ""
+"Il semble que votre système est configuré pour forcer GTK à utiliser X11. "
+"Cela fonctionne, mais n'est pas optimal. Vous devriez vérifier votre "
+"configuration système pour régler cela."
 
 #: app/notifyX11UnderWayland.js:36 app/showErrorPopup.js:36
 msgid "Close"
@@ -587,7 +579,7 @@ msgstr "Fermer"
 
 #: app/notifyX11UnderWayland.js:44
 msgid "Don't show this message anymore."
-msgstr ""
+msgstr "Ne plus afficher ce message."
 
 #: app/preferences.js:98
 msgid "Settings"
@@ -692,7 +684,7 @@ msgstr "Afficher les fichiers cachés"
 #: app/prefswindow.js:115
 msgid "Show a context menu item to delete permanently"
 msgstr ""
-"Afficher un élément « Supprimer définitivement » dans le menu contextuel"
+"Afficher un élément « Supprimer définitivement » dans le menu contextuel"
 
 #: app/prefswindow.js:120
 msgid "Action to do when launching a program from the desktop"
@@ -728,13 +720,15 @@ msgstr "Toujours"
 
 #: app/thumbnails.js:38
 msgid "GnomeDesktop-4.0 GIR file not found"
-msgstr ""
+msgstr "Fichier GnomeDesktop-4.0 GIR introuvable"
 
 #: app/thumbnails.js:39
 msgid ""
 "GnomeDesktop-4.0.gir file is missing. Please, install the required package "
 "in your system."
 msgstr ""
+"Le fichier GnomeDesktop-4.0.gir est introuvable. Veuillez installer le "
+"paquet nécessaire sur votre système."
 
 #: schemas/org.gnome.shell.extensions.ding.gschema.xml:25
 msgid "Icon size"
@@ -849,7 +843,7 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.ding.gschema.xml:91
 msgid "Use Nemo instead of Nautilus to open folders."
 msgstr ""
-"Utilise Nemo à la place de Nautilus (« Fichiers ») pour ouvrir les dossiers."
+"Utilise Nemo à la place de Nautilus (« Fichiers ») pour ouvrir les dossiers."
 
 #: schemas/org.gnome.shell.extensions.ding.gschema.xml:95
 msgid "Add an emblem to links"
@@ -873,13 +867,15 @@ msgstr ""
 
 #: schemas/org.gnome.shell.extensions.ding.gschema.xml:105
 msgid "Show a popup if running on X11Wayland"
-msgstr ""
+msgstr "Afficher un popup si s'exécute sous X11Wayland"
 
 #: schemas/org.gnome.shell.extensions.ding.gschema.xml:106
 msgid ""
 "Whether DING should show a popup if it is running on X11Wayland, or the user "
 "decided to not show it anymore."
 msgstr ""
+"Si DING doit afficher un popup lorsqu'il est exécuté sous X11Wayland, ou si "
+"l'utilisateur décide de ne plus l'afficher."
 
 #~ msgid "Folder name"
 #~ msgstr "Nom du dossier"
@@ -967,14 +963,14 @@ msgstr ""
 #~ "To configure Desktop Icons NG, do right-click in the desktop and choose "
 #~ "the last item: 'Desktop Icons settings'"
 #~ msgstr ""
-#~ "Pour configurer Desktop Icons NG, faites un clic droit sur le bureau et "
-#~ "choisissez le dernier élément : « Préférences »"
+#~ "Pour configurer Desktop Icons NG, faites un clic droit sur le bureau et "
+#~ "choisissez le dernier élément : « Préférences »"
 
 #~ msgid "Do you want to run “{0}”, or display its contents?"
-#~ msgstr "Voulez‐vous exécuter « {0} » ou afficher son contenu ?"
+#~ msgstr "Voulez‐vous exécuter « {0} » ou afficher son contenu ?"
 
 #~ msgid "“{0}” is an executable text file."
-#~ msgstr "« {0} » est un fichier texte exécutable."
+#~ msgstr "« {0} » est un fichier texte exécutable."
 
 #~ msgid "Execute in a terminal"
 #~ msgstr "Exécuter dans un terminal"

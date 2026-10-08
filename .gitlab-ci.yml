@@ -13,7 +13,18 @@
 include:
   - remote: 'https://raw.githubusercontent.com/3v1n0/shexli-ci/main/gitlab/shexli-ci.yml'
 
+stages:
+  - pre-review
+  - prepare
+  - review
+  - build
+  - deploy
+
+default:
+  image: registry.gitlab.gnome.org/gnome/gnome-shell/fedora/43:2025-09-10.1
+
 shexli:
+  stage: review
   extends: .shexli
   variables:
     SHEXLI_PATH: 'ding@rastersoft.com.zip'
@@ -23,3 +34,26 @@ shexli:
       apt-get update -qq
       apt-get install -y -qq meson ninja-build gettext zip
       ./export-zip.sh
+
+js-check:
+  stage: review
+  script:
+    - gjs-check-syntax
+
+eslint:
+  stage: review
+  variables:
+    LINT_LOG: "eslint-report.xml"
+  script:
+    - ./tools/run-eslint.sh --output-file "$LINT_LOG" --format junit --stdout
+  artifacts:
+    reports:
+      junit: "$LINT_LOG"
+
+potfile-js-check:
+  stage: review
+  script:
+    - gjs-check-potfiles
+  artifacts:
+    reports:
+      junit: gjs-check-potfiles.junit.xml

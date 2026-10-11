@@ -1,5 +1,13 @@
 # History of versions #
 
+* NoVersion 51.0.9 (2026-10-11)
+  * Updated french translation
+  * Updated Occitan translation
+  * Drop dead X11 code (Thanks to Marco Trevisan)
+  * Added CI checks
+  * Added new open/close emblems to stacks
+  * Don't show for a brief moment a window icon in Dash (Marco Trevisan)
+
 * Version 51.0.8 (2026-09-09)
   * Allows to change the extension name (needed for ubuntu .deb package)
   * Updated .po files

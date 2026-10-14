@@ -419,7 +419,7 @@ export var FileItem = class extends desktopIconItem.desktopIconItem {
         return launchContext;
     }
 
-    _doOpenContext(context, fileList) {
+    _doOpenContext(context, fileList, timestamp) {
         if (!fileList)
             fileList = [];
 
@@ -440,12 +440,12 @@ export var FileItem = class extends desktopIconItem.desktopIconItem {
             this._launchAppImageFile(context, fileList);
 
 
-        if (this._isDirectory && this._desktopManager.useNemo) {
+        if (this._isDirectory) {
             try {
-                DesktopIconsUtil.trySpawn(GLib.get_home_dir(), ['nemo', this.file.get_uri()], DesktopIconsUtil.getFilteredEnviron());
+                DBusUtils.RemoteFileOperations.ShowFolderRemote(this.file.get_uri(), timestamp);
                 return;
             } catch (err) {
-                console.log(`Couldn't launch Nemo: ${err.message}\n${err}`);
+                console.log(`Couldn't launch default file manager to open a folder: ${err.message}\n${err}`);
             }
         }
 
@@ -706,7 +706,7 @@ export var FileItem = class extends desktopIconItem.desktopIconItem {
         if (!fileList)
             fileList = [];
 
-        this._doOpenContext(this._getDefaultLaunchContext(timestamp), fileList);
+        this._doOpenContext(this._getDefaultLaunchContext(timestamp), fileList, timestamp);
     }
 
     onAllowDisallowLaunchingClicked() {
@@ -781,7 +781,7 @@ export var FileItem = class extends desktopIconItem.desktopIconItem {
             for (let i = 0; i < envS.length; i += 2)
                 context.setenv(envS[i], envS[i + 1]);
 
-            this._doOpenContext(context, null);
+            this._doOpenContext(context, null, timestamp);
             return;
         }
         const title = _('Could not find discrete GPU data');

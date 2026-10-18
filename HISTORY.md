@@ -1,6 +1,6 @@
 # History of versions #
 
-* NoVersion 51.0.9 (2026-10-11)
+* Version 51.0.9 (2026-10-11)
   * Updated french translation
   * Updated Occitan translation
   * Drop dead X11 code (Thanks to Marco Trevisan)

@@ -348,7 +348,7 @@ export var FileItem = class extends desktopIconItem.desktopIconItem {
         this._unixmode = fileInfo.get_attribute_uint32('unix::mode');
         this._writableByOthers = (this._unixmode & Enums.S_IWOTH) !== 0;
         this._trusted = fileInfo.get_attribute_as_string('metadata::trusted') === 'true';
-        this._useSandboxing = fileInfo.get_attribute_as_string('metadata::nosandbox') === 'false';
+        this._useSandboxing = fileInfo.get_attribute_as_string('metadata::nosandbox') !== 'true';
         this._attributeContentType = fileInfo.get_content_type();
         this._isDesktopFile = this._attributeContentType === 'application/x-desktop';
         this._isAppImageFile = this._attributeContentType === 'application/vnd.appimage';

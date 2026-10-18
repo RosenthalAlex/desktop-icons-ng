@@ -8,6 +8,7 @@
   * Added new open/close emblems to stacks
   * Don't show for a brief moment a window icon in Dash (Marco Trevisan)
   * Use org.freedesktop.FileManager1 interface to open folders
+  * Use sandboxing by default in .appimage files
 
 * Version 51.0.8 (2026-09-09)
   * Allows to change the extension name (needed for ubuntu .deb package)

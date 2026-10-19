@@ -941,7 +941,7 @@ export var FileItem = class extends desktopIconItem.desktopIconItem {
                     this._refreshMetadataAsync(true);
                 } catch (error) {
                     if (!error.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.CANCELLED)) {
-                        const title = _('Failed to set metadata::trusted flag');
+                        const title = _('Failed to set metadata::sandbox flag');
                         const err = error.message;
                         const logError = `${title}: ${err}`;
                         this._logAndPopupError(title, err, logError);

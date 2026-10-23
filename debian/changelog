@@ -1,24 +1,37 @@
-gnome-shell-extension-desktop-icons-ng (51.0.8-Debian1) sid; urgency=low
+gnome-shell-extension-ding (51.0.9-Debian1) sid; urgency=low
+
+  * Updated french translation
+  * Updated Occitan translation
+  * Drop dead X11 code (Thanks to Marco Trevisan)
+  * Added CI checks
+  * Added new open/close emblems to stacks
+  * Don't show for a brief moment a window icon in Dash (Marco Trevisan)
+  * Use org.freedesktop.FileManager1 interface to open folders
+  * Use sandboxing by default in .appimage files
+
+ -- Sergio Costas Rodriguez <raster@rastersoft.com>  Sun, 11 Oct 2026 23:55:00 +0200
+
+gnome-shell-extension-ding (51.0.8-Debian1) sid; urgency=low
 
   * Allows to change the extension name (needed for ubuntu .deb package)
   * Updated .po files
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Wed, 09 Sep 2026 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (51.0.7-Debian1) sid; urgency=low
+gnome-shell-extension-ding (51.0.7-Debian1) sid; urgency=low
 
   * Support for DnD of files onto trusted .desktop files
   * Fixed proxy-wrappers bug (thanks to Daniel Van Vugt)
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Tue, 25 Aug 2026 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (51.0.6-Debian1) sid; urgency=low
+gnome-shell-extension-ding (51.0.6-Debian1) sid; urgency=low
 
   * Fixed typo
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Tue, 11 Aug 2026 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (51.0.5-Debian1) sid; urgency=low
+gnome-shell-extension-ding (51.0.5-Debian1) sid; urgency=low
 
   * Fixed accent color change detection (thanks to Boogie)
   * Don't show the custom icon in .desktop or .appimage files that aren't
@@ -26,39 +39,39 @@ trusted
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Mon, 03 Aug 2026 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (51.0.4-Debian1) sid; urgency=low
+gnome-shell-extension-ding (51.0.4-Debian1) sid; urgency=low
 
   * Added support for DnD of URIs and plain text
   * Added support for directly launch AppImages
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Sun, 02 Aug 2026 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (51.0.3-Debian1) sid; urgency=low
+gnome-shell-extension-ding (51.0.3-Debian1) sid; urgency=low
 
   * Fixed "Open in terminal" for the desktop
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Fri, 17 Jul 2026 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (51.0.2-Debian1) sid; urgency=low
+gnome-shell-extension-ding (51.0.2-Debian1) sid; urgency=low
 
   * Added metadata to run in Gnome 51
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Wed, 15 Jul 2026 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (51.0.1-Debian1) sid; urgency=low
+gnome-shell-extension-ding (51.0.1-Debian1) sid; urgency=low
 
   * Several fixes in popups (Thanks to Balló György)
   * Fix not being able to re-open settings window (Balló György)
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Mon, 13 Jul 2026 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (51.0.0-Debian1) sid; urgency=low
+gnome-shell-extension-ding (51.0.0-Debian1) sid; urgency=low
 
   * Port to Gtk4
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Fri, 10 Jul 2026 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (50.3.0-Debian1) sid; urgency=low
+gnome-shell-extension-ding (50.3.0-Debian1) sid; urgency=low
 
   * Fix memory leaks
   * Make stacks accessible
@@ -69,7 +82,7 @@ gnome-shell-extension-desktop-icons-ng (50.3.0-Debian1) sid; urgency=low
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Fri, 19 Jun 2026 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (50.2.0-Debian1) sid; urgency=low
+gnome-shell-extension-ding (50.2.0-Debian1) sid; urgency=low
 
   * Use proper Gdk context to avoid the "Application is ready"
 notification (thanks to Marco Trevisan)
@@ -80,7 +93,7 @@ notification (thanks to Marco Trevisan)
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Tue, 05 May 2026 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (50.1.0-Debian1) sid; urgency=low
+gnome-shell-extension-ding (50.1.0-Debian1) sid; urgency=low
 
   * Do not fail on init when initializing DBus (thanks to Marco Trevisan)
   * Rounded corners to look more consistent with Nautilus (thanks to Marco
@@ -89,20 +102,20 @@ Trevisan)
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Tue, 24 Mar 2026 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (50.0.0-Debian1) sid; urgency=low
+gnome-shell-extension-ding (50.0.0-Debian1) sid; urgency=low
 
   * Fix incorrect window size on startup
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Tue, 17 Mar 2026 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (49.99.1-Debian1) sid; urgency=low
+gnome-shell-extension-ding (49.99.1-Debian1) sid; urgency=low
 
   * Allows to increase and decrease the icon size with Ctrl+ / Ctrl-
   * Updated translations
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Tue, 17 Feb 2026 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (49.99.0-Debian1) sid; urgency=low
+gnome-shell-extension-ding (49.99.0-Debian1) sid; urgency=low
 
   * Support for Gnome Shell 50.alpha
   * Disable search autohide if keyboard or screen reader A11Y are enabled
@@ -113,26 +126,26 @@ gnome-shell-extension-desktop-icons-ng (49.99.0-Debian1) sid; urgency=low
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Tue, 13 Jan 2026 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (49.0.5-Debian1) sid; urgency=low
+gnome-shell-extension-ding (49.0.5-Debian1) sid; urgency=low
 
   * Updated Simplified and Traditional chinese translation
   * Added full support for Ptyxis
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Wed, 24 Sep 2025 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (49.0.4-Debian1) sid; urgency=low
+gnome-shell-extension-ding (49.0.4-Debian1) sid; urgency=low
 
   * Show a notification if a GIR file is missing
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Thu, 28 Aug 2025 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (49.0.3-Debian1) sid; urgency=low
+gnome-shell-extension-ding (49.0.3-Debian1) sid; urgency=low
 
   * Fixed `maximize` API changes in Gnome Shell 49
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Thu, 31 Jul 2025 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (0.11.0-Debian1) sid; urgency=low
+gnome-shell-extension-ding (0.11.0-Debian1) sid; urgency=low
 
   * Copy files instead of move when using DnD into another drive
   * Removed flicker when a file is created or removed
@@ -145,7 +158,7 @@ gnome-shell-extension-desktop-icons-ng (0.11.0-Debian1) sid; urgency=low
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Fri, 17 Apr 2020 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (0.10.0-Debian1) sid; urgency=low
+gnome-shell-extension-ding (0.10.0-Debian1) sid; urgency=low
 
   * Added 'tiny' icon size
   * Doesn't allow to use an existing name when renaming or creating a new
@@ -154,19 +167,19 @@ folder
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Sat, 22 Feb 2020 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (0.9.1-Debian1) sid; urgency=low
+gnome-shell-extension-ding (0.9.1-Debian1) sid; urgency=low
 
   * Now "Delete permanently" works again
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Thu, 06 Feb 2020 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (0.9.0-Debian1) sid; urgency=low
+gnome-shell-extension-ding (0.9.0-Debian1) sid; urgency=low
 
   * Fix bug that prevented it to work with Gnome Shell 3.30
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Fri, 31 Jan 2020 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (0.8.0-Debian1) sid; urgency=low
+gnome-shell-extension-ding (0.8.0-Debian1) sid; urgency=low
 
   * Fix memory leak when using the rubber band too fast
   * Add finally full support for multimonitor and HiDPI combined
@@ -174,7 +187,7 @@ gnome-shell-extension-desktop-icons-ng (0.8.0-Debian1) sid; urgency=low
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Sun, 19 Jan 2020 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (0.7.0-Debian1) sid; urgency=low
+gnome-shell-extension-ding (0.7.0-Debian1) sid; urgency=low
 
   * Don't show ".desktop" in enabled .desktop files
   * Appearance more consistent with Nautilus
@@ -191,7 +204,7 @@ folder
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Mon, 09 Dec 2019 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (0.6.0-Debian1) sid; urgency=low
+gnome-shell-extension-ding (0.6.0-Debian1) sid; urgency=low
 
   * Fix icon distribution in the desktop
   * Show the "Name" field in the .desktop files
@@ -207,7 +220,7 @@ gnome-shell-extension-desktop-icons-ng (0.6.0-Debian1) sid; urgency=low
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Tue, 29 Oct 2019 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (0.5.0-Debian1) sid; urgency=low
+gnome-shell-extension-ding (0.5.0-Debian1) sid; urgency=low
 
   * Fix right-click menu in trash not showing sometimes
   * Fix opening a file during New folder operation
@@ -215,7 +228,7 @@ gnome-shell-extension-desktop-icons-ng (0.5.0-Debian1) sid; urgency=low
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Tue, 15 Oct 2019 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (0.4.0-Debian1) sid; urgency=low
+gnome-shell-extension-ding (0.4.0-Debian1) sid; urgency=low
 
   * Fix Drag'n'Drop in some special cases
   * Don't relaunch the desktop process when disabling and enabling fast
@@ -223,7 +236,7 @@ gnome-shell-extension-desktop-icons-ng (0.4.0-Debian1) sid; urgency=low
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Fri, 04 Oct 2019 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (0.3.0-Debian1) sid; urgency=low
+gnome-shell-extension-ding (0.3.0-Debian1) sid; urgency=low
 
   * Separate Wayland and X11 paths
   * When a file is dropped from another window, it is done at the cursor
@@ -231,7 +244,7 @@ gnome-shell-extension-desktop-icons-ng (0.3.0-Debian1) sid; urgency=low
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Tue, 17 Sep 2019 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (0.2.0-Debian1) sid; urgency=low
+gnome-shell-extension-ding (0.2.0-Debian1) sid; urgency=low
 
   * Shows the full filename if selected
   * Use theme color for selections
@@ -248,7 +261,7 @@ workspaces
 
  -- Sergio Costas Rodriguez <raster@rastersoft.com>  Mon, 19 Aug 2019 23:55:00 +0200
 
-gnome-shell-extension-desktop-icons-ng (0.1.0-Debian1) sid; urgency=low
+gnome-shell-extension-ding (0.1.0-Debian1) sid; urgency=low
 
   * First semi-working version version
   * Has everything supported by Desktop Icons, plus Drag'n'Drop

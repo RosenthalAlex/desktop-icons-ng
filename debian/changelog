@@ -1,9 +1,15 @@
+gnome-shell-extension-ding (51.1.1-Debian1) sid; urgency=low
+
+  * Restore the gschema file
+
+ -- Sergio Costas Rodriguez <raster@rastersoft.com>  Sun, 25 Oct 2026 23:55:00 +0200
+
 gnome-shell-extension-ding (51.1.0-Debian1) sid; urgency=low
 
   * Added DnD support for Flatpak/Snap
   * Fixed little message
 
- -- Sergio Costas Rodriguez <raster@rastersoft.com>  Sun, 25 Oct 2026 23:55:00 +0200
+ -- Sergio Costas Rodriguez <raster@rastersoft.com>  Sun, 25 Oct 2026 23:50:00 +0200
 
 gnome-shell-extension-ding (51.0.9-Debian1) sid; urgency=low
 

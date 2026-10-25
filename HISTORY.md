@@ -1,5 +1,8 @@
 # History of versions #
 
+* Version 51.1.1 (2026-10-25)
+  * Restore the gschema file
+
 * Version 51.1.0 (2026-10-25)
   * Added DnD support for Flatpak/Snap
   * Fixed little message

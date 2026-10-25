@@ -1,5 +1,9 @@
 # History of versions #
 
+* Version 51.1.0 (2026-10-25)
+  * Added DnD support for Flatpak/Snap
+  * Fixed little message
+
 * Version 51.0.9 (2026-10-11)
   * Updated french translation
   * Updated Occitan translation

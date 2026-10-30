@@ -1,7 +1,7 @@
 # History of versions #
 
 * Version 51.2.0 (2026-10-30)
- * Fixed process respawn during logout
+  * Fixed process respawn during logout
 
 * Version 51.1.1 (2026-10-25)
   * Restore the gschema file

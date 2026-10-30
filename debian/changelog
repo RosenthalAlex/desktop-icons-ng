@@ -1,3 +1,9 @@
+gnome-shell-extension-ding (51.2.0-Debian1) sid; urgency=low
+
+  * Fixed process respawn during logout
+
+ -- Sergio Costas Rodriguez <raster@rastersoft.com>  Fri, 30 Oct 2026 23:55:00 +0200
+
 gnome-shell-extension-ding (51.1.1-Debian1) sid; urgency=low
 
   * Restore the gschema file

@@ -13,8 +13,8 @@ with these advantages:
 
 ## Requirements
 
-* GNOME Shell >= 3.38
-* Nautilus >= 3.38
+* GNOME Shell >= 50
+* Nautilus >= 4.0
 * File-roller >= 3.38 or Gnome AutoAr (including gir1.2 files)
 * Desktop folder already created
 
@@ -24,25 +24,11 @@ The easiest way of installing DING is to run the `local_install.sh` script. It p
 specified in the next section.
 
 In Ubuntu, unfortunately, it is not possible to use it directly because the internal desktop-icons-ng
-extension interferes. Fortunately, you can find .deb packages for Ubuntu in the oficial page:
-
-<https://www.rastersoft.com/programas/ding.html>
-
-If you still want to use the extension from source code, the only way is to install the
-package "gnome-session" to be able to use the standard gnome shell session, and there install the
-following extensions from extensions.gnome.org:
-
-* Desktop icons ng
-* Dash to dock
-* Appindicator and KstatusNotifierItem support
-* Tiling assistant
-
-That will allow to have the same experience than the original Ubuntu desktop, but with the most recent
-versions of the extensions.
+extension interferes. Fortunately, you can use the ubuntu_install.sh script.
 
 ## Internal architecture
 
-The code is divided in two parts: a classic Gtk3 program that manages the whole desktop, and a little
+The code is divided in two parts: a classic Gtk4 program that manages the whole desktop, and a little
 extension (comprised only by the files 'extension.js', 'visibleArea.js' and
 'emulateX11WindowType.js') that have these roles:
 

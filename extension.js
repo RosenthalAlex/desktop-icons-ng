@@ -58,6 +58,8 @@ export default class DING extends Extension {
         }
         // If the desktop is still starting up, we wait until it is ready
         if (Main.layoutManager._startingUp) {
+            this.data.realHasOverview = Main.sessionMode.hasOverview;
+            Main.sessionMode.hasOverview = false;
             this.data.startupPreparedId = Main.layoutManager.connect('startup-complete', () => this.innerEnable());
         } else {
             this.data.startupPreparedId = null;
@@ -66,6 +68,11 @@ export default class DING extends Extension {
     }
 
     disable() {
+        if (this.data.realHasOverview !== undefined) {
+            Main.sessionMode.hasOverview = this.data.realHasOverview;
+            delete this.data.realHasOverview;
+        }
+
         this.DesktopIconsUsableArea = null;
         this.data.isEnabled = false;
         this.killCurrentProcess();
@@ -128,8 +135,10 @@ export default class DING extends Extension {
             this.data.startupPreparedId = null;
         }
 
-        // Exit the overview mode on startup
-        Main.overview.hide();
+        if (this.data.realHasOverview !== undefined) {
+            Main.sessionMode.hasOverview = this.data.realHasOverview;
+            delete this.data.realHasOverview;
+        }
 
         this.data.x11Manager.enable();
 

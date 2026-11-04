@@ -58,8 +58,13 @@ export default class DING extends Extension {
         }
         // If the desktop is still starting up, we wait until it is ready
         if (Main.layoutManager._startingUp) {
-            this.data.realHasOverview = Main.sessionMode.hasOverview;
-            Main.sessionMode.hasOverview = false;
+            if (Main.overview.runStartupAnimation) {
+                this.data.origRunStartupAnimation = Main.overview.runStartupAnimation;
+                Main.overview.runStartupAnimation = async () => {};
+            }
+            if (Main.overview.visible || Main.overview._shown)
+                Main.overview.hide();
+
             this.data.startupPreparedId = Main.layoutManager.connect('startup-complete', () => this.innerEnable());
         } else {
             this.data.startupPreparedId = null;
@@ -68,9 +73,9 @@ export default class DING extends Extension {
     }
 
     disable() {
-        if (this.data.realHasOverview !== undefined) {
-            Main.sessionMode.hasOverview = this.data.realHasOverview;
-            delete this.data.realHasOverview;
+        if (this.data.origRunStartupAnimation) {
+            Main.overview.runStartupAnimation = this.data.origRunStartupAnimation;
+            delete this.data.origRunStartupAnimation;
         }
 
         this.DesktopIconsUsableArea = null;
@@ -135,10 +140,14 @@ export default class DING extends Extension {
             this.data.startupPreparedId = null;
         }
 
-        if (this.data.realHasOverview !== undefined) {
-            Main.sessionMode.hasOverview = this.data.realHasOverview;
-            delete this.data.realHasOverview;
+        if (this.data.origRunStartupAnimation) {
+            Main.overview.runStartupAnimation = this.data.origRunStartupAnimation;
+            delete this.data.origRunStartupAnimation;
         }
+
+        // Exit the overview mode on startup
+        if (Main.overview.visible || Main.overview._shown)
+            Main.overview.hide();
 
         this.data.x11Manager.enable();
 
